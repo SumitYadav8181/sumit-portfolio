@@ -1,283 +1,4798 @@
 <!doctype html>
 <html lang="en">
-<!--
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sumit Kumar Yadav • Windows 7 Ultimate</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 
+    <!-- 7.css - The Authentic Windows 7 CSS Framework -->
+    <link rel="stylesheet" href="/7.css" />
 
-██╗  ██╗██╗       ████████╗██╗  ██╗███████╗██████╗ ███████╗
-██║  ██║██║       ╚══██╔══╝██║  ██║██╔════╝██╔══██╗██╔════╝
-███████║██║          ██║   ███████║█████╗  ██████╔╝█████╗  
-██╔══██║██║          ██║   ██╔══██║██╔══╝  ██╔══██╗██╔══╝  
-██║  ██║██║▄█╗       ██║   ██║  ██║███████╗██║  ██║███████╗
-╚═╝  ╚═╝╚═╝╚═╝       ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝             
+    <!-- Segoe UI Font for 100% genuine Windows 7 typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&family=Consolas&display=swap"
+      rel="stylesheet"
+    />
 
-Interested in Building Something Similar?
+    <style>
+      /* =========================================================
+       AUTHENTIC WINDOWS 7 DESKTOP ENVIRONMENT & AERO GLASS
+       ========================================================= */
+      :root {
+        --win7-font: "Segoe UI", Tahoma, Helvetica, Arial, sans-serif;
+        --win7-code: "Consolas", "Lucida Console", monospace;
+        --taskbar-h: 40px;
+        --aero-active-tint: rgba(55, 120, 185, 0.45);
+        --aero-inactive-tint: rgba(180, 205, 225, 0.35);
+      }
 
-  Built with Tailwind CSS https://tailwindcss.com
-  No Javascript
-  Icons from https://simpleicons.org
-  Hosted on https://www.netlify.com
-  Version Control - Gitlab
-  Code Editor- VSCode
-  
- -->
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-font-smoothing: antialiased;
+      }
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="stylesheet" href="/build/tailwind.css">
-  <title>Sumit Kumar Yadav</title>
-  <!-- Primary Meta Tags -->
-  <title>Sumit Kumar Yadav | Love Building Things</title>
-  <meta name="title" content="Sumit Kumar Yadav | Love Building Things">
-  <meta name="description"
-    content="Sumit has a passion for creating things and has built Android Apps, Chrome extensions, Several Websites and more already in process in my time from scratch. Sumit is also a big PC gamer. ">
+      body,
+      html {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        font-family: var(--win7-font);
+        font-size: 12px;
+        cursor: default;
+      }
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://sumityadav.in/">
-  <meta property="og:title" content="Sumit Kumar Yadav | Love Building Things">
-  <meta property="og:description"
-    content="Sumit has a passion for creating things and has built Android Apps, Chrome extensions, Several Websites and more already in process in my time from scratch. Sumit is also a big PC gamer. ">
-  <meta property="og:image" content="https://sumityadav.in/img/sumityadav-og.png">
+      /* Windows 7 Genuine Harmony Desktop Background */
+      #desktop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: calc(100vh - var(--taskbar-h));
+        background: #092742 url("/img/windows-7-wallpaper.jpg") no-repeat center
+          center fixed;
+        background-size: cover;
+        overflow: hidden;
+        position: relative;
+      }
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://sumityadav.in/">
-  <meta property="twitter:title" content="Sumit Kumar Yadav | Love Building Things">
-  <meta property="twitter:description"
-    content="Sumit has a passion for creating things and has built Android Apps, Chrome extensions, Several Websites and more already in process in my time from scratch. Sumit is also a big PC gamer. ">
-  <meta property="twitter:image" content="https://sumityadav.in/img/sumityadav-og.png">
+      /* Selection Marquee Box */
+      #selectionBox {
+        position: absolute;
+        border: 1px solid rgba(49, 106, 197, 0.85);
+        background: rgba(49, 106, 197, 0.25);
+        pointer-events: none;
+        display: none;
+        z-index: 9998;
+      }
 
+      /* Desktop Icons Grid */
+      .desktop-icons {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        padding: 12px 10px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        gap: 10px 14px;
+        z-index: 2;
+      }
 
-</head>
+      .desktop-icon {
+        width: 76px;
+        padding: 6px 3px 4px 3px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border-radius: 3px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition:
+          background 0.12s,
+          border-color 0.12s,
+          box-shadow 0.12s;
+      }
 
-<body class="antialiased bg-gray-100">
-  <section class="bg-black text-white  ">
-    <header class="md:flex flex-none py-20 md:mx-10 ">
-      <div class="w-full md:w-1/2  md:flex-auto text-center p-4">
-        <div class="text-left md:text-left md:mt-16 lg:ml-20">
-          <span class="leading-none">
-            <p class="text-5xl md:text-6xl ">Hi,</p>
-            <p class="text-7xl md:text-8xl font-extrabold mt-5"><span class="font-semibold">I'm</span> Sumit</p>
-            <p class="text-xl md:text-2xl mt-5 leading-normal">Tech Enthusiast <br>Love Building Things.
-            </p>
-          </span>
-          <div class="text-center sm:text-left mb-20 sm:mb-0">
-            <a href="https://www.linkedin.com/in/sumityadav8181/" target="_blank">
-              <button class="gradient h-16 w-64 text-gray-300 m-2 rounded-lg mt-10 text-center font-semibold peak">Say
-                Hi!</button></a>
-          </div>
+      .desktop-icon:hover {
+        background: rgba(255, 255, 255, 0.22);
+        border-color: rgba(255, 255, 255, 0.45);
+        box-shadow: 0 0 10px rgba(0, 160, 255, 0.35);
+      }
+
+      .desktop-icon.selected {
+        background: rgba(0, 120, 215, 0.35);
+        border-color: rgba(0, 120, 215, 0.7);
+        box-shadow: 0 0 8px rgba(0, 120, 215, 0.4);
+      }
+
+      .desktop-icon svg,
+      .desktop-icon img {
+        width: 46px;
+        height: 46px;
+        margin-bottom: 4px;
+        filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.65));
+        pointer-events: none;
+      }
+
+      .desktop-icon-label {
+        font-size: 11px;
+        color: #ffffff;
+        text-shadow:
+          0 1px 2px #000,
+          0 0 4px #000,
+          0 0 6px #000;
+        line-height: 1.25;
+        word-break: break-word;
+        pointer-events: none;
+      }
+
+      /* =========================================================
+       WINDOWS 7 DESKTOP GADGET: ANALOG CLOCK
+       ========================================================= */
+      #clockGadget {
+        position: absolute;
+        top: 24px;
+        right: 28px;
+        width: 130px;
+        height: 130px;
+        z-index: 1;
+        cursor: move;
+        filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
+        transition: opacity 0.2s;
+      }
+
+      .gadget-face {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 38% 38%,
+          #ffffff 0%,
+          #e6eff7 55%,
+          #c8dbee 100%
+        );
+        border: 6px solid #202b36;
+        box-shadow:
+          inset 0 2px 6px rgba(0, 0, 0, 0.35),
+          0 0 0 1px rgba(255, 255, 255, 0.45);
+        position: relative;
+      }
+
+      .gadget-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #111;
+        border: 2px solid #555;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+      }
+
+      .gadget-hand {
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+        transform-origin: 50% 100%;
+        border-radius: 2px;
+      }
+
+      .gadget-hour {
+        width: 4px;
+        height: 32px;
+        background: #111822;
+        margin-left: -2px;
+        z-index: 7;
+      }
+
+      .gadget-minute {
+        width: 3px;
+        height: 44px;
+        background: #2b3a4a;
+        margin-left: -1.5px;
+        z-index: 8;
+      }
+
+      .gadget-second {
+        width: 1.5px;
+        height: 48px;
+        background: #d44026;
+        margin-left: -0.75px;
+        z-index: 9;
+      }
+
+      /* =========================================================
+       WINDOWS 7 SUPERBAR (TASKBAR)
+       ========================================================= */
+      #taskbar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: var(--taskbar-h);
+        background: linear-gradient(
+          180deg,
+          rgba(28, 56, 88, 0.72) 0%,
+          rgba(13, 30, 52, 0.88) 50%,
+          rgba(7, 18, 33, 0.94) 100%
+        );
+        backdrop-filter: blur(20px) saturate(190%);
+        -webkit-backdrop-filter: blur(20px) saturate(190%);
+        border-top: 1px solid rgba(255, 255, 255, 0.38);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.22),
+          0 -2px 10px rgba(0, 0, 0, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2px;
+        z-index: 100000;
+      }
+
+      /* The Iconic Windows 7 Start Orb */
+      .start-orb-container {
+        position: relative;
+        width: 52px;
+        height: var(--taskbar-h);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 2px;
+      }
+
+      .start-orb {
+        position: absolute;
+        top: -6px;
+        left: 0;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 35% 30%,
+          #56aaff 0%,
+          #1562b8 55%,
+          #053066 90%,
+          #001838 100%
+        );
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        box-shadow:
+          0 0 12px rgba(0, 160, 255, 0.65),
+          inset 0 2px 4px #ffffff,
+          inset 0 -2px 5px rgba(0, 0, 0, 0.6);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s,
+          filter 0.15s;
+      }
+
+      .start-orb:hover {
+        transform: scale(1.06);
+        box-shadow:
+          0 0 22px rgba(60, 190, 255, 0.95),
+          inset 0 2px 6px #ffffff;
+        filter: brightness(1.15);
+      }
+
+      .start-orb:active {
+        transform: scale(0.98);
+        box-shadow:
+          0 0 8px rgba(0, 120, 215, 0.8),
+          inset 0 2px 6px rgba(0, 0, 0, 0.8);
+      }
+
+      .start-orb svg {
+        width: 25px;
+        height: 25px;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
+        pointer-events: none;
+      }
+
+      /* Superbar App Buttons */
+      .superbar-apps {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        margin-left: 8px;
+      }
+
+      .superbar-btn {
+        width: 48px;
+        height: 34px;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: relative;
+        border: 1px solid transparent;
+        transition: all 0.15s ease;
+      }
+
+      .superbar-btn svg,
+      .superbar-btn img {
+        width: 26px;
+        height: 26px;
+        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+        pointer-events: none;
+      }
+
+      .superbar-btn:hover {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.32) 0%,
+          rgba(255, 255, 255, 0.14) 50%,
+          rgba(255, 255, 255, 0.22) 100%
+        );
+        border-color: rgba(255, 255, 255, 0.45);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.5),
+          0 0 10px rgba(0, 180, 255, 0.4);
+      }
+
+      .superbar-btn.running {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.22) 0%,
+          rgba(255, 255, 255, 0.08) 50%,
+          rgba(255, 255, 255, 0.18) 100%
+        );
+        border-color: rgba(255, 255, 255, 0.35);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      }
+
+      .superbar-btn.active {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.35) 0%,
+          rgba(255, 255, 255, 0.18) 50%,
+          rgba(0, 150, 255, 0.32) 100%
+        );
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow:
+          inset 0 1px 2px rgba(255, 255, 255, 0.6),
+          0 0 12px rgba(0, 170, 255, 0.6);
+      }
+
+      .superbar-btn.running::after {
+        content: "";
+        position: absolute;
+        bottom: 2px;
+        left: 6px;
+        right: 6px;
+        height: 2px;
+        background: #9bd2ff;
+        border-radius: 1px;
+        box-shadow: 0 0 4px #56b5ff;
+      }
+
+      .superbar-btn.active::after {
+        background: #ffffff;
+        box-shadow:
+          0 0 6px #56c2ff,
+          0 0 10px #0088ff;
+      }
+
+      /* System Tray / Notification Area */
+      .system-tray {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding-right: 2px;
+      }
+
+      .tray-btn {
+        padding: 0 5px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2px;
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 13px;
+        border: 1px solid transparent;
+      }
+
+      .tray-btn:hover {
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .tray-clock {
+        padding: 0 8px;
+        height: 34px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-size: 11px;
+        line-height: 1.25;
+        text-shadow: 0 1px 2px #000;
+        border-radius: 2px;
+        cursor: pointer;
+        border: 1px solid transparent;
+      }
+
+      .tray-clock:hover {
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .tray-clock .date {
+        font-size: 9.5px;
+        opacity: 0.9;
+      }
+
+      /* Windows 7 Aero Peek */
+      .aero-peek {
+        width: 14px;
+        height: 34px;
+        margin-left: 4px;
+        border-left: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 0 2px 2px 0;
+        background: rgba(255, 255, 255, 0.08);
+        cursor: pointer;
+        position: relative;
+      }
+
+      .aero-peek:hover {
+        background: rgba(255, 255, 255, 0.35);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+      }
+
+      /* =========================================================
+       AUTHENTIC WINDOWS 7 SPEAKER VOLUME FLYOUT (PIXEL-PERFECT)
+       ========================================================= */
+      #volumeFlyout {
+        position: fixed;
+        bottom: calc(var(--taskbar-h) + 4px);
+        right: 64px;
+        width: 98px;
+        height: 310px;
+        padding: 12px 10px 8px 10px;
+        background: linear-gradient(
+          180deg,
+          rgba(28, 56, 88, 0.94) 0%,
+          rgba(13, 30, 52, 0.97) 100%
+        );
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        box-shadow:
+          0 10px 30px rgba(0, 0, 0, 0.75),
+          inset 0 1px 0 rgba(255, 255, 255, 0.45);
+        border-radius: 6px;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 99999;
+        color: #ffffff;
+        user-select: none;
+      }
+
+      .vol-title {
+        font-size: 11.5px;
+        font-weight: 600;
+        color: #ffffff;
+        text-shadow: 0 1px 2px #000;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding-bottom: 4px;
+      }
+
+      /* Windows 7 Slider Interactive Area */
+      .vol-track-container {
+        position: relative;
+        width: 72px;
+        height: 170px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        touch-action: none;
+        user-select: none;
+        margin: 2px 0;
+      }
+
+      .vol-slider-row {
+        position: relative;
+        width: 48px;
+        height: 154px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .vol-groove {
+        width: 6px;
+        height: 144px;
+        background: #091522;
+        border: 1px solid #37526f;
+        border-radius: 3px;
+        box-shadow:
+          inset 0 1px 4px rgba(0, 0, 0, 0.85),
+          0 1px 0 rgba(255, 255, 255, 0.25);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .vol-fill {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60%;
+        background: linear-gradient(0deg, #0284c7 0%, #38bdf8 100%);
+        box-shadow: 0 0 6px #38bdf8;
+        border-radius: 2px;
+      }
+
+      /* Windows 7 Tick Marks */
+      .vol-ticks {
+        position: absolute;
+        right: 2px;
+        top: 5px;
+        bottom: 5px;
+        width: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        pointer-events: none;
+      }
+
+      .vol-tick {
+        width: 4px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.45);
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+      }
+
+      .vol-tick.tick-major {
+        width: 7px;
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      /* Windows 7 Slider Thumb (Metallic Pill with Grip Line) */
+      .vol-thumb {
+        position: absolute;
+        left: 17px;
+        bottom: 91px;
+        transform: translateY(50%);
+        width: 26px;
+        height: 14px;
+        border-radius: 2px;
+        background: linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #d8e5f2 40%,
+          #b0cce3 41%,
+          #cbe0f2 100%
+        );
+        border: 1px solid #365c82;
+        box-shadow:
+          0 2px 6px rgba(0, 0, 0, 0.8),
+          inset 0 1px 0 #ffffff;
+        cursor: pointer;
+        z-index: 2;
+        transition:
+          box-shadow 0.15s,
+          border-color 0.15s;
+      }
+
+      .vol-thumb::after {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        right: 6px;
+        height: 1px;
+        background: #5a7b9e;
+        box-shadow: 0 1px 0 #ffffff;
+      }
+
+      .vol-thumb:hover,
+      .vol-track-container:active .vol-thumb {
+        background: linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #bfe3ff 40%,
+          #68b4ff 45%,
+          #a4d8ff 100%
+        );
+        border-color: #0078d7;
+        box-shadow:
+          0 0 12px rgba(56, 189, 248, 0.95),
+          inset 0 1px 0 #ffffff;
+      }
+
+      .vol-speaker-btn {
+        width: 38px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+        cursor: pointer;
+        border: 1px solid transparent;
+        font-size: 18px;
+        margin-top: 1px;
+      }
+
+      .vol-speaker-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.35);
+      }
+
+      .vol-percent-label {
+        font-size: 13px;
+        font-weight: 700;
+        color: #ffffff;
+        text-shadow: 0 1px 3px #000;
+        margin: 1px 0 3px 0;
+      }
+
+      .vol-mixer-btn {
+        width: 100%;
+        padding: 5px 0 2px 0;
+        text-align: center;
+        font-size: 11.5px;
+        color: #cfe2f3;
+        border-top: 1px solid rgba(255, 255, 255, 0.22);
+        cursor: pointer;
+        border-radius: 0 0 4px 4px;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        transition: all 0.15s;
+      }
+
+      .vol-mixer-btn:hover {
+        color: #ffffff;
+        text-decoration-color: #ffffff;
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      #clockFlyout {
+        position: fixed;
+        bottom: calc(var(--taskbar-h) + 3px);
+        right: 10px;
+        width: 290px;
+        padding: 14px;
+        background: rgba(18, 38, 62, 0.88);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 6px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 99999;
+        color: #fff;
+      }
+
+      /* =========================================================
+       WINDOWS 7 TWO-COLUMN START MENU
+       ========================================================= */
+      #startMenu {
+        position: fixed;
+        bottom: var(--taskbar-h);
+        left: 0;
+        width: 395px;
+        height: 485px;
+        background: rgba(15, 35, 58, 0.86);
+        backdrop-filter: blur(28px) saturate(200%);
+        -webkit-backdrop-filter: blur(28px) saturate(200%);
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        border-bottom: none;
+        border-radius: 8px 8px 0 0;
+        box-shadow:
+          0 12px 40px rgba(0, 0, 0, 0.75),
+          inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        display: none;
+        flex-direction: column;
+        z-index: 99999;
+        overflow: hidden;
+      }
+
+      .start-menu-inner {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1.35fr 1fr;
+        padding: 7px;
+        gap: 7px;
+      }
+
+      .start-left {
+        background: #ffffff;
+        border-radius: 3px;
+        border: 1px solid #71889c;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        padding: 5px 3px;
+        overflow-y: auto;
+      }
+
+      .start-app-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 8px;
+        border-radius: 3px;
+        font-size: 12px;
+        color: #1e1e1e;
+        cursor: pointer;
+        border: 1px solid transparent;
+        text-decoration: none;
+      }
+
+      .start-app-item:hover {
+        background: linear-gradient(180deg, #edf5fd 0%, #d5e9fc 100%);
+        border-color: #70c0e7;
+      }
+
+      .start-app-item svg,
+      .start-app-item img {
+        width: 26px;
+        height: 26px;
+        flex-shrink: 0;
+      }
+
+      .start-all-programs {
+        margin-top: auto;
+        border-top: 1px solid #d9e1e8;
+        padding: 7px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 11.5px;
+        color: #111;
+        cursor: pointer;
+        border-radius: 3px;
+      }
+
+      .start-all-programs:hover {
+        background: #eaf3fc;
+      }
+
+      .start-right {
+        display: flex;
+        flex-direction: column;
+        padding: 4px 6px;
+        color: #ffffff;
+        position: relative;
+      }
+
+      .user-avatar-frame {
+        width: 58px;
+        height: 58px;
+        border-radius: 4px;
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        box-shadow:
+          0 2px 8px rgba(0, 0, 0, 0.5),
+          inset 0 1px 2px #fff;
+        overflow: hidden;
+        margin: 2px auto 10px auto;
+        background: #112233;
+      }
+
+      .user-avatar-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .start-link {
+        padding: 5px 8px;
+        border-radius: 3px;
+        font-size: 11.5px;
+        color: #f1f6fa;
+        cursor: pointer;
+        text-shadow: 0 1px 2px #000;
+        border: 1px solid transparent;
+        display: block;
+      }
+
+      .start-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .start-link.bold {
+        font-weight: 600;
+      }
+
+      .start-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 4px 6px;
+      }
+
+      .start-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 8px;
+        background: rgba(10, 24, 40, 0.9);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .start-search-box {
+        flex: 1;
+        position: relative;
+        margin-right: 8px;
+      }
+
+      .start-search-box input {
+        width: 100%;
+        height: 25px;
+        background: #ffffff;
+        border: 1px solid #7f9db9;
+        border-radius: 2px;
+        padding: 0 24px 0 8px;
+        font-family: inherit;
+        font-size: 11.5px;
+        font-style: italic;
+        color: #333;
+        outline: none;
+      }
+
+      .start-search-box input:focus {
+        font-style: normal;
+        border-color: #3c7fb1;
+        box-shadow: 0 0 5px rgba(60, 127, 177, 0.6);
+      }
+
+      .start-search-icon {
+        position: absolute;
+        right: 6px;
+        top: 5px;
+        color: #0066cc;
+        font-size: 12px;
+        pointer-events: none;
+      }
+
+      .shutdown-btn-group {
+        display: flex;
+      }
+
+      .shutdown-btn {
+        height: 25px;
+        padding: 0 12px;
+        background: linear-gradient(
+          180deg,
+          #3a6894 0%,
+          #1f456c 50%,
+          #163657 100%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 3px 0 0 3px;
+        color: #ffffff;
+        font-size: 11.5px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .shutdown-btn:hover {
+        background: linear-gradient(
+          180deg,
+          #4c7dae 0%,
+          #2b5784 50%,
+          #1f456c 100%
+        );
+      }
+
+      .shutdown-arrow {
+        height: 25px;
+        width: 18px;
+        background: linear-gradient(
+          180deg,
+          #3a6894 0%,
+          #1f456c 50%,
+          #163657 100%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-left: none;
+        border-radius: 0 3px 3px 0;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        cursor: pointer;
+      }
+
+      /* =========================================================
+       7.CSS WINDOW STYLES & POSITIONING
+       ========================================================= */
+      .window {
+        position: absolute;
+        display: none;
+        flex-direction: column;
+        box-shadow:
+          0 16px 40px rgba(0, 0, 0, 0.55),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+        min-width: 320px;
+        min-height: 200px;
+      }
+
+      .window.glass {
+        backdrop-filter: blur(14px) saturate(180%);
+        -webkit-backdrop-filter: blur(14px) saturate(180%);
+      }
+
+      .window.maximized {
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: calc(100vh - var(--taskbar-h)) !important;
+        border-radius: 0 !important;
+      }
+
+      .window.minimized {
+        display: none !important;
+      }
+
+      .title-bar-text {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .title-bar-text img,
+      .title-bar-text svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* Notepad App */
+      #notepadWindow {
+        width: 650px;
+        height: 520px;
+        top: 35px;
+        left: 115px;
+      }
+
+      .notepad-menubar {
+        background: #f5f6f7;
+        border-top: 1px solid rgba(255, 255, 255, 0.9);
+        border-bottom: 1px solid #d9d9d9;
+        padding: 2px 4px;
+        display: flex;
+        gap: 4px;
+        font-size: 12px;
+        color: #222;
+        position: relative;
+      }
+
+      .menu-trigger {
+        padding: 2px 8px;
+        border-radius: 2px;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .menu-trigger:hover,
+      .menu-trigger.active {
+        background: linear-gradient(180deg, #f0f7fe 0%, #e1f0fc 100%);
+        outline: 1px solid #70c0e7;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #f0f0f0;
+        border: 1px solid #979797;
+        box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.3);
+        border-radius: 0 0 3px 3px;
+        min-width: 175px;
+        display: none;
+        flex-direction: column;
+        z-index: 1000;
+        padding: 2px;
+      }
+
+      .menu-trigger.active .dropdown-menu {
+        display: flex;
+      }
+
+      .dropdown-item {
+        padding: 4px 16px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 11.5px;
+        cursor: pointer;
+        color: #000;
+      }
+
+      .dropdown-item:hover {
+        background: #3399ff;
+        color: #ffffff;
+      }
+
+      .dropdown-sep {
+        height: 1px;
+        background: #d4d4d4;
+        margin: 3px 2px;
+      }
+
+      .notepad-client {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: #ffffff;
+        border: 1px solid #7a7a7a;
+        border-right-color: #d8d8d8;
+        border-bottom-color: #d8d8d8;
+        overflow: hidden;
+        margin: 0 4px 4px 4px;
+      }
+
+      #notepadTextarea {
+        flex: 1;
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 12px;
+        font-family: var(--win7-code);
+        font-size: 13px;
+        line-height: 1.6;
+        color: #000000;
+        background: #ffffff;
+        resize: none;
+        user-select: text;
+        -webkit-user-select: text;
+      }
+
+      /* =========================================================
+       UPGRADED WINDOWS MEDIA PLAYER 12 (NOW PLAYING & PLAYLIST)
+       ========================================================= */
+      #wmpWindow {
+        width: 530px;
+        height: 440px;
+        top: 50px;
+        left: 790px;
+      }
+
+      .wmp-frame {
+        flex: 1;
+        background: #000000;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .wmp-subnav {
+        height: 26px;
+        background: #1b1e24;
+        border-bottom: 1px solid #30353f;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
+        font-size: 11px;
+        color: #cbd5e1;
+      }
+
+      .wmp-tabs {
+        display: flex;
+        gap: 6px;
+      }
+
+      .wmp-tab-btn {
+        padding: 2px 8px;
+        border-radius: 2px;
+        cursor: pointer;
+        color: #94a3b8;
+      }
+
+      .wmp-tab-btn.active,
+      .wmp-tab-btn:hover {
+        color: #ffffff;
+        background: #2d333f;
+      }
+
+      #wmpVisualizerContainer {
+        flex: 1;
+        position: relative;
+        display: flex;
+      }
+
+      #wmpCanvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        cursor: pointer;
+      }
+
+      .wmp-info-overlay {
+        position: absolute;
+        top: 10px;
+        left: 12px;
+        right: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        pointer-events: none;
+      }
+
+      .wmp-title-text {
+        font-size: 14px;
+        font-weight: 600;
+        color: #ffffff;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+      }
+
+      .wmp-artist-text {
+        font-size: 11px;
+        color: #6ee6ff;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+        margin-top: 2px;
+      }
+
+      .wmp-mode-badge {
+        font-size: 10px;
+        color: #ffd24d;
+        background: rgba(0, 0, 0, 0.65);
+        padding: 2px 7px;
+        border-radius: 3px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+      }
+
+      /* WMP Playlist Drawer */
+      #wmpPlaylistContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #12151b;
+        display: none;
+        flex-direction: column;
+        overflow-y: auto;
+        padding: 6px;
+        z-index: 5;
+      }
+
+      .wmp-playlist-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 10px;
+        border-radius: 3px;
+        color: #cbd5e1;
+        cursor: pointer;
+        font-size: 11.5px;
+        border: 1px solid transparent;
+        margin-bottom: 2px;
+      }
+
+      .wmp-playlist-item:hover {
+        background: #1e2634;
+        border-color: #3b82f6;
+        color: #ffffff;
+      }
+
+      .wmp-playlist-item.active {
+        background: linear-gradient(
+          90deg,
+          rgba(0, 120, 215, 0.35) 0%,
+          rgba(0, 120, 215, 0.1) 100%
+        );
+        border-color: #0078d7;
+        color: #60a5fa;
+        font-weight: 600;
+      }
+
+      /* WMP Deck Controls */
+      .wmp-deck {
+        height: 64px;
+        background: linear-gradient(
+          180deg,
+          #30353e 0%,
+          #1c2026 50%,
+          #101215 100%
+        );
+        border-top: 1px solid #484f5c;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        display: flex;
+        flex-direction: column;
+        padding: 4px 14px 6px 14px;
+      }
+
+      .wmp-progress-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 10px;
+        color: #a0a6b2;
+        margin-bottom: 4px;
+      }
+
+      .wmp-progress-track {
+        flex: 1;
+        height: 5px;
+        background: #000;
+        border-radius: 2px;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .wmp-progress-fill {
+        height: 100%;
+        width: 0%;
+        background: #0078d7;
+        border-radius: 2px;
+      }
+
+      .wmp-buttons-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .wmp-btn-round {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #444b57 0%, #262a31 100%);
+        border: 1px solid #555d6c;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        cursor: pointer;
+      }
+
+      .wmp-btn-round.active {
+        background: linear-gradient(180deg, #0078d7 0%, #004d99 100%);
+        border-color: #60a5fa;
+        box-shadow: 0 0 8px #0078d7;
+      }
+
+      .wmp-btn-round:hover {
+        background: linear-gradient(180deg, #586170 0%, #353b45 100%);
+        box-shadow: 0 0 6px rgba(0, 160, 255, 0.5);
+      }
+
+      .wmp-play-orb {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 35% 35%,
+          #4ea8ff 0%,
+          #0066cc 60%,
+          #003d7a 100%
+        );
+        border: 2px solid #a1d2ff;
+        box-shadow:
+          0 2px 8px rgba(0, 102, 204, 0.6),
+          inset 0 1px 2px #ffffff;
+        color: #ffffff;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+
+      .wmp-play-orb:hover {
+        transform: scale(1.06);
+        box-shadow:
+          0 0 16px rgba(0, 160, 255, 0.95),
+          inset 0 1px 4px #ffffff;
+      }
+
+      /* =========================================================
+       SPOTIFY AERO GLASS APPLICATION WINDOW
+       ========================================================= */
+      #spotifyWindow {
+        width: 660px;
+        height: 520px;
+        top: 35px;
+        left: 780px;
+      }
+
+      .spotify-top-bar {
+        background: #121212;
+        border-bottom: 1px solid #282828;
+        padding: 6px 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .spotify-url-input {
+        flex: 1;
+        height: 24px;
+        background: #242424;
+        border: 1px solid #3e3e3e;
+        border-radius: 12px;
+        padding: 0 12px;
+        color: #ffffff;
+        font-size: 11px;
+        outline: none;
+      }
+
+      .spotify-url-input:focus {
+        border-color: #1db954;
+      }
+
+      .spotify-chip-btn {
+        padding: 3px 10px;
+        border-radius: 12px;
+        background: #282828;
+        color: #ffffff;
+        font-size: 11px;
+        cursor: pointer;
+        border: 1px solid #3e3e3e;
+      }
+
+      .spotify-chip-btn:hover {
+        background: #1db954;
+        color: #000000;
+        border-color: #1db954;
+      }
+
+      .spotify-frame-container {
+        flex: 1;
+        background: #121212;
+        position: relative;
+      }
+
+      .spotify-frame-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+
+      .spotify-footer-hint {
+        background: #181818;
+        border-top: 1px solid #282828;
+        padding: 4px 10px;
+        font-size: 10px;
+        color: #a7a7a7;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* Windows Explorer Window */
+      #explorerWindow {
+        width: 800px;
+        height: 520px;
+        top: 70px;
+        left: 120px;
+      }
+
+      .explorer-nav-bar {
+        background: #f4f7fa;
+        border-bottom: 1px solid #d9d9d9;
+        padding: 4px 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .explorer-nav-btn {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 1px solid #8292a1;
+        background: linear-gradient(180deg, #ffffff 0%, #e1e7ec 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        cursor: pointer;
+      }
+
+      .explorer-nav-btn:hover {
+        background: linear-gradient(180deg, #ffffff 0%, #c9e0f7 100%);
+        border-color: #3c7fb1;
+      }
+
+      .explorer-address-bar {
+        flex: 1;
+        height: 24px;
+        background: #ffffff;
+        border: 1px solid #abadb3;
+        border-radius: 2px;
+        padding: 0 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11.5px;
+      }
+
+      .explorer-search-box {
+        width: 170px;
+        height: 24px;
+        background: #ffffff;
+        border: 1px solid #abadb3;
+        border-radius: 2px;
+        padding: 0 6px;
+        display: flex;
+        align-items: center;
+        font-size: 11px;
+        color: #666;
+      }
+
+      .explorer-command-bar {
+        background: linear-gradient(180deg, #fbfbfb 0%, #ebebeb 100%);
+        border-bottom: 1px solid #d1d1d1;
+        padding: 3px 8px;
+        display: flex;
+        gap: 8px;
+        font-size: 11.5px;
+      }
+
+      .explorer-command-item {
+        padding: 2px 6px;
+        border-radius: 2px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .explorer-command-item:hover {
+        background: #e5f1fb;
+        outline: 1px solid #70c0e7;
+      }
+
+      .explorer-body {
+        flex: 1;
+        display: flex;
+        background: #ffffff;
+        overflow: hidden;
+      }
+
+      .explorer-sidebar {
+        width: 180px;
+        background: #fbfbfb;
+        border-right: 1px solid #d9d9d9;
+        padding: 8px 4px;
+        overflow-y: auto;
+      }
+
+      .explorer-main {
+        flex: 1;
+        padding: 12px;
+        overflow-y: auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        gap: 12px;
+      }
+
+      .explorer-item {
+        width: 90px;
+        padding: 6px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      .explorer-item:hover {
+        background: #e5f1fb;
+        border-color: #70c0e7;
+      }
+
+      .explorer-item svg {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 4px;
+      }
+
+      .explorer-item span {
+        font-size: 11px;
+        word-break: break-word;
+      }
+
+      .explorer-details-pane {
+        height: 46px;
+        background: linear-gradient(180deg, #e4eef6 0%, #d1e4f2 100%);
+        border-top: 1px solid #9dc3e6;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        gap: 12px;
+      }
+
+      /* Windows 7 Calculator Window */
+      #calcWindow {
+        width: 250px;
+        height: 340px;
+        top: 120px;
+        left: 380px;
+      }
+
+      .calc-screen {
+        height: 50px;
+        background: #ffffff;
+        border: 1px solid #8292a1;
+        border-radius: 2px;
+        margin: 8px 6px;
+        padding: 6px 10px;
+        text-align: right;
+        font-size: 26px;
+        font-family: var(--win7-font);
+        font-weight: 300;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .calc-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4px;
+        padding: 0 6px 8px 6px;
+      }
+
+      .calc-grid button {
+        height: 32px;
+        font-size: 13px;
+        font-weight: 400;
+      }
+
+      /* Desktop Context Menu */
+      #desktopContextMenu {
+        position: fixed;
+        width: 175px;
+        background: #f0f0f0;
+        border: 1px solid #979797;
+        box-shadow: 2px 4px 14px rgba(0, 0, 0, 0.35);
+        border-radius: 2px;
+        padding: 2px;
+        display: none;
+        flex-direction: column;
+        z-index: 1000000;
+      }
+
+      .ctx-item {
+        padding: 4px 16px;
+        font-size: 11.5px;
+        color: #000;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .ctx-item:hover {
+        background: #3399ff;
+        color: #ffffff;
+      }
+
+      .ctx-sep {
+        height: 1px;
+        background: #d4d4d4;
+        margin: 3px 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- =========================================================
+       DESKTOP WORKSPACE & ICONS
+       ========================================================= -->
+    <div
+      id="desktop"
+      onmousedown="onDesktopMouseDown(event)"
+      oncontextmenu="openContextMenu(event)"
+    >
+      <div id="selectionBox"></div>
+
+      <!-- Desktop Icons Grid -->
+      <div class="desktop-icons" id="desktopIcons">
+        <!-- Computer -->
+        <div class="desktop-icon" onclick="openWindowSmart('explorerWindow')">
+          <svg viewBox="0 0 48 48">
+            <rect
+              x="6"
+              y="6"
+              width="36"
+              height="26"
+              rx="2"
+              fill="#2a5f9e"
+              stroke="#1d426d"
+              stroke-width="1.5"
+            />
+            <rect x="9" y="9" width="30" height="20" fill="url(#screenGrad)" />
+            <path
+              d="M20 32 L28 32 L26 38 L22 38 Z"
+              fill="#b0c2d3"
+              stroke="#718291"
+            />
+            <ellipse cx="24" cy="38" rx="8" ry="2" fill="#889dae" />
+            <defs>
+              <linearGradient id="screenGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4aa3df" />
+                <stop offset="60%" stop-color="#1b5a93" />
+                <stop offset="100%" stop-color="#0a2a47" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="desktop-icon-label">Computer</div>
+        </div>
+
+        <!-- Sumit User Profile -->
+        <div
+          class="desktop-icon"
+          onclick="openWindowSmart('notepadWindow', 'about_sumit.txt')"
+        >
+          <svg viewBox="0 0 48 48">
+            <path
+              d="M6 10 L18 10 L22 14 L42 14 L42 40 L6 40 Z"
+              fill="#ffb834"
+              stroke="#d48a12"
+              stroke-width="1.2"
+            />
+            <path d="M6 16 L42 16 L40 40 L6 40 Z" fill="#ffd166" />
+            <circle cx="24" cy="25" r="5" fill="#1b5a93" />
+            <path d="M16 36 C16 31 32 31 32 36" fill="#1b5a93" />
+          </svg>
+          <div class="desktop-icon-label">Sumit</div>
+        </div>
+
+        <!-- Windows Media Player 12 -->
+        <div class="desktop-icon" onclick="openWindowSmart('wmpWindow')">
+          <svg viewBox="0 0 48 48">
+            <circle
+              cx="24"
+              cy="24"
+              r="19"
+              fill="url(#wmpOuter)"
+              stroke="#ea580c"
+              stroke-width="1.2"
+            />
+            <circle
+              cx="24"
+              cy="24"
+              r="14"
+              fill="#03487f"
+              stroke="#38bdf8"
+              stroke-width="1"
+            />
+            <polygon points="21,18 31,24 21,30" fill="#ffffff" />
+            <defs>
+              <radialGradient id="wmpOuter" cx="40%" cy="35%">
+                <stop offset="0%" stop-color="#ffedd5" />
+                <stop offset="50%" stop-color="#f97316" />
+                <stop offset="100%" stop-color="#c2410c" />
+              </radialGradient>
+            </defs>
+          </svg>
+          <div class="desktop-icon-label">Windows Media Player</div>
+        </div>
+
+        <!-- Spotify Web App -->
+        <div class="desktop-icon" onclick="openWindowSmart('spotifyWindow')">
+          <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="19" fill="#1ed760" />
+            <path
+              d="M14 18 C22 15 32 16 36 19 M15 24 C21 21.5 29 22 34 25 M16 30 C21 28 27 28.5 32 31"
+              fill="none"
+              stroke="#121212"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+          </svg>
+          <div class="desktop-icon-label">Spotify</div>
+        </div>
+
+        <!-- Tools I Use -->
+        <div
+          class="desktop-icon"
+          onclick="openWindowSmart('notepadWindow', 'tools_i_use.txt')"
+        >
+          <svg viewBox="0 0 48 48">
+            <rect
+              x="10"
+              y="6"
+              width="28"
+              height="36"
+              rx="2"
+              fill="#f8fafc"
+              stroke="#94a3b8"
+              stroke-width="1.2"
+            />
+            <path
+              d="M15 12 L33 12 M15 18 L33 18 M15 24 L27 24 M15 30 L30 30"
+              stroke="#64748b"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <circle cx="33" cy="33" r="8" fill="#3b82f6" />
+            <path d="M33 28 L30 33 L33 33 L33 38 L36 33 L33 33 Z" fill="#fff" />
+          </svg>
+          <div class="desktop-icon-label">tools_i_use.txt</div>
+        </div>
+
+        <!-- Portfolio Explorer -->
+        <div class="desktop-icon" onclick="openWindowSmart('explorerWindow')">
+          <svg viewBox="0 0 48 48">
+            <path
+              d="M6 10 L18 10 L22 14 L42 14 L42 40 L6 40 Z"
+              fill="#f59e0b"
+              stroke="#b45309"
+              stroke-width="1.2"
+            />
+            <path d="M8 18 L44 18 L40 40 L6 40 Z" fill="#fde047" />
+            <rect x="12" y="14" width="24" height="6" fill="#60a5fa" rx="1" />
+          </svg>
+          <div class="desktop-icon-label">Portfolio Explorer</div>
+        </div>
+
+        <!-- Calculator -->
+        <div class="desktop-icon" onclick="openWindowSmart('calcWindow')">
+          <svg viewBox="0 0 48 48">
+            <rect
+              x="10"
+              y="6"
+              width="28"
+              height="36"
+              rx="3"
+              fill="#cbd5e1"
+              stroke="#475569"
+              stroke-width="1.2"
+            />
+            <rect
+              x="14"
+              y="10"
+              width="20"
+              height="8"
+              rx="1"
+              fill="#94a3b8"
+              stroke="#334155"
+            />
+            <circle cx="16" cy="23" r="2" fill="#475569" />
+            <circle cx="24" cy="23" r="2" fill="#475569" />
+            <circle cx="32" cy="23" r="2" fill="#0284c7" />
+            <circle cx="16" cy="30" r="2" fill="#475569" />
+            <circle cx="24" cy="30" r="2" fill="#475569" />
+            <circle cx="32" cy="30" r="2" fill="#0284c7" />
+            <circle cx="16" cy="37" r="2" fill="#475569" />
+            <circle cx="24" cy="37" r="2" fill="#475569" />
+            <circle cx="32" cy="37" r="2" fill="#ea580c" />
+          </svg>
+          <div class="desktop-icon-label">Calculator</div>
+        </div>
+
+        <!-- Philosophy -->
+        <div
+          class="desktop-icon"
+          onclick="openWindowSmart('notepadWindow', 'philosophy.txt')"
+        >
+          <svg viewBox="0 0 48 48">
+            <rect
+              x="10"
+              y="6"
+              width="28"
+              height="36"
+              rx="2"
+              fill="#f8fafc"
+              stroke="#94a3b8"
+              stroke-width="1.2"
+            />
+            <path
+              d="M15 12 L33 12 M15 18 L33 18 M15 24 L25 24 M15 30 L30 30"
+              stroke="#64748b"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <circle cx="33" cy="32" r="7" fill="#f59e0b" />
+            <path
+              d="M33 27 L33 37 M28 32 L38 32"
+              stroke="#fff"
+              stroke-width="1.5"
+            />
+          </svg>
+          <div class="desktop-icon-label">philosophy.txt</div>
+        </div>
+
+        <!-- Contact -->
+        <div
+          class="desktop-icon"
+          onclick="openWindowSmart('notepadWindow', 'contact.txt')"
+        >
+          <svg viewBox="0 0 48 48">
+            <rect
+              x="6"
+              y="12"
+              width="36"
+              height="24"
+              rx="3"
+              fill="#38bdf8"
+              stroke="#0284c7"
+              stroke-width="1.2"
+            />
+            <path
+              d="M6 14 L24 28 L42 14"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="2"
+            />
+          </svg>
+          <div class="desktop-icon-label">contact.txt</div>
+        </div>
+
+        <!-- Recycle Bin -->
+        <div
+          class="desktop-icon"
+          onclick="alert('Recycle Bin is clean and empty.')"
+        >
+          <svg viewBox="0 0 48 48">
+            <path
+              d="M12 14 L14 40 L34 40 L36 14 Z"
+              fill="url(#binGlass)"
+              stroke="#38bdf8"
+              stroke-width="1.2"
+            />
+            <ellipse
+              cx="24"
+              cy="14"
+              rx="12"
+              ry="4"
+              fill="#67e8f9"
+              stroke="#0284c7"
+            />
+            <defs>
+              <linearGradient id="binGlass" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#bae6fd" stop-opacity="0.8" />
+                <stop offset="100%" stop-color="#0284c7" stop-opacity="0.9" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="desktop-icon-label">Recycle Bin</div>
         </div>
       </div>
-      <div class="w-full md:w-1/2 md:flex-auto">
-        <!--   <img src="./img/sumit-herobw.png" alt="Sumit" class="mx-auto">  -->
-      </div>
-    </header>
-    <!-- header -->
-  </section>
-  <div class="hidden bg-yellow-700 sm:bg-green-700 md:bg-red-700 lg:bg-blue-700 h-2">
-  </div>
-  <!-- Projects -->
-  <section class="py-8">
-    <div class="container mx-auto m-8">
-      <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center">Building Stuff </h1>
-      <div class="w-full mb-10">
-        <div class="h-1 mx-auto gradient w-64 opacity-65 py-0 rounded-t"></div>
-      </div>
-      <div class="flex flex-col flex-wrap md:flex-row py-3 md:justify-around">
-        <!-- project 1 -->
-        <a href="https://www.thetechbasket.com/" target="_blank">
-          <div class=" flex-auto lg:max-w-lg rounded overflow-hidden shadow-md hover:shadow-lg m-4 bg-white">
-            <!-- <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains"> -->
-            <div class="px-6 py-4">
-              <div class="font-bold text-xl mb-2">The Tech Basket</div>
-              <p class="text-gray-700 text-base text-justify"> Started the blog to learn digital marketing
-                practically. </p>
-              <p class="text-gray-700 text-base"> Learned: User Experience, SEO, Content Writing, Backlinks,
-                Performance Improvement, Basics of Server Management, Analyzing Search Console, Tag Manager </p>
-            </div>
-            <div class="px-6 py-4">
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#wordpress</span>
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#blog</span>
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#tech</span>
-            </div>
-          </div>
-        </a>
-        <!-- project 2 -->
-        <a href="https://chrome.google.com/webstore/detail/where-is-my-website/dkfaagghjjmjdfgibcfaphlifihjmpfm"
-          target="_blank">
-          <div class="flex-auto lg:max-w-lg rounded overflow-hidden shadow-md hover:shadow-lg  m-4 bg-white">
-            <!-- <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains"> -->
-            <div class="px-6 py-4">
-              <div class="font-bold text-xl mb-2">Where is My Website?</div>
-              <p class="text-gray-700 text-base">#5 Product of the Day on ProductHunt</p>
-              <p class="text-gray-700 text-base">Highlight Your Website in Google Search and Keep an Eye on
-                Competitors. </p>
-              <p class="text-gray-700 text-base">I was personally facing this issue so I took up the challenge and
-                learned how to make Chrome Extension. </p>
-            </div>
-            <div class="px-6 py-4">
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#chrome</span>
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#extension</span>
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#utility</span>
-            </div>
-          </div>
-        </a>
-        <!-- project 3 -->
-        <a href="https://play.google.com/store/apps/details?id=upp.salaryslip.sky" target="_blank">
-          <div class="flex-auto lg:max-w-lg rounded overflow-hidden shadow-md hover:shadow-lg  m-4 bg-white">
-            <!-- <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains"> -->
-            <div class="px-6 py-4">
-              <div class="font-bold text-xl mb-2">UPP Salary Slip</div>
-              <p class="text-gray-700 text-base">Made it for my dad later released on Google Play store and now it's
-                being used by more than 7k+ dads and it's so satisfying.<br> Built With - Apache Cordova, Basic HTML,
-                Javascript
-            </div>
-            <div class="px-6 py-4">
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#android</span>
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#cordova</span>
-            </div>
-          </div>
-        </a>
-        <!-- project 4 -->
-        <a href="https://play.google.com/store/apps/details?id=com.splashit.sky" target="_blank">
-          <div class="flex-auto lg:max-w-lg rounded overflow-hidden shadow-md hover:shadow-lg  m-4 bg-white">
-            <!-- <img class="w-full" src="https://apps.thetechbasket.com/assets/img/splash-it.jpg" alt="Sunset in theountains"> -->
-            <div class="px-6 py-4">
-              <div class="font-bold text-xl mb-2">Splash IT</div>
-              <p class="text-gray-700 text-base"> 53k+ Users, Collection of handpicked wallpapers<br> Learned: App
-                Store Optimization, Play Console and User Engagement </p>
-            </div>
-            <div class="px-6 py-4">
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#android</span>
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#aso</span>
-            </div>
-          </div>
-        </a>
-        <!-- project 5 -->
-        <a href="https://www.thetechbasket.com/stack/" target="_blank">
-          <div class="flex-auto lg:max-w-lg rounded overflow-hidden shadow-md hover:shadow-lg  m-4 bg-white">
-            <!-- <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains"> -->
-            <div class="px-6 py-4">
-              <div class="font-bold text-xl mb-2">Stack </div>
-              <p class="text-gray-700 text-base"> A collection of tools to get work done. Manually handpicked tools
-                across different categories. Search Less, Do More </p>
-              <p class="text-gray-700 text-base"> 223+ Upvotes on ProductHunt</p>
-            </div>
-            <div class="px-6 py-4">
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#tools</span>
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#static</span>
-            </div>
-          </div>
-        </a>
-        <!-- project 6 -->
-        <a href="https://chrome.google.com/webstore/detail/shop-with-family-hide-all/oohachhjalffnijmimfehhmppedmdljk/"
-          target="_blank">
-          <div class="flex-auto lg:max-w-lg rounded overflow-hidden shadow-md hover:shadow-lg m-4 bg-white">
-            <!-- <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains"> -->
-            <div class="px-6 py-4">
-              <div class="font-bold text-xl mb-2">Hide All Prices: Shop with Family </div>
-              <p class="text-gray-700 text-base"> Hides all the prices from Flipkart, Amazon, Myntra, Aliexpress etc
-                so you can focus on product not the price. </p>
-              <p class="text-gray-700 text-base"> Super Helpful when you are shopping with mom. (always use price
-                filter) </p>
-            </div>
-            <div class="px-6 py-4">
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#chrome</span>
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#extension</span>
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#utility</span>
-            </div>
-          </div>
-        </a>
-        <!-- project 7 -->
-        <a href="https://play.google.com/store/apps/details?id=com.stickers.forwa" target="_blank">
-          <div class="flex-auto lg:max-w-lg rounded overflow-hidden shadow-md hover:shadow-lg m-4 bg-white">
-            <!-- <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains"> -->
-            <div class="px-6 py-4">
-              <div class="font-bold text-xl mb-2">Blob is Back - Whatsapp Sticker For Chat </div>
-              <p class="text-gray-700 text-base"> Because I love Big Blob Emojis. After Releasing Looks Like too many
-                people love blob Emojis for chatting. </p>
-            </div>
-            <div class="px-6 py-4">
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#android</span>
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#sticker</span>
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#whatsapp</span>
-            </div>
-          </div>
-        </a>
+
+      <!-- Desktop Analog Clock Gadget -->
+      <div id="clockGadget" title="Windows 7 Desktop Clock">
+        <div class="gadget-face">
+          <div class="gadget-center"></div>
+          <div class="gadget-hand gadget-hour" id="gadgetHour"></div>
+          <div class="gadget-hand gadget-minute" id="gadgetMinute"></div>
+          <div class="gadget-hand gadget-second" id="gadgetSecond"></div>
+        </div>
       </div>
     </div>
-  </section>
-  <!-- <div class="text-center mb-10 ">
-      <a href="https://www.dropbox.com/s/qdpm8vib4xiym84/Resume-%20Sumit%20Kumar%20Yadav.pdf?dl=0" target="_blank">
-        <button class="gradient h-20 w-64 text-gray-300 m-2 rounded-lg mt-10 text-center font-semibold peak">View
-          Resume</button></a>
-    </div> -->
-  <!-- before footer -->
-  <section class="container mx-auto max-h-full text-center py-6 mb-12 text-black">
-    <h1 class="w-full my-2 text-5xl font-bold leading-tight">Say Hi!</h1>
-    <div class="mx-10">
-      <div class="m-4">
-        <p class="font-bold text-xl mb-1">Remember It's Good to Talk</p>
-        <div class="w-full mb-10 md:mb-20">
-          <div class="h-1 mx-auto gradient w-16 opacity-55 my-0 py-0 rounded-t"></div>
+
+    <!-- =========================================================
+       WINDOW 1: NOTEPAD (7.CSS AERO GLASS WINDOW)
+       ========================================================= -->
+    <div class="window active glass" id="notepadWindow">
+      <div
+        class="title-bar"
+        onmousedown="startDrag(event, 'notepadWindow')"
+        ondblclick="toggleMaximize('notepadWindow')"
+      >
+        <div class="title-bar-text">
+          <svg viewBox="0 0 16 16">
+            <rect
+              x="2"
+              y="1"
+              width="12"
+              height="14"
+              rx="1"
+              fill="#fff"
+              stroke="#64748b"
+            />
+            <path d="M4 4h8M4 7h8M4 10h5" stroke="#94a3b8" />
+          </svg>
+          <span id="notepadTitle">tools_i_use.txt - Notepad</span>
         </div>
-        <div class="flex flex-wrap justify-between">
-          <a href="https://www.facebook.com/sumityadav8181/" rel="nofollow">
-            <img class="md:h-16 md:w-16 h-8 w-8" src="img/svg/facebook.svg" />
-          </a>
-          <a href="https://twitter.com/sumityadav8181/" rel="nofollow">
-            <img class="md:h-16 md:w-16 h-8 w-8" src="img/svg/twitter.svg" />
-          </a>
-          <a href="https://www.linkedin.com/in/sumityadav8181/" rel="nofollow">
-            <img class="md:h-16 md:w-16 h-8 w-8" src="img/svg/linkedin.svg" />
-          </a>
-          <a href="https://www.quora.com/profile/Sumit-Kumar-Yadav-3" rel="nofollow">
-            <img class="md:h-16 md:w-16 h-8 w-8" src="img/svg/quora.svg" />
-          </a>
-          <a href="mailto:sumityadav8181@gmail.com" rel="nofollow">
-            <img class="md:h-16 md:w-16 h-8 w-8" src="img/svg/gmail.svg" />
-          </a>
+        <div class="title-bar-controls">
+          <button
+            aria-label="Minimize"
+            onclick="minimizeWindow('notepadWindow')"
+          ></button>
+          <button
+            aria-label="Maximize"
+            onclick="toggleMaximize('notepadWindow')"
+          ></button>
+          <button
+            aria-label="Close"
+            onclick="closeWindow('notepadWindow')"
+          ></button>
+        </div>
+      </div>
+
+      <!-- Notepad Menubar -->
+      <div class="notepad-menubar">
+        <div class="menu-trigger" onclick="toggleMenu(this)">
+          <u>F</u>ile
+          <div class="dropdown-menu">
+            <div class="dropdown-item" onclick="actionNewFile()">
+              <span><u>N</u>ew</span><small>Ctrl+N</small>
+            </div>
+            <div class="dropdown-item" onclick="actionSaveFile()">
+              <span><u>S</u>ave</span><small>Ctrl+S</small>
+            </div>
+            <div class="dropdown-item" onclick="actionSaveFile()">
+              <span>Save <u>A</u>s...</span>
+            </div>
+            <div class="dropdown-sep"></div>
+            <div class="dropdown-item" onclick="window.print()">
+              <span><u>P</u>rint...</span><small>Ctrl+P</small>
+            </div>
+            <div class="dropdown-sep"></div>
+            <div class="dropdown-item" onclick="closeWindow('notepadWindow')">
+              <span>E<u>x</u>it</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-trigger" onclick="toggleMenu(this)">
+          <u>E</u>dit
+          <div class="dropdown-menu">
+            <div class="dropdown-item" onclick="document.execCommand('undo')">
+              <span><u>U</u>ndo</span><small>Ctrl+Z</small>
+            </div>
+            <div class="dropdown-sep"></div>
+            <div class="dropdown-item" onclick="document.execCommand('cut')">
+              <span>Cu<u>t</u></span
+              ><small>Ctrl+X</small>
+            </div>
+            <div class="dropdown-item" onclick="document.execCommand('copy')">
+              <span><u>C</u>opy</span><small>Ctrl+C</small>
+            </div>
+            <div class="dropdown-item" onclick="actionSelectAll()">
+              <span>Select <u>A</u>ll</span><small>Ctrl+A</small>
+            </div>
+            <div class="dropdown-sep"></div>
+            <div class="dropdown-item" onclick="actionInsertTimeDate()">
+              <span>Time/<u>D</u>ate</span><small>F5</small>
+            </div>
+          </div>
+        </div>
+        <div class="menu-trigger" onclick="toggleMenu(this)">
+          <u>F</u>ormat
+          <div class="dropdown-menu">
+            <div class="dropdown-item" onclick="toggleWordWrap()">
+              <span>Word <u>W</u>rap</span><span id="wrapCheck">✓</span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-trigger" onclick="toggleMenu(this)">
+          <u>H</u>elp
+          <div class="dropdown-menu">
+            <div
+              class="dropdown-item"
+              onclick="alert('Notepad for Windows 7 • Sumit Yadav Edition')"
+            >
+              <span>About Notepad</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Client Area -->
+      <div class="notepad-client">
+        <textarea id="notepadTextarea" spellcheck="false"></textarea>
+      </div>
+
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <p class="status-bar-field" id="statusLineCol">Ln 1, Col 1</p>
+        <p class="status-bar-field" id="statusCharCount">Chars: 0</p>
+        <p class="status-bar-field" style="max-width: 60px">100%</p>
+        <p class="status-bar-field" style="max-width: 110px">Windows (CRLF)</p>
+        <p class="status-bar-field" style="max-width: 70px">UTF-8</p>
+      </div>
+    </div>
+
+    <!-- =========================================================
+       WINDOW 2: UPGRADED WINDOWS MEDIA PLAYER 12
+       ========================================================= -->
+    <div class="window active glass" id="wmpWindow">
+      <div
+        class="title-bar"
+        onmousedown="startDrag(event, 'wmpWindow')"
+        ondblclick="toggleMaximize('wmpWindow')"
+      >
+        <div class="title-bar-text">
+          <svg viewBox="0 0 16 16">
+            <circle cx="8" cy="8" r="7" fill="#f97316" />
+            <polygon points="6,4 12,8 6,12" fill="#fff" />
+          </svg>
+          <span id="wmpHeaderTitle">Windows Media Player • Now Playing</span>
+        </div>
+        <div class="title-bar-controls">
+          <button
+            aria-label="Minimize"
+            onclick="minimizeWindow('wmpWindow')"
+          ></button>
+          <button
+            aria-label="Maximize"
+            onclick="toggleMaximize('wmpWindow')"
+          ></button>
+          <button
+            aria-label="Close"
+            onclick="closeWindow('wmpWindow')"
+          ></button>
+        </div>
+      </div>
+
+      <div class="wmp-frame">
+        <!-- Subnavigation: Now Playing vs Playlist Selector -->
+        <div class="wmp-subnav">
+          <div class="wmp-tabs">
+            <div
+              class="wmp-tab-btn active"
+              id="wmpTabNowPlaying"
+              onclick="switchWmpTab('nowPlaying')"
+            >
+              Now Playing
+            </div>
+            <div
+              class="wmp-tab-btn"
+              id="wmpTabPlaylist"
+              onclick="switchWmpTab('playlist')"
+            >
+              Library Playlist (8)
+            </div>
+          </div>
+          <div style="font-size: 10px; color: #38bdf8" id="wmpBitrate">
+            320 kbps • 48 kHz
+          </div>
+        </div>
+
+        <!-- Tab 1: Live Spectrum Visualizer -->
+        <div id="wmpVisualizerContainer">
+          <canvas
+            id="wmpCanvas"
+            onclick="switchVisualizerMode()"
+            title="Click canvas to change visualizer mode"
+          ></canvas>
+
+          <div class="wmp-info-overlay">
+            <div>
+              <div class="wmp-title-text" id="wmpTitle">Late Night Study</div>
+              <div class="wmp-artist-text" id="wmpGenre">
+                Sumit • Chillhop / Rhodes / Vinyl
+              </div>
+            </div>
+            <div class="wmp-mode-badge" id="wmpModeBadge">
+              Visualizer: Bars & Peaks
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Interactive Playlist Table Drawer -->
+        <div id="wmpPlaylistContainer"></div>
+
+        <!-- WMP 12 Deck -->
+        <div class="wmp-deck">
+          <div class="wmp-progress-bar">
+            <span id="wmpTimeElapsed">0:00</span>
+            <div
+              class="wmp-progress-track"
+              id="wmpProgressTrack"
+              onclick="seekWmp(event)"
+            >
+              <div class="wmp-progress-fill" id="wmpProgressFill"></div>
+            </div>
+            <span id="wmpTimeTotal">-3:45</span>
+          </div>
+
+          <div class="wmp-buttons-row">
+            <div style="display: flex; gap: 6px">
+              <div
+                class="wmp-btn-round"
+                id="wmpShuffleBtn"
+                title="Turn Shuffle On/Off"
+                onclick="toggleWmpShuffle()"
+              >
+                🔀
+              </div>
+              <div
+                class="wmp-btn-round active"
+                id="wmpRepeatBtn"
+                title="Turn Repeat On/Off"
+                onclick="toggleWmpRepeat()"
+              >
+                🔁
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 6px">
+              <div
+                class="wmp-btn-round"
+                onclick="window.ambientPlayer.prev()"
+                title="Previous Track"
+              >
+                ⏮
+              </div>
+              <div
+                class="wmp-play-orb"
+                id="wmpPlayBtn"
+                onclick="toggleAudio()"
+                title="Play / Pause"
+              >
+                ▶
+              </div>
+              <div
+                class="wmp-btn-round"
+                onclick="window.ambientPlayer.next()"
+                title="Next Track"
+              >
+                ⏭
+              </div>
+              <div
+                class="wmp-btn-round"
+                onclick="window.ambientPlayer.pause()"
+                title="Stop"
+              >
+                ⏹
+              </div>
+            </div>
+
+            <div
+              style="display: flex; align-items: center; gap: 6px; width: 100px"
+            >
+              <span style="color: #aaa; font-size: 12px">🔊</span>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
+                value="0.60"
+                id="wmpVolSlider"
+                style="width: 100%; accent-color: #0078d7"
+                oninput="updateSystemVolume(parseFloat(this.value))"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
-  <style>
-    .gradient {
-      background: #1801fd;
-    }
 
-    body {
-      font-family: Roboto, 'Helvetica Neue', sans-serif;
-    }
+    <!-- =========================================================
+       WINDOW 3: SPOTIFY WEB PLAYER (AERO GLASS APP)
+       ========================================================= -->
+    <div class="window active glass" id="spotifyWindow">
+      <div
+        class="title-bar"
+        onmousedown="startDrag(event, 'spotifyWindow')"
+        ondblclick="toggleMaximize('spotifyWindow')"
+      >
+        <div class="title-bar-text">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="#1ed760" />
+            <path
+              d="M7 9 C11 7.5 16 8 18 9.5 M7.5 12 C10.5 10.7 14.5 11 17 12.5 M8 15 C10.5 14 13.5 14.2 16 15.5"
+              fill="none"
+              stroke="#121212"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span>Spotify • Windows 7 Player</span>
+        </div>
+        <div class="title-bar-controls">
+          <button
+            aria-label="Minimize"
+            onclick="minimizeWindow('spotifyWindow')"
+          ></button>
+          <button
+            aria-label="Maximize"
+            onclick="toggleMaximize('spotifyWindow')"
+          ></button>
+          <button
+            aria-label="Close"
+            onclick="closeWindow('spotifyWindow')"
+          ></button>
+        </div>
+      </div>
 
-    .peak {
-      background: url("/img/peak.gif") no-repeat;
-      background-position: left bottom;
-      background-size: 5rem;
-      background-color: #1801fd;
-    }
-  </style>
-</body>
+      <!-- Quick Presets & URL Loader -->
+      <div class="spotify-top-bar">
+        <div
+          class="spotify-chip-btn"
+          onclick="loadSpotifyUri('playlist/37i9dQZF1DXdLEN7aqioXM')"
+        >
+          Lofi Beats
+        </div>
+        <div
+          class="spotify-chip-btn"
+          onclick="loadSpotifyUri('playlist/37i9dQZF1DWZeKCadgRdKQ')"
+        >
+          Deep Focus
+        </div>
+        <div
+          class="spotify-chip-btn"
+          onclick="loadSpotifyUri('playlist/37i9dQZF1DXd9rSDyQguIk')"
+        >
+          Synthwave
+        </div>
+        <input
+          type="text"
+          class="spotify-url-input"
+          id="spotifyCustomInput"
+          placeholder="Paste Spotify Playlist / Track URL..."
+          onkeydown="if (event.key === 'Enter') loadCustomSpotify();"
+        />
+        <button
+          class="default"
+          style="height: 24px; padding: 0 10px; font-size: 11px"
+          onclick="loadCustomSpotify()"
+        >
+          Load
+        </button>
+      </div>
 
+      <!-- Embedded Spotify Frame -->
+      <div class="spotify-frame-container">
+        <iframe
+          id="spotifyIframe"
+          src="https://open.spotify.com/embed/playlist/37i9dQZF1DX32oVqaQE8BM?utm_source=generator&theme=0"
+          allow="
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            fullscreen;
+            picture-in-picture;
+          "
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <div class="spotify-footer-hint">
+        <span>💡 Logged into Spotify in your browser? Full tracks play continuously.</span>
+        <span
+          onclick="openWindowSmart('wmpWindow')"
+          style="color: #38bdf8; cursor: pointer; text-decoration: underline;"
+          title="Open Windows Media Player 12"
+        >Open Windows Media Player 12 for 100% free continuous audio ➔</span>
+      </div>
+    </div>
+
+    <!-- =========================================================
+       WINDOW 4: WINDOWS EXPLORER (PORTFOLIO & PROJECTS)
+       ========================================================= -->
+    <div class="window active glass" id="explorerWindow">
+      <div
+        class="title-bar"
+        onmousedown="startDrag(event, 'explorerWindow')"
+        ondblclick="toggleMaximize('explorerWindow')"
+      >
+        <div class="title-bar-text">
+          <svg viewBox="0 0 16 16">
+            <path d="M2 3 L6 3 L8 5 L14 5 L14 13 L2 13 Z" fill="#f59e0b" />
+          </svg>
+          <span id="explorerTitle">Computer • Portfolio (C:)</span>
+        </div>
+        <div class="title-bar-controls">
+          <button
+            aria-label="Minimize"
+            onclick="minimizeWindow('explorerWindow')"
+          ></button>
+          <button
+            aria-label="Maximize"
+            onclick="toggleMaximize('explorerWindow')"
+          ></button>
+          <button
+            aria-label="Close"
+            onclick="closeWindow('explorerWindow')"
+          ></button>
+        </div>
+      </div>
+
+      <!-- Navigation & Address Bar -->
+      <div class="explorer-nav-bar">
+        <div class="explorer-nav-btn" onclick="filterExplorer('projects')">
+          ◀
+        </div>
+        <div class="explorer-nav-btn" style="opacity: 0.4">▶</div>
+        <div class="explorer-address-bar">
+          <span>📁</span>
+          <span id="explorerPath"
+            >Computer &gt; Local Disk (C:) &gt; Sumit &gt; Projects</span
+          >
+        </div>
+        <div class="explorer-search-box">
+          <span>🔍 Search Projects</span>
+        </div>
+      </div>
+
+      <!-- Command Bar -->
+      <div class="explorer-command-bar">
+        <div
+          class="explorer-command-item"
+          onclick="
+            alert(
+              'Sumit Yadav Workstation: Clean Architecture, zero tracking bloat.',
+            )
+          "
+        >
+          <span>⚙️</span> <span>System properties</span>
+        </div>
+        <div
+          class="explorer-command-item"
+          onclick="openWindowSmart('notepadWindow', 'tools_i_use.txt')"
+        >
+          <span>📝</span> <span>Open in Notepad</span>
+        </div>
+        <div
+          class="explorer-command-item"
+          onclick="window.open('https://github.com/SumitYadav8181', '_blank')"
+        >
+          <span>🌐</span> <span>GitHub Profile</span>
+        </div>
+      </div>
+
+      <!-- Explorer Main Body -->
+      <div class="explorer-body">
+        <!-- Left Tree View (7.css tree-view) -->
+        <div class="explorer-sidebar">
+          <ul class="tree-view has-collapse-button">
+            <li>
+              <details open>
+                <summary>Favorites</summary>
+                <ul>
+                  <li onclick="filterExplorer('desktop')">
+                    <a href="javascript:void(0)">Desktop</a>
+                  </li>
+                  <li onclick="filterExplorer('downloads')">
+                    <a href="javascript:void(0)">Downloads</a>
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details open>
+                <summary>Libraries</summary>
+                <ul>
+                  <li onclick="filterExplorer('documents')">
+                    <a href="javascript:void(0)">Documents</a>
+                  </li>
+                  <li onclick="filterExplorer('music')">
+                    <a href="javascript:void(0)">Music</a>
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details open>
+                <summary>Computer</summary>
+                <ul>
+                  <li onclick="filterExplorer('projects')">
+                    <a href="javascript:void(0)"
+                      ><strong>Local Disk (C:)</strong></a
+                    >
+                  </li>
+                </ul>
+              </details>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Main File Grid -->
+        <div class="explorer-main" id="explorerGrid">
+          <div
+            class="explorer-item"
+            onclick="openWindowSmart('notepadWindow', 'tools_i_use.txt')"
+          >
+            <svg viewBox="0 0 32 32">
+              <rect
+                x="6"
+                y="4"
+                width="20"
+                height="24"
+                rx="2"
+                fill="#fff"
+                stroke="#94a3b8"
+              />
+              <path
+                d="M10 9h12M10 14h12M10 19h7"
+                stroke="#64748b"
+                stroke-width="2"
+              />
+            </svg>
+            <span>tools_i_use.txt</span>
+          </div>
+          <div
+            class="explorer-item"
+            onclick="openWindowSmart('notepadWindow', 'about_sumit.txt')"
+          >
+            <svg viewBox="0 0 32 32">
+              <rect
+                x="6"
+                y="4"
+                width="20"
+                height="24"
+                rx="2"
+                fill="#fff"
+                stroke="#94a3b8"
+              />
+              <path
+                d="M10 9h12M10 14h12M10 19h7"
+                stroke="#64748b"
+                stroke-width="2"
+              />
+            </svg>
+            <span>about_sumit.txt</span>
+          </div>
+          <div
+            class="explorer-item"
+            onclick="openWindowSmart('notepadWindow', 'philosophy.txt')"
+          >
+            <svg viewBox="0 0 32 32">
+              <rect
+                x="6"
+                y="4"
+                width="20"
+                height="24"
+                rx="2"
+                fill="#fff"
+                stroke="#94a3b8"
+              />
+              <path
+                d="M10 9h12M10 14h12M10 19h7"
+                stroke="#64748b"
+                stroke-width="2"
+              />
+            </svg>
+            <span>philosophy.txt</span>
+          </div>
+          <div
+            class="explorer-item"
+            onclick="openWindowSmart('notepadWindow', 'contact.txt')"
+          >
+            <svg viewBox="0 0 32 32">
+              <rect
+                x="6"
+                y="4"
+                width="20"
+                height="24"
+                rx="2"
+                fill="#fff"
+                stroke="#94a3b8"
+              />
+              <path
+                d="M10 9h12M10 14h12M10 19h7"
+                stroke="#64748b"
+                stroke-width="2"
+              />
+            </svg>
+            <span>contact.txt</span>
+          </div>
+          <div class="explorer-item" onclick="openWindowSmart('wmpWindow')">
+            <svg viewBox="0 0 32 32">
+              <circle cx="16" cy="16" r="14" fill="#f97316" />
+              <polygon points="12,10 22,16 12,22" fill="#fff" />
+            </svg>
+            <span>Ambient Audio Engine.exe</span>
+          </div>
+          <div class="explorer-item" onclick="openWindowSmart('spotifyWindow')">
+            <svg viewBox="0 0 32 32">
+              <circle cx="16" cy="16" r="14" fill="#1ed760" />
+              <path
+                d="M9 12 C15 10 22 10.5 25 12.5 M10 16 C14 14.5 19 15 23 17"
+                stroke="#121212"
+                stroke-width="2"
+                fill="none"
+              />
+            </svg>
+            <span>Spotify.exe</span>
+          </div>
+          <div class="explorer-item" onclick="openWindowSmart('calcWindow')">
+            <svg viewBox="0 0 32 32">
+              <rect x="7" y="4" width="18" height="24" rx="2" fill="#94a3b8" />
+              <rect x="10" y="7" width="12" height="5" fill="#cbd5e1" />
+            </svg>
+            <span>Calculator.exe</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Details Pane -->
+      <div class="explorer-details-pane">
+        <svg viewBox="0 0 32 32" style="width: 28px; height: 28px">
+          <rect x="4" y="4" width="24" height="24" rx="3" fill="#0284c7" />
+          <path d="M8 12 L16 8 L24 12 L24 22 L16 26 L8 22 Z" fill="#fff" />
+        </svg>
+        <div>
+          <div
+            style="font-weight: 600; font-size: 12px; color: #1b3954"
+            id="detailsPaneTitle"
+          >
+            Portfolio (C:)
+          </div>
+          <div style="font-size: 11px; color: #476582">
+            7 items | Local Disk | NTFS
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+       WINDOW 5: WINDOWS 7 CALCULATOR (7.CSS)
+       ========================================================= -->
+    <div class="window active glass" id="calcWindow">
+      <div class="title-bar" onmousedown="startDrag(event, 'calcWindow')">
+        <div class="title-bar-text">
+          <svg viewBox="0 0 16 16">
+            <rect x="3" y="2" width="10" height="12" rx="1" fill="#475569" />
+            <rect x="5" y="4" width="6" height="3" fill="#94a3b8" />
+          </svg>
+          <span>Calculator</span>
+        </div>
+        <div class="title-bar-controls">
+          <button
+            aria-label="Minimize"
+            onclick="minimizeWindow('calcWindow')"
+          ></button>
+          <button
+            aria-label="Close"
+            onclick="closeWindow('calcWindow')"
+          ></button>
+        </div>
+      </div>
+
+      <div class="calc-screen" id="calcDisplay">0</div>
+
+      <div class="calc-grid">
+        <button onclick="calcPress('MC')">MC</button>
+        <button onclick="calcPress('MR')">MR</button>
+        <button onclick="calcPress('MS')">MS</button>
+        <button onclick="calcPress('M+')">M+</button>
+
+        <button onclick="calcPress('C')">C</button>
+        <button onclick="calcPress('CE')">CE</button>
+        <button onclick="calcPress('±')">±</button>
+        <button onclick="calcPress('/')">/</button>
+
+        <button onclick="calcPress('7')">7</button>
+        <button onclick="calcPress('8')">8</button>
+        <button onclick="calcPress('9')">9</button>
+        <button onclick="calcPress('*')">*</button>
+
+        <button onclick="calcPress('4')">4</button>
+        <button onclick="calcPress('5')">5</button>
+        <button onclick="calcPress('6')">6</button>
+        <button onclick="calcPress('-')">-</button>
+
+        <button onclick="calcPress('1')">1</button>
+        <button onclick="calcPress('2')">2</button>
+        <button onclick="calcPress('3')">3</button>
+        <button onclick="calcPress('+')">+</button>
+
+        <button style="grid-column: span 2" onclick="calcPress('0')">0</button>
+        <button onclick="calcPress('.')">.</button>
+        <button class="default" onclick="calcPress('=')">=</button>
+      </div>
+    </div>
+
+    <!-- =========================================================
+       WINDOW 6: WINDOWS 7 VOLUME MIXER (7.CSS AERO GLASS)
+       ========================================================= -->
+    <div
+      class="window active glass"
+      id="mixerWindow"
+      style="
+        width: 450px;
+        height: 360px;
+        min-width: 380px;
+        min-height: 320px;
+        display: none;
+      "
+    >
+      <div class="title-bar" onmousedown="startDrag(event, 'mixerWindow')">
+        <div class="title-bar-text">
+          <svg viewBox="0 0 16 16">
+            <path d="M2 5h3l4-3v12l-4-3H2z" fill="#3b82f6" />
+            <path
+              d="M12 4c1.5 2 1.5 6 0 8"
+              stroke="#3b82f6"
+              stroke-width="1.5"
+              fill="none"
+            />
+          </svg>
+          <span>Volume Mixer - Speakers (High Definition Audio Device)</span>
+        </div>
+        <div class="title-bar-controls">
+          <button
+            aria-label="Minimize"
+            onclick="minimizeWindow('mixerWindow')"
+          ></button>
+          <button
+            aria-label="Close"
+            onclick="closeWindow('mixerWindow')"
+          ></button>
+        </div>
+      </div>
+
+      <div
+        class="window-body"
+        style="
+          padding: 10px 14px;
+          display: flex;
+          gap: 12px;
+          background: #ebf2f8;
+          flex: 1;
+          user-select: none;
+          border-radius: 0 0 5px 5px;
+        "
+      >
+        <!-- Device Group -->
+        <fieldset
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 12px;
+            border: 1px solid #a3b8cc;
+            border-radius: 4px;
+            background: #ffffff;
+            min-width: 110px;
+          "
+        >
+          <legend style="font-weight: 600; color: #1e3a5f; padding: 0 4px">
+            Device
+          </legend>
+          <div style="text-align: center; margin-bottom: 6px">
+            <div style="font-size: 26px">🔊</div>
+            <div style="font-weight: 600; font-size: 11.5px; margin-top: 2px">
+              Speakers
+            </div>
+            <div style="font-size: 9.5px; color: #64748b">Realtek HD</div>
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex: 1;
+              justify-content: center;
+              gap: 6px;
+            "
+          >
+            <input
+              type="range"
+              orient="vertical"
+              min="0"
+              max="100"
+              value="60"
+              id="mixerSpeakerSlider"
+              oninput="updateSystemVolume(this.value / 100)"
+              style="
+                writing-mode: vertical-lr;
+                direction: rtl;
+                height: 110px;
+                width: 26px;
+                cursor: pointer;
+              "
+            />
+            <div id="mixerSpeakerVal" style="font-weight: 600; font-size: 11px">
+              60%
+            </div>
+            <button
+              style="
+                min-width: 28px;
+                padding: 2px 6px;
+                font-size: 14px;
+                margin-top: 4px;
+              "
+              onclick="toggleMute()"
+              title="Mute Speakers"
+            >
+              🔊
+            </button>
+          </div>
+        </fieldset>
+
+        <!-- Applications Group -->
+        <fieldset
+          style="
+            display: flex;
+            gap: 12px;
+            padding: 10px 12px;
+            border: 1px solid #a3b8cc;
+            border-radius: 4px;
+            background: #ffffff;
+            flex: 1;
+          "
+        >
+          <legend style="font-weight: 600; color: #1e3a5f; padding: 0 4px">
+            Applications
+          </legend>
+
+          <!-- System Sounds -->
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              min-width: 75px;
+            "
+          >
+            <div style="text-align: center; margin-bottom: 6px">
+              <div style="font-size: 24px">🔔</div>
+              <div style="font-weight: 600; font-size: 11px; margin-top: 2px">
+                System Sounds
+              </div>
+              <div style="font-size: 9.5px; color: #64748b">Windows</div>
+            </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                flex: 1;
+                justify-content: center;
+                gap: 6px;
+              "
+            >
+              <input
+                type="range"
+                orient="vertical"
+                min="0"
+                max="100"
+                value="80"
+                id="mixerSysSlider"
+                oninput="
+                  document.getElementById('mixerSysVal').textContent =
+                    this.value + '%'
+                "
+                style="
+                  writing-mode: vertical-lr;
+                  direction: rtl;
+                  height: 110px;
+                  width: 26px;
+                  cursor: pointer;
+                "
+              />
+              <div id="mixerSysVal" style="font-weight: 600; font-size: 11px">
+                80%
+              </div>
+              <button
+                style="
+                  min-width: 28px;
+                  padding: 2px 6px;
+                  font-size: 14px;
+                  margin-top: 4px;
+                "
+                onclick="playAudioEffect('click')"
+              >
+                🔊
+              </button>
+            </div>
+          </div>
+
+          <!-- Windows Media Player -->
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              min-width: 75px;
+            "
+          >
+            <div style="text-align: center; margin-bottom: 6px">
+              <div style="font-size: 24px">🎵</div>
+              <div style="font-weight: 600; font-size: 11px; margin-top: 2px">
+                Media Player
+              </div>
+              <div style="font-size: 9.5px; color: #64748b">WMP 12</div>
+            </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                flex: 1;
+                justify-content: center;
+                gap: 6px;
+              "
+            >
+              <input
+                type="range"
+                orient="vertical"
+                min="0"
+                max="100"
+                value="60"
+                id="mixerWmpSlider"
+                oninput="updateSystemVolume(this.value / 100)"
+                style="
+                  writing-mode: vertical-lr;
+                  direction: rtl;
+                  height: 110px;
+                  width: 26px;
+                  cursor: pointer;
+                "
+              />
+              <div id="mixerWmpVal" style="font-weight: 600; font-size: 11px">
+                60%
+              </div>
+              <button
+                style="
+                  min-width: 28px;
+                  padding: 2px 6px;
+                  font-size: 14px;
+                  margin-top: 4px;
+                "
+                onclick="toggleMute()"
+              >
+                🔊
+              </button>
+            </div>
+          </div>
+
+          <!-- Spotify -->
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              min-width: 75px;
+            "
+          >
+            <div style="text-align: center; margin-bottom: 6px">
+              <div style="font-size: 24px">🟢</div>
+              <div style="font-weight: 600; font-size: 11px; margin-top: 2px">
+                Spotify
+              </div>
+              <div style="font-size: 9.5px; color: #64748b">Web Player</div>
+            </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                flex: 1;
+                justify-content: center;
+                gap: 6px;
+              "
+            >
+              <input
+                type="range"
+                orient="vertical"
+                min="0"
+                max="100"
+                value="100"
+                id="mixerSpotifySlider"
+                oninput="
+                  document.getElementById('mixerSpotifyVal').textContent =
+                    this.value + '%'
+                "
+                style="
+                  writing-mode: vertical-lr;
+                  direction: rtl;
+                  height: 110px;
+                  width: 26px;
+                  cursor: pointer;
+                "
+              />
+              <div
+                id="mixerSpotifyVal"
+                style="font-weight: 600; font-size: 11px"
+              >
+                100%
+              </div>
+              <button
+                style="
+                  min-width: 28px;
+                  padding: 2px 6px;
+                  font-size: 14px;
+                  margin-top: 4px;
+                "
+                onclick="playAudioEffect('click')"
+              >
+                🔊
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <!-- =========================================================
+       SUPERBAR (TASKBAR) & START ORB
+       ========================================================= -->
+    <div id="taskbar">
+      <!-- Windows 7 Start Orb -->
+      <div class="start-orb-container">
+        <div class="start-orb" onclick="toggleStartMenu()" title="Start">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M4.5 4 C8 3.5 10 5.5 11 5 L11 11 L4.5 11 Z"
+              fill="#ef4444"
+            />
+            <path
+              d="M12.5 4.8 C14 4.3 17 3 20 4.2 L20 11 L12.5 11 Z"
+              fill="#84cc16"
+            />
+            <path
+              d="M4.5 12.5 L11 12.5 L11 19 C9 18.5 7 20.2 4.5 19.5 Z"
+              fill="#0284c7"
+            />
+            <path
+              d="M12.5 12.5 L20 12.5 L20 19.8 C17 18.8 14 20.2 12.5 19.5 Z"
+              fill="#eab308"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Running & Pinned Apps -->
+      <div class="superbar-apps">
+        <div
+          class="superbar-btn"
+          id="btn-explorerWindow"
+          onclick="toggleWindowFocus('explorerWindow')"
+          title="Windows Explorer"
+        >
+          <svg viewBox="0 0 32 32">
+            <path d="M4 6 L12 6 L15 9 L28 9 L28 26 L4 26 Z" fill="#f59e0b" />
+            <path d="M6 12 L30 12 L27 26 L4 26 Z" fill="#fde047" />
+            <rect x="8" y="9" width="16" height="4" fill="#60a5fa" rx="1" />
+          </svg>
+        </div>
+        <div
+          class="superbar-btn active running"
+          id="btn-notepadWindow"
+          onclick="toggleWindowFocus('notepadWindow')"
+          title="Notepad"
+        >
+          <svg viewBox="0 0 32 32">
+            <rect
+              x="7"
+              y="3"
+              width="18"
+              height="26"
+              rx="2"
+              fill="#fff"
+              stroke="#64748b"
+              stroke-width="1.5"
+            />
+            <path
+              d="M10 8h12M10 13h12M10 18h7"
+              stroke="#94a3b8"
+              stroke-width="1.5"
+            />
+          </svg>
+        </div>
+        <div
+          class="superbar-btn running"
+          id="btn-wmpWindow"
+          onclick="toggleWindowFocus('wmpWindow')"
+          title="Windows Media Player"
+        >
+          <svg viewBox="0 0 32 32">
+            <circle cx="16" cy="16" r="14" fill="#f97316" />
+            <polygon points="12,10 22,16 12,22" fill="#fff" />
+          </svg>
+        </div>
+        <div
+          class="superbar-btn"
+          id="btn-spotifyWindow"
+          onclick="toggleWindowFocus('spotifyWindow')"
+          title="Spotify"
+        >
+          <svg viewBox="0 0 32 32">
+            <circle cx="16" cy="16" r="14" fill="#1ed760" />
+            <path
+              d="M9 12 C15 10 22 10.5 25 12.5 M10 16 C14 14.5 19 15 23 17"
+              stroke="#121212"
+              stroke-width="2"
+              fill="none"
+            />
+          </svg>
+        </div>
+        <div
+          class="superbar-btn"
+          id="btn-calcWindow"
+          onclick="toggleWindowFocus('calcWindow')"
+          title="Calculator"
+        >
+          <svg viewBox="0 0 32 32">
+            <rect
+              x="7"
+              y="4"
+              width="18"
+              height="24"
+              rx="2"
+              fill="#cbd5e1"
+              stroke="#334155"
+            />
+            <rect x="10" y="7" width="12" height="5" fill="#94a3b8" />
+          </svg>
+        </div>
+        <div
+          class="superbar-btn"
+          id="btn-mixerWindow"
+          onclick="toggleWindowFocus('mixerWindow')"
+          title="Volume Mixer"
+          style="display: none"
+        >
+          <svg viewBox="0 0 32 32">
+            <path d="M5 11h6l7-6v22l-7-6H5z" fill="#3b82f6" />
+            <path
+              d="M22 10c2.5 3 2.5 9 0 12"
+              stroke="#3b82f6"
+              stroke-width="2.5"
+              fill="none"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <!-- System Tray -->
+      <div class="system-tray">
+        <div
+          class="tray-btn"
+          onclick="alert('Sumit Workstation: All background services optimal.')"
+          title="Notification Overflow"
+        >
+          ▲
+        </div>
+        <div
+          class="tray-btn"
+          onclick="alert('Action Center: 0 issues detected.')"
+          title="Action Center"
+        >
+          🚩
+        </div>
+
+        <!-- Authentic Windows 7 Speaker Icon -->
+        <div
+          class="tray-btn"
+          id="traySpeakerBtn"
+          onclick="toggleVolumeFlyout()"
+          title="Speakers: 60%"
+        >
+          🔊
+        </div>
+
+        <!-- Windows 7 Two-Line Clock & Date -->
+        <div
+          class="tray-clock"
+          onclick="toggleClockFlyout()"
+          title="Clock and Calendar"
+        >
+          <span id="trayTime">12:00 PM</span>
+          <span class="date" id="trayDate">9/13/2026</span>
+        </div>
+
+        <!-- Aero Peek Button -->
+        <div
+          class="aero-peek"
+          onmouseenter="startAeroPeek()"
+          onmouseleave="stopAeroPeek()"
+          onclick="toggleDesktopPeek()"
+          title="Show desktop"
+        ></div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+       AUTHENTIC WINDOWS 7 SPEAKER VOLUME FLYOUT (PIXEL-PERFECT)
+       ========================================================= -->
+    <div id="volumeFlyout">
+      <div class="vol-title">
+        <span id="volHeaderSpeakerIcon">🔊</span>
+        <span>Speakers</span>
+      </div>
+
+      <!-- Authentic 144px Windows 7 Slider Track with Ticks -->
+      <div
+        class="vol-track-container"
+        id="volTrackContainer"
+        onpointerdown="handleVolPointerDown(event)"
+        onpointermove="handleVolPointerMove(event)"
+        onpointerup="handleVolPointerUp(event)"
+        onpointercancel="handleVolPointerUp(event)"
+      >
+        <div class="vol-slider-row">
+          <div class="vol-groove" id="volTrackGroove">
+            <div class="vol-fill" id="volFillBar" style="height: 60%"></div>
+          </div>
+          <div class="vol-ticks">
+            <div class="vol-tick tick-major" title="100%"></div>
+            <div class="vol-tick"></div>
+            <div class="vol-tick"></div>
+            <div class="vol-tick"></div>
+            <div class="vol-tick tick-major" title="50%"></div>
+            <div class="vol-tick"></div>
+            <div class="vol-tick"></div>
+            <div class="vol-tick"></div>
+            <div class="vol-tick tick-major" title="0%"></div>
+          </div>
+          <div class="vol-thumb" id="volThumb" style="bottom: 91px"></div>
+        </div>
+      </div>
+
+      <!-- Mute Button -->
+      <div
+        class="vol-speaker-btn"
+        id="volMuteBtn"
+        onclick="toggleMute()"
+        title="Mute / Unmute"
+      >
+        <span id="volSpeakerIcon">🔊</span>
+      </div>
+
+      <div class="vol-percent-label" id="volPercentDisplay">60%</div>
+
+      <div
+        class="vol-mixer-btn"
+        onclick="
+          openWindowSmart('mixerWindow');
+          document.getElementById('volumeFlyout').style.display = 'none';
+        "
+      >
+        Mixer
+      </div>
+    </div>
+
+    <!-- Clock & Calendar Flyout -->
+    <div id="clockFlyout">
+      <div
+        style="
+          font-size: 16px;
+          font-weight: 600;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+          padding-bottom: 6px;
+        "
+        id="clockFlyoutTime"
+      >
+        12:00:00 PM
+      </div>
+      <div style="font-size: 12px; color: #c7dbec" id="clockFlyoutDate">
+        Sunday, September 13, 2026
+      </div>
+      <div style="margin-top: 6px; font-size: 11px; opacity: 0.8">
+        Windows 7 System Time Sync • IST
+      </div>
+    </div>
+
+    <!-- =========================================================
+         AUTHENTIC WINDOWS 7 MESSAGEBOX (PERSISTENT SYSTEM DIALOG)
+         ========================================================= -->
+    <div
+      id="win7DialogOverlay"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.2);
+        z-index: 999998;
+        display: none;
+      "
+    ></div>
+
+    <div
+      class="window active glass"
+      id="win7Dialog"
+      style="
+        position: fixed;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 380px;
+        min-width: 320px;
+        max-width: 90vw;
+        z-index: 999999;
+        display: none;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.45);
+      "
+    >
+      <div
+        class="title-bar"
+        onmousedown="startDrag(event, 'win7Dialog')"
+        style="cursor: move;"
+      >
+        <div class="title-bar-text" style="display: flex; align-items: center; gap: 6px;">
+          <svg viewBox="0 0 16 16" style="width: 14px; height: 14px; flex-shrink: 0;">
+            <circle cx="8" cy="8" r="7" fill="#0284c7" />
+            <circle cx="8" cy="5" r="1.2" fill="#fff" />
+            <rect x="7" y="7" width="2" height="5" rx="0.5" fill="#fff" />
+          </svg>
+          <span id="win7DialogTitle">Windows 7</span>
+        </div>
+        <div class="title-bar-controls">
+          <button aria-label="Close" onclick="closeWin7Dialog()"></button>
+        </div>
+      </div>
+
+      <div
+        class="window-body"
+        style="
+          padding: 0;
+          margin: 0;
+          background: #ffffff;
+          border-radius: 0 0 5px 5px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+        "
+      >
+        <div
+          style="
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px 22px 20px 22px;
+            background: #ffffff;
+          "
+        >
+          <div
+            id="win7DialogIcon"
+            style="flex-shrink: 0; line-height: 1;"
+          >
+            <svg viewBox="0 0 32 32" style="width: 36px; height: 36px;">
+              <circle cx="16" cy="16" r="14" fill="#0284c7" />
+              <circle cx="16" cy="9.5" r="2.2" fill="#ffffff" />
+              <rect x="14" y="14" width="4" height="10" rx="1.5" fill="#ffffff" />
+            </svg>
+          </div>
+          <div
+            id="win7DialogMsg"
+            style="
+              font-size: 12px;
+              color: #1e293b;
+              line-height: 1.55;
+              user-select: text;
+              word-break: break-word;
+              font-family: var(--win7-font);
+              padding-top: 3px;
+            "
+          >
+            Notification message
+          </div>
+        </div>
+
+        <div
+          style="
+            background: #f0f0f0;
+            border-top: 1px solid #dfdfdf;
+            padding: 10px 16px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+          "
+        >
+          <button
+            class="default"
+            id="win7DialogOkBtn"
+            onclick="closeWin7Dialog()"
+            style="min-width: 80px; height: 24px; font-weight: 600; cursor: pointer;"
+          >
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+       WINDOWS 7 START MENU
+       ========================================================= -->
+    <div id="startMenu">
+      <div class="start-menu-inner">
+        <div class="start-left">
+          <div
+            class="start-app-item"
+            onclick="
+              openWindowSmart('wmpWindow');
+              toggleStartMenu();
+            "
+          >
+            <svg viewBox="0 0 32 32">
+              <circle cx="16" cy="16" r="14" fill="#f97316" />
+              <polygon points="12,10 22,16 12,22" fill="#fff" />
+            </svg>
+            <div>
+              <div style="font-weight: 600">Windows Media Player</div>
+              <div style="font-size: 10.5px; color: #666">
+                8 Chill & Lofi Soundscapes
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="start-app-item"
+            onclick="
+              openWindowSmart('spotifyWindow');
+              toggleStartMenu();
+            "
+          >
+            <svg viewBox="0 0 32 32">
+              <circle cx="16" cy="16" r="14" fill="#1ed760" />
+              <path
+                d="M9 12 C15 10 22 10.5 25 12.5 M10 16 C14 14.5 19 15 23 17"
+                stroke="#121212"
+                stroke-width="2"
+                fill="none"
+              />
+            </svg>
+            <div>
+              <div style="font-weight: 600">Spotify</div>
+              <div style="font-size: 10.5px; color: #666">
+                Web Player & Playlists
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="start-app-item"
+            onclick="
+              openWindowSmart('notepadWindow', 'tools_i_use.txt');
+              toggleStartMenu();
+            "
+          >
+            <svg viewBox="0 0 32 32">
+              <rect
+                x="7"
+                y="3"
+                width="18"
+                height="26"
+                rx="2"
+                fill="#fff"
+                stroke="#64748b"
+                stroke-width="1.5"
+              />
+              <path
+                d="M10 8h12M10 13h12M10 18h7"
+                stroke="#94a3b8"
+                stroke-width="1.5"
+              />
+            </svg>
+            <div>
+              <div style="font-weight: 600">Coding Tools & Specs</div>
+              <div style="font-size: 10.5px; color: #666">tools_i_use.txt</div>
+            </div>
+          </div>
+
+          <div
+            class="start-app-item"
+            onclick="
+              openWindowSmart('notepadWindow', 'about_sumit.txt');
+              toggleStartMenu();
+            "
+          >
+            <svg viewBox="0 0 32 32">
+              <path d="M4 6 L12 6 L15 9 L28 9 L28 26 L4 26 Z" fill="#ffb834" />
+            </svg>
+            <div>
+              <div style="font-weight: 600">About Sumit</div>
+              <div style="font-size: 10.5px; color: #666">
+                Personal Bio & Values
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="start-app-item"
+            onclick="
+              openWindowSmart('explorerWindow');
+              toggleStartMenu();
+            "
+          >
+            <svg viewBox="0 0 32 32">
+              <path d="M4 6 L12 6 L15 9 L28 9 L28 26 L4 26 Z" fill="#f59e0b" />
+              <path d="M6 12 L30 12 L27 26 L4 26 Z" fill="#fde047" />
+            </svg>
+            <div>
+              <div style="font-weight: 600">Portfolio Explorer</div>
+              <div style="font-size: 10.5px; color: #666">
+                Browse projects & files
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="start-app-item"
+            onclick="
+              openWindowSmart('calcWindow');
+              toggleStartMenu();
+            "
+          >
+            <svg viewBox="0 0 32 32">
+              <rect
+                x="7"
+                y="4"
+                width="18"
+                height="24"
+                rx="2"
+                fill="#cbd5e1"
+                stroke="#334155"
+              />
+            </svg>
+            <div>
+              <div style="font-weight: 600">Calculator</div>
+              <div style="font-size: 10.5px; color: #666">
+                Standard 7.css Calculator
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="start-all-programs"
+            onclick="
+              alert(
+                'All applications are accessible directly from your desktop.',
+              )
+            "
+          >
+            <span>All Programs</span>
+            <span>▶</span>
+          </div>
+        </div>
+
+        <div class="start-right">
+          <div class="user-avatar-frame">
+            <img
+              src="/img/sumit-og.png"
+              onerror="this.src = '/favicon-32x32.png'"
+              alt="Sumit"
+            />
+          </div>
+
+          <a
+            class="start-link bold"
+            onclick="
+              openWindowSmart('notepadWindow', 'about_sumit.txt');
+              toggleStartMenu();
+            "
+            >Sumit</a
+          >
+          <a
+            class="start-link"
+            onclick="
+              openWindowSmart('explorerWindow');
+              toggleStartMenu();
+            "
+            >Documents</a
+          >
+          <a
+            class="start-link"
+            onclick="
+              openWindowSmart('wmpWindow');
+              toggleStartMenu();
+            "
+            >Music</a
+          >
+          <a
+            class="start-link"
+            onclick="
+              openWindowSmart('explorerWindow');
+              toggleStartMenu();
+            "
+            >Computer</a
+          >
+
+          <div class="start-divider"></div>
+
+          <a
+            class="start-link"
+            onclick="
+              openWindowSmart('notepadWindow', 'tools_i_use.txt');
+              toggleStartMenu();
+            "
+            >Control Panel</a
+          >
+          <a
+            class="start-link"
+            onclick="
+              openWindowSmart('notepadWindow', 'contact.txt');
+              toggleStartMenu();
+            "
+            >Devices & Printers</a
+          >
+          <a
+            class="start-link"
+            onclick="
+              openWindowSmart('notepadWindow', 'philosophy.txt');
+              toggleStartMenu();
+            "
+            >Help and Support</a
+          >
+        </div>
+      </div>
+
+      <div class="start-bottom">
+        <div class="start-search-box">
+          <input
+            type="text"
+            placeholder="Search programs and files"
+            oninput="handleStartSearch(this.value)"
+          />
+          <span class="start-search-icon">🔍</span>
+        </div>
+        <div class="shutdown-btn-group">
+          <div class="shutdown-btn" onclick="actionShutdown()">Shut down</div>
+          <div
+            class="shutdown-arrow"
+            onclick="alert('Options: Restart, Sleep, Lock')"
+          >
+            ▶
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop Context Menu -->
+    <div id="desktopContextMenu">
+      <div class="ctx-item" onclick="alert('View: Medium Icons')">
+        <span>View</span> <span>▶</span>
+      </div>
+      <div class="ctx-item" onclick="alert('Sort by: Name')">
+        <span>Sort by</span> <span>▶</span>
+      </div>
+      <div class="ctx-item" onclick="location.reload()">
+        <span><u>R</u>efresh</span>
+      </div>
+      <div class="ctx-sep"></div>
+      <div
+        class="ctx-item"
+        onclick="
+          actionNewFile();
+          openWindowSmart('notepadWindow');
+        "
+      >
+        <span><u>N</u>ew Text Document</span>
+      </div>
+      <div class="ctx-sep"></div>
+      <div class="ctx-item" onclick="toggleClockGadget()">
+        <span><u>G</u>adgets</span>
+      </div>
+      <div
+        class="ctx-item"
+        onclick="alert('Windows 7 Aero Glass Theme: Activated')"
+      >
+        <span><u>P</u>ersonalize</span>
+      </div>
+    </div>
+
+    <!-- Audio Engine -->
+    <script src="/audio/ambient-player.js"></script>
+
+    <script>
+      // =========================================================
+      // DOCUMENTS REPOSITORY
+      // =========================================================
+      const docs = {
+        "tools_i_use.txt": `======================================================================
+SUMIT'S CODING TOOLKIT & WORKSPACE (2026)
+======================================================================
+
+Hello! I'm Sumit. Here is the curated set of tools, environments,
+and stacks I rely on for building clean, fast, and tactile software:
+
+----------------------------------------------------------------------
+1. CORE EDITOR & WORKSPACE
+----------------------------------------------------------------------
+- Primary Editor  : VS Code (Obsidian/Minimal dark themes, high legibility)
+- Font            : JetBrains Mono / Consolas (Ligatures enabled)
+- Machine & OS    : Portable Unix Workstation (Clean, quiet, and fast)
+- Shell           : zsh with fast fuzzy finders (fzf, zoxide, ripgrep)
+- Git Philosophy  : Surgical commits, clean history, zero clutter
+
+----------------------------------------------------------------------
+2. LANGUAGES & RUNTIMES
+----------------------------------------------------------------------
+- JavaScript / TypeScript : First-class language for interfaces & APIs
+- Modern Vanilla Web APIs : Web Audio API, Canvas 2D / WebGL, CSS Grid
+- Node.js & Bun           : Fast scripting, tooling, and backend pipelines
+- HTML5 / CSS3            : High-performance layouts with zero framework bloat
+
+----------------------------------------------------------------------
+3. CLOUD & INFRASTRUCTURE
+----------------------------------------------------------------------
+- Cloudflare Ecosystem : Workers, Pages, Edge KV, and Durable Workflows
+- Static Hosting       : Netlify, GitHub Pages, Cloudflare Pages
+- Design & Prototyping : Procedural canvas tools, Figma, Vanilla CSS tokens
+
+----------------------------------------------------------------------
+4. PERSONAL WORKFLOW CREED
+----------------------------------------------------------------------
+* Sub-10ms feedback loops: Instant reload, lightweight dependencies.
+* Build in the quiet hours: Crafting without algorithmic self-promotion.
+* Audio & Focus: Reference headphones streaming procedural lofi sound.
+
+----------------------------------------------------------------------
+CONTACT & CONNECT:
+----------------------------------------------------------------------
+- LinkedIn  : https://www.linkedin.com/in/sumityadav8181/
+- Twitter/X : https://twitter.com/sumityadav8181/
+- Email     : sumityadav8181@gmail.com
+======================================================================
+[Press F5 to stamp time, edit freely, or use File > Save to export]`,
+
+        "about_sumit.txt": `======================================================================
+SUMIT KUMAR YADAV // PERSONAL PROFILE
+======================================================================
+
+Hi, I'm Sumit.
+
+I am a software craftsman, technology enthusiast, and perpetual tinkerer.
+I enjoy exploring computer architectures, optimizing development workflows,
+and writing clean software in the quiet hours.
+
+I don't broadcast side projects or vanity metrics on my name.
+This is simply my calm, authentic digital corner of the web.
+
+TIME ZONE : Asia/Kolkata (IST - New Delhi)
+STATUS    : Stealth exploration & late-night focus
+======================================================================`,
+
+        "philosophy.txt": `======================================================================
+DEVELOPMENT CREED & PHILOSOPHY
+======================================================================
+
+1. BUILD IN THE SHADOWS:
+   Not every piece of work needs a promotional campaign.
+   Quiet craft brings the greatest satisfaction.
+
+2. SUBSTANCE OVER NOISE:
+   A website should load in milliseconds, have zero tracking
+   telemetry, and speak for itself.
+
+3. CONTINUOUS EXPLORATION:
+   Stay curious. Tinker with hardware, code, and sound.
+======================================================================`,
+
+        "contact.txt": `======================================================================
+DIRECT COMMUNICATION ENDPOINTS
+======================================================================
+
+Always open to conversations with fellow software developers,
+creators, and curious tinkerers.
+
+- LinkedIn  : https://www.linkedin.com/in/sumityadav8181/
+- Twitter/X : https://twitter.com/sumityadav8181/
+- Email     : sumityadav8181@gmail.com
+======================================================================`,
+      };
+
+      // =========================================================
+      // AUDIO CLICK SYNTHESIZER
+      // =========================================================
+      let audioFxCtx = null;
+      function playAudioEffect(type = "click") {
+        try {
+          if (!audioFxCtx) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            audioFxCtx = new AudioCtx();
+          }
+          if (audioFxCtx.state === "suspended") {
+            audioFxCtx.resume();
+          }
+          const osc = audioFxCtx.createOscillator();
+          const gain = audioFxCtx.createGain();
+          osc.connect(gain);
+          gain.connect(audioFxCtx.destination);
+
+          const now = audioFxCtx.currentTime;
+          if (type === "click") {
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(1400, now);
+            osc.frequency.exponentialRampToValueAtTime(300, now + 0.035);
+            gain.gain.setValueAtTime(0.04, now);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
+            osc.start(now);
+            osc.stop(now + 0.035);
+          }
+        } catch (e) {}
+      }
+
+      // =========================================================
+      // WINDOW MANAGEMENT
+      // =========================================================
+      let highestZ = 100;
+
+      function openWindowSmart(id, docName = null) {
+        playAudioEffect("click");
+        const win = document.getElementById(id);
+        if (!win) return;
+
+        if (id === "notepadWindow" && docName && docs[docName]) {
+          document.getElementById("notepadTextarea").value = docs[docName];
+          document.getElementById("notepadTitle").textContent =
+            `${docName} - Notepad`;
+          updateNotepadStatus();
+        }
+
+        const screenW = window.innerWidth;
+        if (screenW >= 1480) {
+          if (id === "notepadWindow") {
+            win.style.left = "115px";
+            win.style.top = "35px";
+          } else if (id === "spotifyWindow") {
+            win.style.left = "785px";
+            win.style.top = "35px";
+          } else if (id === "wmpWindow") {
+            win.style.left = "785px";
+            win.style.top = "45px";
+          } else if (id === "explorerWindow") {
+            win.style.left = "140px";
+            win.style.top = "65px";
+          } else if (id === "mixerWindow") {
+            win.style.left = "320px";
+            win.style.top = "140px";
+          }
+        } else if (screenW >= 1180) {
+          if (id === "notepadWindow") {
+            win.style.left = "115px";
+            win.style.top = "30px";
+          } else if (id === "spotifyWindow") {
+            win.style.left = "720px";
+            win.style.top = "30px";
+          } else if (id === "wmpWindow") {
+            win.style.left = "720px";
+            win.style.top = "40px";
+          } else if (id === "explorerWindow") {
+            win.style.left = "140px";
+            win.style.top = "55px";
+          } else if (id === "mixerWindow") {
+            win.style.left = "320px";
+            win.style.top = "120px";
+          }
+        } else {
+          // Smaller screens: clear the left desktop icon column cleanly
+          if (id === "notepadWindow") {
+            win.style.left = "115px";
+            win.style.top = "25px";
+          } else if (id === "spotifyWindow") {
+            win.style.left = "145px";
+            win.style.top = "55px";
+          } else if (id === "wmpWindow") {
+            win.style.left = "145px";
+            win.style.top = "55px";
+          } else if (id === "explorerWindow") {
+            win.style.left = "135px";
+            win.style.top = "45px";
+          }
+        }
+
+        if (id === "mixerWindow") {
+          const mixerBtn = document.getElementById("btn-mixerWindow");
+          if (mixerBtn) mixerBtn.style.display = "flex";
+        }
+
+        win.style.display = "flex";
+        win.classList.remove("minimized");
+        focusWindow(id);
+
+        const btn = document.getElementById(`btn-${id}`);
+        if (btn) btn.classList.add("running");
+      }
+
+      function focusWindow(id) {
+        const win = document.getElementById(id);
+        if (!win) return;
+        highestZ++;
+        win.style.zIndex = highestZ;
+
+        document
+          .querySelectorAll(".window")
+          .forEach((w) => w.classList.remove("active"));
+        win.classList.add("active");
+
+        document
+          .querySelectorAll(".superbar-btn")
+          .forEach((b) => b.classList.remove("active"));
+        const btn = document.getElementById(`btn-${id}`);
+        if (btn) {
+          btn.classList.add("active");
+          btn.classList.add("running");
+        }
+      }
+
+      function toggleWindowFocus(id) {
+        playAudioEffect("click");
+        const win = document.getElementById(id);
+        if (!win || win.style.display === "none") {
+          openWindowSmart(id);
+          return;
+        }
+        if (win.classList.contains("minimized")) {
+          win.classList.remove("minimized");
+          focusWindow(id);
+        } else if (!win.classList.contains("active")) {
+          focusWindow(id);
+        } else {
+          minimizeWindow(id);
+        }
+      }
+
+      function minimizeWindow(id) {
+        playAudioEffect("click");
+        const win = document.getElementById(id);
+        if (!win) return;
+        win.classList.add("minimized");
+        const btn = document.getElementById(`btn-${id}`);
+        if (btn) btn.classList.remove("active");
+      }
+
+      function toggleMaximize(id) {
+        playAudioEffect("click");
+        const win = document.getElementById(id);
+        if (win) win.classList.toggle("maximized");
+      }
+
+      function closeWindow(id) {
+        playAudioEffect("click");
+        const win = document.getElementById(id);
+        if (!win) return;
+        win.style.display = "none";
+        if (id === "mixerWindow") {
+          const mixerBtn = document.getElementById("btn-mixerWindow");
+          if (mixerBtn) mixerBtn.style.display = "none";
+        }
+        const btn = document.getElementById(`btn-${id}`);
+        if (btn) {
+          btn.classList.remove("active");
+          btn.classList.remove("running");
+        }
+      }
+
+      document.querySelectorAll(".window").forEach((w) => {
+        w.addEventListener("mousedown", () => focusWindow(w.id));
+      });
+
+      let draggedWin = null,
+        dragOffX = 0,
+        dragOffY = 0;
+      function startDrag(e, id) {
+        if (e.target.closest(".title-bar-controls")) return;
+        const win = document.getElementById(id);
+        if (!win || win.classList.contains("maximized")) return;
+        draggedWin = win;
+        const rect = win.getBoundingClientRect();
+        if (id === "win7Dialog") {
+          win.style.transform = "none";
+          win.style.left = rect.left + "px";
+          win.style.top = rect.top + "px";
+        }
+        dragOffX = e.clientX - rect.left;
+        dragOffY = e.clientY - rect.top;
+        focusWindow(id);
+        e.preventDefault();
+      }
+
+      window.addEventListener("mousemove", (e) => {
+        if (draggedWin) {
+          draggedWin.style.left = Math.max(0, e.clientX - dragOffX) + "px";
+          draggedWin.style.top = Math.max(0, e.clientY - dragOffY) + "px";
+        }
+      });
+
+      window.addEventListener("mouseup", () => {
+        draggedWin = null;
+      });
+
+      // =========================================================
+      // NOTEPAD MENU & ACTIONS
+      // =========================================================
+      const textarea = document.getElementById("notepadTextarea");
+      const statusLineCol = document.getElementById("statusLineCol");
+      const statusCharCount = document.getElementById("statusCharCount");
+
+      function updateNotepadStatus() {
+        const val = textarea.value;
+        const pos = textarea.selectionStart;
+        const lines = val.substring(0, pos).split("\n");
+        statusLineCol.textContent = `Ln ${lines.length}, Col ${lines[lines.length - 1].length + 1}`;
+        statusCharCount.textContent = `Chars: ${val.length.toLocaleString()}`;
+      }
+
+      textarea.addEventListener("keyup", updateNotepadStatus);
+      textarea.addEventListener("click", updateNotepadStatus);
+      textarea.addEventListener("input", updateNotepadStatus);
+
+      function toggleMenu(el) {
+        playAudioEffect("click");
+        const active = el.classList.contains("active");
+        document
+          .querySelectorAll(".menu-trigger")
+          .forEach((m) => m.classList.remove("active"));
+        if (!active) el.classList.add("active");
+      }
+
+      window.addEventListener("click", (e) => {
+        if (!e.target.closest(".menu-trigger")) {
+          document
+            .querySelectorAll(".menu-trigger")
+            .forEach((m) => m.classList.remove("active"));
+        }
+        if (
+          !e.target.closest(".start-orb") &&
+          !e.target.closest("#startMenu")
+        ) {
+          document.getElementById("startMenu").style.display = "none";
+        }
+        if (
+          !e.target.closest("#volumeFlyout") &&
+          !e.target.closest("#traySpeakerBtn")
+        ) {
+          document.getElementById("volumeFlyout").style.display = "none";
+        }
+        if (
+          !e.target.closest("#clockFlyout") &&
+          !e.target.closest(".tray-clock")
+        ) {
+          document.getElementById("clockFlyout").style.display = "none";
+        }
+        if (!e.target.closest("#desktopContextMenu")) {
+          document.getElementById("desktopContextMenu").style.display = "none";
+        }
+      });
+
+      function actionNewFile() {
+        textarea.value = "";
+        document.getElementById("notepadTitle").textContent =
+          "Untitled - Notepad";
+        updateNotepadStatus();
+      }
+
+      function actionSaveFile() {
+        const blob = new Blob([textarea.value], {
+          type: "text/plain;charset=utf-8",
+        });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download =
+          document.getElementById("notepadTitle").textContent.split(" - ")[0] ||
+          "notes.txt";
+        a.click();
+      }
+
+      function actionInsertTimeDate() {
+        const now = new Date();
+        const str =
+          now.toLocaleTimeString("en-US") +
+          " " +
+          now.toLocaleDateString("en-US");
+        const start = textarea.selectionStart;
+        textarea.value =
+          textarea.value.substring(0, start) +
+          str +
+          textarea.value.substring(start);
+        updateNotepadStatus();
+      }
+
+      function actionSelectAll() {
+        textarea.select();
+      }
+
+      function toggleWordWrap() {
+        const isWrapped = textarea.style.whiteSpace !== "nowrap";
+        textarea.style.whiteSpace = isWrapped ? "nowrap" : "pre-wrap";
+        document.getElementById("wrapCheck").style.visibility = isWrapped
+          ? "hidden"
+          : "visible";
+      }
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "F5") {
+          e.preventDefault();
+          actionInsertTimeDate();
+        }
+        if (e.ctrlKey && e.key === "s") {
+          e.preventDefault();
+          actionSaveFile();
+        }
+      });
+
+      // =========================================================
+      // AUTHENTIC WINDOWS 7 MESSAGEBOX (PERSISTENT SYSTEM DIALOG)
+      // =========================================================
+      function playDingSound() {
+        try {
+          if (!audioFxCtx) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            audioFxCtx = new AudioCtx();
+          }
+          if (audioFxCtx.state === "suspended") audioFxCtx.resume();
+          const now = audioFxCtx.currentTime;
+
+          const osc1 = audioFxCtx.createOscillator();
+          const osc2 = audioFxCtx.createOscillator();
+          const gain = audioFxCtx.createGain();
+
+          osc1.type = "sine";
+          osc1.frequency.setValueAtTime(1046.5, now); // C6
+
+          osc2.type = "sine";
+          osc2.frequency.setValueAtTime(1567.98, now); // G6
+
+          gain.gain.setValueAtTime(0.09, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
+
+          osc1.connect(gain);
+          osc2.connect(gain);
+          gain.connect(audioFxCtx.destination);
+
+          osc1.start(now);
+          osc2.start(now);
+          osc1.stop(now + 0.6);
+          osc2.stop(now + 0.6);
+        } catch (e) {}
+      }
+
+      function showWin7Dialog(message, title = "Windows 7") {
+        const overlay = document.getElementById("win7DialogOverlay");
+        const dialog = document.getElementById("win7Dialog");
+        const titleEl = document.getElementById("win7DialogTitle");
+        const msgEl = document.getElementById("win7DialogMsg");
+        const okBtn = document.getElementById("win7DialogOkBtn");
+
+        if (!dialog) return;
+
+        if (titleEl) titleEl.textContent = title;
+        if (msgEl) msgEl.textContent = message;
+
+        // Reset to center
+        dialog.style.left = "50%";
+        dialog.style.top = "45%";
+        dialog.style.transform = "translate(-50%, -50%)";
+
+        highestZ += 2;
+        dialog.style.zIndex = highestZ + 1;
+        if (overlay) {
+          overlay.style.zIndex = highestZ;
+          overlay.style.display = "block";
+        }
+
+        dialog.style.display = "block";
+        playDingSound();
+
+        if (okBtn) {
+          setTimeout(() => okBtn.focus(), 60);
+        }
+      }
+
+      function closeWin7Dialog() {
+        playAudioEffect("click");
+        const overlay = document.getElementById("win7DialogOverlay");
+        const dialog = document.getElementById("win7Dialog");
+        if (dialog) dialog.style.display = "none";
+        if (overlay) overlay.style.display = "none";
+      }
+
+      // Override browser window.alert with genuine persistent Windows 7 dialog
+      window.alert = function (message) {
+        showWin7Dialog(message, "Windows 7");
+      };
+
+      // Handle Enter / Escape on dialog
+      window.addEventListener("keydown", (e) => {
+        const dialog = document.getElementById("win7Dialog");
+        if (dialog && dialog.style.display === "block") {
+          if (e.key === "Enter" || e.key === "Escape" || e.key === " ") {
+            e.preventDefault();
+            closeWin7Dialog();
+            return;
+          }
+        }
+      });
+
+      // Modal outside click gently pulses the dialog window (classic Windows behavior)
+      const dlgOverlay = document.getElementById("win7DialogOverlay");
+      if (dlgOverlay) {
+        dlgOverlay.addEventListener("mousedown", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          playDingSound();
+          const dlg = document.getElementById("win7Dialog");
+          if (dlg) {
+            dlg.style.transition = "transform 0.08s ease";
+            const currentTransform = dlg.style.transform || "translate(-50%, -50%)";
+            if (currentTransform.includes("translate")) {
+              dlg.style.transform = "translate(-50%, -50%) scale(1.02)";
+              setTimeout(() => {
+                dlg.style.transform = "translate(-50%, -50%) scale(1)";
+              }, 80);
+            }
+          }
+        });
+      }
+
+      // =========================================================
+      // START MENU & FLYOUTS
+      // =========================================================
+      function toggleStartMenu() {
+        playAudioEffect("click");
+        const menu = document.getElementById("startMenu");
+        menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+      }
+
+      function handleStartSearch(query) {
+        if (!query) return;
+        const q = query.toLowerCase();
+        if (q.includes("tool") || q.includes("code"))
+          openWindowSmart("notepadWindow", "tools_i_use.txt");
+        else if (q.includes("music") || q.includes("play") || q.includes("wmp"))
+          openWindowSmart("wmpWindow");
+        else if (q.includes("spot")) openWindowSmart("spotifyWindow");
+        else if (q.includes("calc")) openWindowSmart("calcWindow");
+        else if (q.includes("about"))
+          openWindowSmart("notepadWindow", "about_sumit.txt");
+        else if (q.includes("explore") || q.includes("file"))
+          openWindowSmart("explorerWindow");
+      }
+
+      function actionShutdown() {
+        alert("Logging off Sumit Windows 7 Session. Have a wonderful day!");
+        toggleStartMenu();
+      }
+
+      function toggleVolumeFlyout() {
+        playAudioEffect("click");
+        const flyout = document.getElementById("volumeFlyout");
+        if (flyout.style.display === "flex") {
+          flyout.style.display = "none";
+        } else {
+          const btn = document.getElementById("traySpeakerBtn");
+          if (btn) {
+            const r = btn.getBoundingClientRect();
+            const flyoutWidth = 98;
+            const left = Math.round(r.left + r.width / 2 - flyoutWidth / 2);
+            flyout.style.left = `${Math.max(10, Math.min(window.innerWidth - flyoutWidth - 10, left))}px`;
+            flyout.style.right = "auto";
+          }
+          flyout.style.display = "flex";
+          const clockFlyout = document.getElementById("clockFlyout");
+          if (clockFlyout) clockFlyout.style.display = "none";
+        }
+      }
+
+      function toggleClockFlyout() {
+        playAudioEffect("click");
+        const flyout = document.getElementById("clockFlyout");
+        flyout.style.display =
+          flyout.style.display === "flex" ? "none" : "flex";
+        if (flyout.style.display === "flex") {
+          const volFlyout = document.getElementById("volumeFlyout");
+          if (volFlyout) volFlyout.style.display = "none";
+        }
+      }
+
+      function toggleClockGadget() {
+        const g = document.getElementById("clockGadget");
+        g.style.display = g.style.display === "none" ? "block" : "none";
+      }
+
+      // =========================================================
+      // SYSTEM VOLUME CONTROLS (UNIFIED & REACTIVE)
+      // =========================================================
+      let prevVolume = 0.6;
+      let isDraggingVol = false;
+
+      function getVolRatioFromEvent(e) {
+        const groove = document.getElementById("volTrackGroove");
+        if (!groove) return 0.6;
+        const rect = groove.getBoundingClientRect();
+        const clampedY = Math.max(rect.top, Math.min(rect.bottom, e.clientY));
+        return Math.max(0, Math.min(1, (rect.bottom - clampedY) / rect.height));
+      }
+
+      function handleVolPointerDown(e) {
+        isDraggingVol = true;
+        const container = document.getElementById("volTrackContainer");
+        if (
+          container &&
+          container.setPointerCapture &&
+          e.pointerId !== undefined
+        ) {
+          try {
+            container.setPointerCapture(e.pointerId);
+          } catch (err) {}
+        }
+        const ratio = getVolRatioFromEvent(e);
+        updateSystemVolume(ratio);
+        e.preventDefault();
+      }
+
+      function handleVolPointerMove(e) {
+        if (!isDraggingVol) return;
+        const ratio = getVolRatioFromEvent(e);
+        updateSystemVolume(ratio);
+      }
+
+      function handleVolPointerUp(e) {
+        if (!isDraggingVol) return;
+        isDraggingVol = false;
+        const container = document.getElementById("volTrackContainer");
+        if (
+          container &&
+          container.releasePointerCapture &&
+          e.pointerId !== undefined
+        ) {
+          try {
+            container.releasePointerCapture(e.pointerId);
+          } catch (err) {}
+        }
+      }
+
+      window.addEventListener("pointermove", (e) => {
+        if (isDraggingVol) handleVolPointerMove(e);
+      });
+
+      window.addEventListener("pointerup", (e) => {
+        if (isDraggingVol) handleVolPointerUp(e);
+      });
+
+      function updateSystemVolume(val) {
+        val = Math.max(0, Math.min(1, val));
+        window.ambientPlayer.setVolume(val);
+        const percent = Math.round(val * 100);
+
+        const percentLabel = document.getElementById("volPercentDisplay");
+        if (percentLabel) percentLabel.textContent = `${percent}%`;
+
+        // Update Custom 144px Win7 Slider
+        const thumb = document.getElementById("volThumb");
+        const fill = document.getElementById("volFillBar");
+        if (thumb) {
+          const bottomPx = Math.round(5 + val * 144);
+          thumb.style.bottom = `${bottomPx}px`;
+        }
+        if (fill) fill.style.height = `${percent}%`;
+
+        const wmpSlider = document.getElementById("wmpVolSlider");
+        if (wmpSlider) wmpSlider.value = val;
+
+        // Update Volume Mixer window if present
+        const mixerSpeakerSlider =
+          document.getElementById("mixerSpeakerSlider");
+        if (mixerSpeakerSlider) mixerSpeakerSlider.value = percent;
+        const mixerSpeakerVal = document.getElementById("mixerSpeakerVal");
+        if (mixerSpeakerVal) mixerSpeakerVal.textContent = `${percent}%`;
+
+        const mixerWmpSlider = document.getElementById("mixerWmpSlider");
+        if (mixerWmpSlider) mixerWmpSlider.value = percent;
+        const mixerWmpVal = document.getElementById("mixerWmpVal");
+        if (mixerWmpVal) mixerWmpVal.textContent = `${percent}%`;
+
+        const speakerBtn = document.getElementById("traySpeakerBtn");
+        const flyoutIcon = document.getElementById("volSpeakerIcon");
+        const headerIcon = document.getElementById("volHeaderSpeakerIcon");
+
+        let icon = "🔊";
+        if (val === 0) {
+          icon = "🔇";
+          if (speakerBtn) speakerBtn.title = "Speakers: Muted";
+        } else if (val < 0.35) {
+          icon = "🔈";
+          if (speakerBtn) speakerBtn.title = `Speakers: ${percent}%`;
+        } else {
+          icon = "🔊";
+          if (speakerBtn) speakerBtn.title = `Speakers: ${percent}%`;
+        }
+
+        if (speakerBtn) speakerBtn.textContent = icon;
+        if (flyoutIcon) flyoutIcon.textContent = icon;
+        if (headerIcon) headerIcon.textContent = icon;
+      }
+
+      function toggleMute() {
+        playAudioEffect("click");
+        const current = window.ambientPlayer.volume;
+        if (current > 0) {
+          prevVolume = current;
+          updateSystemVolume(0);
+        } else {
+          updateSystemVolume(prevVolume || 0.6);
+        }
+      }
+
+      // Mouse wheel volume scroll on flyout
+      const volFlyoutEl = document.getElementById("volumeFlyout");
+      if (volFlyoutEl) {
+        volFlyoutEl.addEventListener(
+          "wheel",
+          (e) => {
+            e.preventDefault();
+            const cur = window.ambientPlayer.volume;
+            const delta = e.deltaY < 0 ? 0.05 : -0.05;
+            updateSystemVolume(cur + delta);
+          },
+          { passive: false },
+        );
+      }
+
+      // =========================================================
+      // AERO PEEK DESKTOP FEATURE
+      // =========================================================
+      function startAeroPeek() {
+        document.querySelectorAll(".window").forEach((w) => {
+          w.style.opacity = "0.15";
+        });
+      }
+
+      function stopAeroPeek() {
+        document.querySelectorAll(".window").forEach((w) => {
+          w.style.opacity = "1";
+        });
+      }
+
+      function toggleDesktopPeek() {
+        playAudioEffect("click");
+        const windows = document.querySelectorAll(".window");
+        const allMin = Array.from(windows).every((w) =>
+          w.classList.contains("minimized"),
+        );
+        windows.forEach((w) => {
+          if (allMin) w.classList.remove("minimized");
+          else w.classList.add("minimized");
+        });
+      }
+
+      // =========================================================
+      // DESKTOP MARQUEE SELECTION & CONTEXT MENU
+      // =========================================================
+      let isSelecting = false,
+        selStartX = 0,
+        selStartY = 0;
+      const selectionBox = document.getElementById("selectionBox");
+
+      function onDesktopMouseDown(e) {
+        if (
+          e.target.closest(".window") ||
+          e.target.closest("#taskbar") ||
+          e.target.closest("#startMenu") ||
+          e.target.closest("#clockGadget") ||
+          e.target.closest("#desktopContextMenu") ||
+          e.target.closest("#volumeFlyout") ||
+          e.target.closest("#clockFlyout")
+        )
+          return;
+        if (e.button !== 0) return;
+
+        isSelecting = true;
+        selStartX = e.clientX;
+        selStartY = e.clientY;
+        selectionBox.style.left = selStartX + "px";
+        selectionBox.style.top = selStartY + "px";
+        selectionBox.style.width = "0px";
+        selectionBox.style.height = "0px";
+        selectionBox.style.display = "block";
+
+        document
+          .querySelectorAll(".desktop-icon")
+          .forEach((icon) => icon.classList.remove("selected"));
+        if (e.target.closest(".desktop-icon")) {
+          e.target.closest(".desktop-icon").classList.add("selected");
+        }
+      }
+
+      window.addEventListener("mousemove", (e) => {
+        if (!isSelecting) return;
+        const curX = e.clientX;
+        const curY = e.clientY;
+        const left = Math.min(selStartX, curX);
+        const top = Math.min(selStartY, curY);
+        const width = Math.abs(curX - selStartX);
+        const height = Math.abs(curY - selStartY);
+
+        selectionBox.style.left = left + "px";
+        selectionBox.style.top = top + "px";
+        selectionBox.style.width = width + "px";
+        selectionBox.style.height = height + "px";
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (isSelecting) {
+          isSelecting = false;
+          selectionBox.style.display = "none";
+        }
+      });
+
+      function openContextMenu(e) {
+        e.preventDefault();
+        const menu = document.getElementById("desktopContextMenu");
+        menu.style.left = Math.min(window.innerWidth - 180, e.clientX) + "px";
+        menu.style.top = Math.min(window.innerHeight - 200, e.clientY) + "px";
+        menu.style.display = "flex";
+      }
+
+      // =========================================================
+      // WINDOWS EXPLORER NAVIGATION
+      // =========================================================
+      function filterExplorer(category) {
+        playAudioEffect("click");
+        const title = document.getElementById("explorerTitle");
+        const path = document.getElementById("explorerPath");
+        const detailsTitle = document.getElementById("detailsPaneTitle");
+
+        if (category === "desktop") {
+          title.textContent = "Desktop";
+          path.innerHTML = "Computer &gt; Desktop";
+          detailsTitle.textContent = "Desktop Folder";
+        } else if (category === "downloads") {
+          title.textContent = "Downloads";
+          path.innerHTML = "Computer &gt; Downloads";
+          detailsTitle.textContent = "Downloads Folder";
+        } else if (category === "documents") {
+          title.textContent = "Documents";
+          path.innerHTML = "Libraries &gt; Documents";
+          detailsTitle.textContent = "Documents Library";
+        } else if (category === "music") {
+          title.textContent = "Music";
+          path.innerHTML = "Libraries &gt; Music";
+          detailsTitle.textContent = "Music Library";
+        } else {
+          title.textContent = "Computer • Portfolio (C:)";
+          path.innerHTML =
+            "Computer &gt; Local Disk (C:) &gt; Sumit &gt; Projects";
+          detailsTitle.textContent = "Portfolio (C:)";
+        }
+      }
+
+      // =========================================================
+      // CALCULATOR LOGIC
+      // =========================================================
+      let calcCurrent = "0";
+      let calcPrev = null;
+      let calcOp = null;
+
+      function calcPress(key) {
+        playAudioEffect("click");
+        const display = document.getElementById("calcDisplay");
+
+        if (key >= "0" && key <= "9") {
+          if (calcCurrent === "0") calcCurrent = key;
+          else calcCurrent += key;
+        } else if (key === ".") {
+          if (!calcCurrent.includes(".")) calcCurrent += ".";
+        } else if (key === "C") {
+          calcCurrent = "0";
+          calcPrev = null;
+          calcOp = null;
+        } else if (key === "CE") {
+          calcCurrent = "0";
+        } else if (key === "±") {
+          calcCurrent = String(-parseFloat(calcCurrent) || 0);
+        } else if (["+", "-", "*", "/"].includes(key)) {
+          calcPrev = parseFloat(calcCurrent);
+          calcOp = key;
+          calcCurrent = "0";
+        } else if (key === "=") {
+          if (calcOp && calcPrev !== null) {
+            const cur = parseFloat(calcCurrent);
+            let res = 0;
+            if (calcOp === "+") res = calcPrev + cur;
+            else if (calcOp === "-") res = calcPrev - cur;
+            else if (calcOp === "*") res = calcPrev * cur;
+            else if (calcOp === "/") res = cur !== 0 ? calcPrev / cur : "Error";
+            calcCurrent = String(res);
+            calcPrev = null;
+            calcOp = null;
+          }
+        }
+        display.textContent = calcCurrent;
+      }
+
+      // =========================================================
+      // WMP 12 AUDIO ENGINE, PLAYLIST, & SPECTRUM VISUALIZER
+      // =========================================================
+      const wmpCanvas = document.getElementById("wmpCanvas");
+      const wmpCtx = wmpCanvas.getContext("2d");
+      const wmpPlayBtn = document.getElementById("wmpPlayBtn");
+      const wmpTitle = document.getElementById("wmpTitle");
+      const wmpGenre = document.getElementById("wmpGenre");
+      const wmpModeBadge = document.getElementById("wmpModeBadge");
+      const wmpBitrate = document.getElementById("wmpBitrate");
+
+      let visualizerMode = 0; // 0: Bars & Peaks, 1: Ocean Mist Wave
+      const visualizerModes = [
+        "Visualizer: Bars & Peaks",
+        "Visualizer: Ocean Mist Wave",
+      ];
+
+      function switchVisualizerMode() {
+        playAudioEffect("click");
+        visualizerMode = (visualizerMode + 1) % visualizerModes.length;
+        wmpModeBadge.textContent = visualizerModes[visualizerMode];
+      }
+
+      function switchWmpTab(tab) {
+        playAudioEffect("click");
+        const nowPlayingContainer = document.getElementById(
+          "wmpVisualizerContainer",
+        );
+        const playlistContainer = document.getElementById(
+          "wmpPlaylistContainer",
+        );
+        const tabNowPlaying = document.getElementById("wmpTabNowPlaying");
+        const tabPlaylist = document.getElementById("wmpTabPlaylist");
+
+        if (tab === "nowPlaying") {
+          nowPlayingContainer.style.display = "flex";
+          playlistContainer.style.display = "none";
+          tabNowPlaying.classList.add("active");
+          tabPlaylist.classList.remove("active");
+          resizeWmpCanvas();
+        } else {
+          nowPlayingContainer.style.display = "none";
+          playlistContainer.style.display = "flex";
+          tabNowPlaying.classList.remove("active");
+          tabPlaylist.classList.add("active");
+          renderPlaylistItems();
+        }
+      }
+
+      function renderPlaylistItems() {
+        const container = document.getElementById("wmpPlaylistContainer");
+        const currentIdx = window.ambientPlayer.currentTrackIndex;
+        container.innerHTML = window.ambientPlayer.tracks
+          .map(
+            (t, idx) => `
+        <div class="wmp-playlist-item ${idx === currentIdx ? "active" : ""}" onclick="window.ambientPlayer.play(${idx}); renderPlaylistItems();">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span>${idx === currentIdx ? "▶" : idx + 1 + "."}</span>
+            <div>
+              <div style="font-weight:600;">${t.title}</div>
+              <div style="font-size:10px; opacity:0.75;">${t.artist} • ${t.genre}</div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div>${t.duration}</div>
+            <div style="font-size:9.5px; opacity:0.6;">${t.bitrate}</div>
+          </div>
+        </div>
+      `,
+          )
+          .join("");
+      }
+
+      function toggleWmpShuffle() {
+        playAudioEffect("click");
+        const isShuffle = window.ambientPlayer.toggleShuffle();
+        document
+          .getElementById("wmpShuffleBtn")
+          .classList.toggle("active", isShuffle);
+      }
+
+      function toggleWmpRepeat() {
+        playAudioEffect("click");
+        const isRepeat = window.ambientPlayer.toggleRepeat();
+        document
+          .getElementById("wmpRepeatBtn")
+          .classList.toggle("active", isRepeat);
+      }
+
+      function seekWmp(e) {
+        playAudioEffect("click");
+        const track = document.getElementById("wmpProgressTrack");
+        const rect = track.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+        const dur =
+          window.ambientPlayer.tracks[window.ambientPlayer.currentTrackIndex]
+            .durationSec;
+        window.ambientPlayer.currentTime = Math.floor(ratio * dur);
+        window.ambientPlayer.notify();
+      }
+
+      function resizeWmpCanvas() {
+        wmpCanvas.width = wmpCanvas.parentElement.clientWidth;
+        wmpCanvas.height = wmpCanvas.parentElement.clientHeight;
+      }
+      window.addEventListener("resize", resizeWmpCanvas);
+      setTimeout(resizeWmpCanvas, 150);
+
+      function toggleAudio() {
+        playAudioEffect("click");
+        window.ambientPlayer.toggle();
+      }
+
+      function formatTime(secs) {
+        const m = Math.floor(secs / 60);
+        const s = Math.floor(secs % 60);
+        return `${m}:${s < 10 ? "0" : ""}${s}`;
+      }
+
+      window.ambientPlayer.onStateChange(
+        ({ isPlaying, currentTrack, volume, currentTime, duration }) => {
+          wmpPlayBtn.textContent = isPlaying ? "⏸" : "▶";
+          wmpTitle.textContent = currentTrack.title;
+          wmpGenre.textContent = `${currentTrack.artist} • ${currentTrack.genre}`;
+          wmpBitrate.textContent = currentTrack.bitrate;
+
+          // Update seek bar
+          const fill = document.getElementById("wmpProgressFill");
+          const elapsed = document.getElementById("wmpTimeElapsed");
+          const total = document.getElementById("wmpTimeTotal");
+
+          if (currentTrack.duration === "LIVE") {
+            fill.style.width = "100%";
+            elapsed.textContent = "LIVE";
+            total.textContent = "24/7";
+          } else {
+            const percent = Math.min(100, (currentTime / duration) * 100);
+            fill.style.width = `${percent}%`;
+            elapsed.textContent = formatTime(currentTime);
+            total.textContent = `-${formatTime(Math.max(0, duration - currentTime))}`;
+          }
+
+          renderPlaylistItems();
+        },
+      );
+
+      const peaks = new Array(32).fill(0);
+
+      function renderWmpVisualizer() {
+        requestAnimationFrame(renderWmpVisualizer);
+        if (!wmpCtx || wmpCanvas.width === 0) return;
+
+        const data = window.ambientPlayer.getFrequencyData();
+        wmpCtx.fillStyle = "#000000";
+        wmpCtx.fillRect(0, 0, wmpCanvas.width, wmpCanvas.height);
+
+        if (visualizerMode === 0) {
+          // --- MODE 0: WMP 12 SPECTRUM BARS WITH PEAK HOLDS ---
+          const bars = 28;
+          const barW = Math.floor(wmpCanvas.width / bars) - 3;
+          const baseY = wmpCanvas.height - 8;
+
+          for (let i = 0; i < bars; i++) {
+            const val = data[i * 2] / 255.0;
+            const h = Math.max(3, val * (wmpCanvas.height * 0.78));
+            const x = i * (barW + 3) + 4;
+            const y = baseY - h;
+
+            const barGrad = wmpCtx.createLinearGradient(0, y, 0, baseY);
+            barGrad.addColorStop(0, "#ff3b30");
+            barGrad.addColorStop(0.3, "#ffcc00");
+            barGrad.addColorStop(0.7, "#34c759");
+            barGrad.addColorStop(1, "#007aff");
+
+            wmpCtx.fillStyle = barGrad;
+            wmpCtx.fillRect(x, y, barW, h);
+
+            if (h > peaks[i]) {
+              peaks[i] = h;
+            } else {
+              peaks[i] = Math.max(3, peaks[i] - 1.2);
+            }
+
+            const peakY = baseY - peaks[i] - 2;
+            wmpCtx.fillStyle = "#ffffff";
+            wmpCtx.fillRect(x, peakY, barW, 2);
+          }
+        } else {
+          // --- MODE 1: OCEAN MIST OSCILLOSCOPE WAVE ---
+          wmpCtx.beginPath();
+          wmpCtx.lineWidth = 2.5;
+          wmpCtx.strokeStyle = "#00f0ff";
+          wmpCtx.shadowColor = "#00f0ff";
+          wmpCtx.shadowBlur = 10;
+
+          const sliceW = wmpCanvas.width / (data.length / 2);
+          let x = 0;
+
+          for (let i = 0; i < data.length / 2; i++) {
+            const v = data[i] / 255.0;
+            const y =
+              wmpCanvas.height / 2 + (v - 0.5) * wmpCanvas.height * 0.75;
+            if (i === 0) wmpCtx.moveTo(x, y);
+            else wmpCtx.lineTo(x, y);
+            x += sliceW;
+          }
+          wmpCtx.stroke();
+          wmpCtx.shadowBlur = 0;
+        }
+      }
+      renderWmpVisualizer();
+
+      // =========================================================
+      // SPOTIFY WEB APP LOGIC
+      // =========================================================
+      function loadSpotifyUri(uri) {
+        playAudioEffect("click");
+        const cleanUri = uri.replace("https://open.spotify.com/", "");
+        document.getElementById("spotifyIframe").src =
+          `https://open.spotify.com/embed/${cleanUri}?utm_source=generator&theme=0`;
+      }
+
+      function loadCustomSpotify() {
+        playAudioEffect("click");
+        const input = document.getElementById("spotifyCustomInput");
+        let val = input.value.trim();
+        if (!val) return;
+
+        if (val.includes("open.spotify.com/")) {
+          const parts = val.split("open.spotify.com/")[1].split("?")[0];
+          loadSpotifyUri(parts);
+        } else {
+          loadSpotifyUri(val);
+        }
+      }
+
+      // =========================================================
+      // SYSTEM TRAY CLOCK & DESKTOP GADGET
+      // =========================================================
+      function updateClock() {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        });
+        const fullTimeStr = now.toLocaleTimeString("en-US");
+        const dateStr = `${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()}`;
+
+        document.getElementById("trayTime").textContent = timeStr;
+        document.getElementById("trayDate").textContent = dateStr;
+        document.getElementById("clockFlyoutTime").textContent = fullTimeStr;
+        document.getElementById("clockFlyoutDate").textContent =
+          now.toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+
+        // Analog Gadget
+        const hours = now.getHours() % 12;
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        const ms = now.getMilliseconds();
+
+        const secDeg = (seconds + ms / 1000) * 6;
+        const minDeg = (minutes + seconds / 60) * 6;
+        const hourDeg = (hours + minutes / 60) * 30;
+
+        document.getElementById("gadgetSecond").style.transform =
+          `rotate(${secDeg}deg)`;
+        document.getElementById("gadgetMinute").style.transform =
+          `rotate(${minDeg}deg)`;
+        document.getElementById("gadgetHour").style.transform =
+          `rotate(${hourDeg}deg)`;
+      }
+      setInterval(updateClock, 100);
+      updateClock();
+
+      // Launch side-by-side on initial load (Notepad + Spotify)
+      window.addEventListener("load", () => {
+        openWindowSmart("notepadWindow", "tools_i_use.txt");
+        openWindowSmart("spotifyWindow");
+        updateSystemVolume(0.6);
+        renderPlaylistItems();
+      });
+    </script>
+  </body>
 </html>
