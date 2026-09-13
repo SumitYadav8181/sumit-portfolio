@@ -2,7 +2,7 @@
 
 An authentic, zero-framework recreation of the classic **Windows 7 Aero Glass desktop environment (circa 2009)**, crafted as an interactive personal web portfolio by **Sumit Kumar Yadav**.
 
-Live Demo: **[sumit.thetechbasket.com](https://sumit.thetechbasket.com)**
+Live Demo: **[sumityadav.in](https://sumityadav.in)**
 
 ---
 
@@ -51,4 +51,4 @@ If you are an AI coding assistant (Claude Code, Google Antigravity, OpenCode, Cu
 
 Crafted with care by **Sumit Kumar Yadav**.
 
-You are free to explore, study, fork, and remix this project. If you adapt this project for your own portfolio or templates, kindly retain a discreet attribution to [Sumit Kumar Yadav](https://sumit.thetechbasket.com).
+You are free to explore, study, fork, and remix this project. If you adapt this project for your own portfolio or templates, kindly retain a discreet attribution to [Sumit Kumar Yadav](https://sumityadav.in).

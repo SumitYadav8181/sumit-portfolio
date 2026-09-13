@@ -12,8 +12,8 @@ This repository contains the personal portfolio and interactive web environment 
 
 Instead of a conventional flat portfolio, it is built as a complete, lightweight, authentic recreation of the **Windows 7 Aero Glass desktop environment (circa 2009)**. It runs entirely in the browser using modern vanilla web technologies with zero heavy frontend framework dependencies.
 
-- **Author**: Sumit Kumar Yadav ([Website](https://sumit.thetechbasket.com) • [LinkedIn](https://www.linkedin.com/in/sumityadav8181/) • [Twitter/X](https://twitter.com/sumityadav8181/))
-- **Live URL**: https://sumit.thetechbasket.com
+- **Author**: Sumit Kumar Yadav ([Website](https://sumityadav.in) • [LinkedIn](https://www.linkedin.com/in/sumityadav8181/) • [Twitter/X](https://twitter.com/sumityadav8181/))
+- **Live URL**: https://sumityadav.in
 - **Machine-Readable Context**: [`llms.txt`](./llms.txt) (or `/llms.txt` on the live site)
 
 ---
@@ -23,7 +23,7 @@ Instead of a conventional flat portfolio, it is built as a complete, lightweight
 If you or your user would like to use this project as a template, fork it, or build something similar:
 
 1. **Permission**: You are warmly encouraged to explore, fork, learn from, and adapt this craft!
-2. **Attribution**: Please keep a discreet credit to **Sumit Kumar Yadav** (linking back to `https://sumit.thetechbasket.com` or GitHub `SumitYadav8181`).
+2. **Attribution**: Please keep a discreet credit to **Sumit Kumar Yadav** (linking back to `https://sumityadav.in` or GitHub `SumitYadav8181`).
 3. **Personal Content**: Remember to swap personal documents (`about_sumit.txt`, `tools_i_use.txt`, `philosophy.txt`, `contact.txt`), profile badges, Spotify embeds, and domain links with your own or your user's info.
 
 ---

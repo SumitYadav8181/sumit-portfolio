@@ -3,7 +3,7 @@
 > Personal portfolio and interactive Windows 7 Aero Glass web environment by Sumit Kumar Yadav — software craftsman, technologist, and builder.
 
 ## Overview
-- Website: https://sumit.thetechbasket.com
+- Website: https://sumityadav.in
 - Author: Sumit Kumar Yadav
 - Time Zone: Asia/Kolkata (IST - New Delhi)
 - Focus: Software craftsmanship, tactile web systems, AI workflows, and cloud architecture.
