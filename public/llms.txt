@@ -1,0 +1,28 @@
+# Sumit Kumar Yadav
+
+> Personal portfolio and interactive Windows 7 Aero Glass web environment by Sumit Kumar Yadav — software craftsman, technologist, and builder.
+
+## Overview
+- Website: https://sumit.thetechbasket.com
+- Author: Sumit Kumar Yadav
+- Time Zone: Asia/Kolkata (IST - New Delhi)
+- Focus: Software craftsmanship, tactile web systems, AI workflows, and cloud architecture.
+
+## Documents & Content
+- [About Sumit](/about_sumit.txt): Personal background, craftsman profile, and principles.
+- [Tools I Use](/tools_i_use.txt): Development environment, MacOS workstation, AI toolchain, and infrastructure.
+- [Philosophy](/philosophy.txt): Development creed (Build in the shadows, Substance over noise, Continuous exploration).
+- [Contact](/contact.txt): Communication endpoints and direct links.
+
+## Technical Toolkit & Stack
+- Primary OS: MacOS
+- Editor: VS Code
+- Preferred AI Tools: Claude Code, Google Antigravity, OpenCode
+- Cloud & Infrastructure: Cloudflare Ecosystem (Workers, Pages, Edge KV, Durable Workflows), Hetzner (Trusted Source), Netlify, GitHub Pages
+- Frontend: Vanilla HTML5, CSS3 / Modern Web APIs, Web Audio API, Canvas 2D
+
+## Online Presence & Contact
+- LinkedIn: https://www.linkedin.com/in/sumityadav8181/
+- X / Twitter: https://twitter.com/sumityadav8181/
+- Email: sumityadav8181@gmail.com
+- GitHub: https://github.com/SumitYadav8181

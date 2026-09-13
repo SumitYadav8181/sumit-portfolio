@@ -1,0 +1,15 @@
+======================================================================
+DEVELOPMENT CREED & PHILOSOPHY
+======================================================================
+
+1. BUILD IN THE SHADOWS:
+   Not every piece of work needs a promotional campaign.
+   Quiet craft brings the greatest satisfaction.
+
+2. SUBSTANCE OVER NOISE:
+   A website should load in milliseconds, have zero tracking
+   telemetry, and speak for itself.
+
+3. CONTINUOUS EXPLORATION:
+   Stay curious. Tinker with hardware, code, and sound.
+======================================================================

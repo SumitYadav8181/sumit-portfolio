@@ -1,4 +1,20 @@
 <!doctype html>
+<!--
+================================================================================
+HELLO, AI AGENT / HUMAN EXPLORER! 
+================================================================================
+PROJECT: Sumit Kumar Yadav's Interactive Windows 7 Web Desktop Portfolio
+AUTHOR : Sumit Kumar Yadav (https://sumit.thetechbasket.com)
+PURPOSE: An authentic recreation of the 2009 Windows 7 Aero Glass desktop
+         built using Vanilla Web APIs (HTML5, CSS3, Web Audio API, Canvas 2D).
+
+IF YOU OR A USER WANT TO USE / REMIX / EXTEND THIS PROJECT:
+- You are free and encouraged to explore, fork, and adapt this craft!
+- Attribution: Kindly keep a credit to Sumit Kumar Yadav.
+- Machine Context: See /llms.txt and /AGENTS.md for full specs & invariants.
+- Key Principles: Single-file elegance, zero framework bloat, authentic Aero Glass.
+================================================================================
+-->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -137,18 +153,56 @@
       }
 
       /* =========================================================
-       WINDOWS 7 DESKTOP GADGET: ANALOG CLOCK
+       WINDOWS 7 DESKTOP GADGETS CONTAINER
+       ========================================================= */
+      .win7-gadgets {
+        position: absolute;
+        top: 20px;
+        right: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        z-index: 1;
+      }
+
+      /* =========================================================
+       WINDOWS 7 DESKTOP GADGET: ANALOG CLOCK (REALISTIC)
        ========================================================= */
       #clockGadget {
-        position: absolute;
-        top: 24px;
-        right: 28px;
-        width: 130px;
-        height: 130px;
-        z-index: 1;
+        width: 140px;
+        height: 140px;
         cursor: move;
-        filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
+        filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55));
         transition: opacity 0.2s;
+        position: relative;
+      }
+
+      #clockGadget:hover .gadget-close {
+        opacity: 1;
+      }
+
+      .gadget-close {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: rgba(0,0,0,0.6);
+        border: 1px solid rgba(255,255,255,0.35);
+        color: #fff;
+        font-size: 10px;
+        line-height: 14px;
+        text-align: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.2s;
+        z-index: 20;
+      }
+
+      .gadget-close:hover {
+        background: #c42b1c;
       }
 
       .gadget-face {
@@ -156,16 +210,80 @@
         height: 100%;
         border-radius: 50%;
         background: radial-gradient(
-          circle at 38% 38%,
+          ellipse at 40% 35%,
           #ffffff 0%,
-          #e6eff7 55%,
-          #c8dbee 100%
+          #f0f5fa 30%,
+          #dce7f2 60%,
+          #c0d3e6 85%,
+          #a8bfd6 100%
         );
-        border: 6px solid #202b36;
+        border: 3px solid;
+        border-color: #1a2836 #283a4e #384e64 #283a4e;
         box-shadow:
-          inset 0 2px 6px rgba(0, 0, 0, 0.35),
-          0 0 0 1px rgba(255, 255, 255, 0.45);
+          0 0 0 1px rgba(255, 255, 255, 0.5),
+          inset 0 3px 8px rgba(0, 0, 0, 0.25),
+          inset 0 -1px 3px rgba(255, 255, 255, 0.6),
+          0 4px 12px rgba(0, 0, 0, 0.4);
         position: relative;
+        overflow: hidden;
+      }
+
+      /* Glass highlight on clock face */
+      .gadget-face::before {
+        content: '';
+        position: absolute;
+        top: 4%;
+        left: 12%;
+        width: 76%;
+        height: 42%;
+        border-radius: 50%;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.65) 0%,
+          rgba(255, 255, 255, 0.15) 60%,
+          transparent 100%
+        );
+        pointer-events: none;
+        z-index: 11;
+      }
+
+      /* Hour markers */
+      .clock-marker {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: 0 0;
+        z-index: 3;
+      }
+
+      .clock-marker-line {
+        position: absolute;
+        background: #2c3e50;
+        border-radius: 1px;
+      }
+
+      .clock-marker-major .clock-marker-line {
+        width: 2.5px;
+        height: 10px;
+        margin-left: -1.25px;
+      }
+
+      .clock-marker-minor .clock-marker-line {
+        width: 1px;
+        height: 5px;
+        margin-left: -0.5px;
+      }
+
+      /* Hour numbers */
+      .clock-number {
+        position: absolute;
+        font-family: 'Segoe UI', 'Georgia', serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: #1a2a3a;
+        text-shadow: 0 0.5px 0 rgba(255,255,255,0.7);
+        z-index: 4;
+        pointer-events: none;
       }
 
       .gadget-center {
@@ -175,10 +293,11 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: #111;
-        border: 2px solid #555;
+        background: radial-gradient(circle at 35% 35%, #666, #111);
+        border: 1.5px solid #888;
         transform: translate(-50%, -50%);
         z-index: 10;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.5);
       }
 
       .gadget-hand {
@@ -190,27 +309,470 @@
       }
 
       .gadget-hour {
-        width: 4px;
-        height: 32px;
-        background: #111822;
-        margin-left: -2px;
+        width: 3.5px;
+        height: 30px;
+        background: linear-gradient(180deg, #0a1520 0%, #1a2a3a 100%);
+        margin-left: -1.75px;
         z-index: 7;
+        border-radius: 2px 2px 1px 1px;
+        box-shadow: 0 0 2px rgba(0,0,0,0.3);
       }
 
       .gadget-minute {
-        width: 3px;
-        height: 44px;
-        background: #2b3a4a;
-        margin-left: -1.5px;
+        width: 2.5px;
+        height: 42px;
+        background: linear-gradient(180deg, #0a1520 0%, #2b3a4a 100%);
+        margin-left: -1.25px;
         z-index: 8;
+        border-radius: 2px 2px 1px 1px;
+        box-shadow: 0 0 2px rgba(0,0,0,0.2);
       }
 
       .gadget-second {
-        width: 1.5px;
-        height: 48px;
-        background: #d44026;
-        margin-left: -0.75px;
+        width: 1px;
+        height: 50px;
+        background: #cc3300;
+        margin-left: -0.5px;
         z-index: 9;
+        box-shadow: 0 0 3px rgba(204, 51, 0, 0.4);
+      }
+
+      /* Second hand tail (counterweight) */
+      .gadget-second::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 3px;
+        height: 12px;
+        background: #cc3300;
+        border-radius: 0 0 2px 2px;
+      }
+
+      /* =========================================================
+       WINDOWS 7 DESKTOP GADGET: WEATHER
+       ========================================================= */
+      #weatherGadget {
+        width: 140px;
+        min-height: 152px;
+        cursor: move;
+        filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.5));
+        transition: opacity 0.2s;
+        position: relative;
+      }
+
+      #weatherGadget:hover .gadget-close {
+        opacity: 1;
+      }
+
+      .weather-gadget-body {
+        width: 100%;
+        min-height: 152px;
+        border-radius: 8px;
+        background: linear-gradient(
+          180deg,
+          rgba(20, 40, 65, 0.82) 0%,
+          rgba(12, 28, 48, 0.9) 60%,
+          rgba(8, 20, 38, 0.95) 100%
+        );
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.32);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.35),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+          0 4px 16px rgba(0, 0, 0, 0.45);
+        padding: 12px 10px 10px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Glass reflection */
+      .weather-gadget-body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 45%;
+        border-radius: 8px 8px 0 0;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.12) 0%,
+          rgba(255, 255, 255, 0.04) 50%,
+          transparent 100%
+        );
+        pointer-events: none;
+      }
+
+      .weather-icon-large {
+        font-size: 36px;
+        line-height: 1;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+        margin-bottom: 2px;
+      }
+
+      .weather-temp {
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 28px;
+        font-weight: 300;
+        letter-spacing: -1px;
+        color: #ffffff;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        line-height: 1;
+      }
+
+      .weather-temp sup {
+        font-size: 14px;
+        font-weight: 400;
+        vertical-align: super;
+        margin-left: 1px;
+      }
+
+      .weather-desc {
+        font-size: 10px;
+        font-weight: 400;
+        color: rgba(220, 235, 255, 0.9);
+        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        text-align: center;
+        letter-spacing: 0.3px;
+      }
+
+      .weather-location {
+        font-size: 9.5px;
+        color: rgba(180, 210, 245, 0.75);
+        text-align: center;
+        margin-top: 2px;
+      }
+
+      .weather-divider {
+        width: 80%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255,255,255,0.2) 50%,
+          transparent 100%
+        );
+        margin: 4px 0;
+      }
+
+      .weather-details {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 4px;
+      }
+
+      .weather-detail-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1px;
+      }
+
+      .weather-detail-icon {
+        font-size: 11px;
+        opacity: 0.7;
+      }
+
+      .weather-detail-val {
+        font-size: 9px;
+        color: rgba(200, 220, 245, 0.85);
+        font-weight: 500;
+      }
+
+      .weather-loading {
+        font-size: 11px;
+        color: rgba(200, 220, 245, 0.7);
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      @keyframes weatherFadeIn {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .weather-loaded {
+        animation: weatherFadeIn 0.4s ease-out;
+      }
+
+      /* =========================================================
+       WINDOWS 7 DESKTOP GADGET: STICKY NOTES / TODO
+       Responsive sizing relative to screen width (small vs large monitors)
+       ========================================================= */
+      #todoGadget {
+        --todo-w: clamp(148px, 13vw, 170px);
+        --todo-min-h: 80px;
+        --todo-title-size: 11px;
+        --todo-text-size: 10.5px;
+        --todo-input-size: 10px;
+        --todo-list-max-h: 200px;
+        --todo-btn-size: 20px;
+        --todo-btn-font: 15px;
+        --todo-check-size: 14px;
+        --todo-pad-x: 8px;
+        --todo-pad-y: 6px;
+
+        width: var(--todo-w);
+        cursor: move;
+        filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.5));
+        transition: opacity 0.2s, width 0.2s;
+        position: relative;
+      }
+
+      /* Medium screens (e.g. 1180px - 1479px) */
+      @media (min-width: 1180px) {
+        #todoGadget {
+          --todo-w: clamp(170px, 13vw, 200px);
+          --todo-min-h: 90px;
+          --todo-title-size: 11.5px;
+          --todo-text-size: 11px;
+          --todo-input-size: 10.5px;
+          --todo-list-max-h: 230px;
+          --todo-btn-size: 22px;
+          --todo-btn-font: 16px;
+          --todo-check-size: 15px;
+          --todo-pad-x: 10px;
+          --todo-pad-y: 7px;
+        }
+      }
+
+      /* Large monitors (e.g. 1480px - 1919px) */
+      @media (min-width: 1480px) {
+        #todoGadget {
+          --todo-w: clamp(210px, 12.5vw, 250px);
+          --todo-min-h: 105px;
+          --todo-title-size: 12.5px;
+          --todo-text-size: 12px;
+          --todo-input-size: 11px;
+          --todo-list-max-h: 280px;
+          --todo-btn-size: 24px;
+          --todo-btn-font: 18px;
+          --todo-check-size: 16px;
+          --todo-pad-x: 12px;
+          --todo-pad-y: 8px;
+        }
+      }
+
+      /* Extra large / 2K / 4K monitors (≥ 1920px) */
+      @media (min-width: 1920px) {
+        #todoGadget {
+          --todo-w: clamp(250px, 12vw, 300px);
+          --todo-min-h: 120px;
+          --todo-title-size: 13.5px;
+          --todo-text-size: 13px;
+          --todo-input-size: 12px;
+          --todo-list-max-h: 340px;
+          --todo-btn-size: 26px;
+          --todo-btn-font: 19px;
+          --todo-check-size: 18px;
+          --todo-pad-x: 14px;
+          --todo-pad-y: 9px;
+        }
+      }
+
+      #todoGadget:hover .gadget-close {
+        opacity: 1;
+      }
+
+      .todo-gadget-body {
+        width: 100%;
+        min-height: var(--todo-min-h);
+        border-radius: 2px 2px 3px 3px;
+        background: linear-gradient(
+          180deg,
+          #fef9a7 0%,
+          #fdee6e 6%,
+          #fde94e 100%
+        );
+        border: 1px solid rgba(180, 160, 60, 0.45);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.7),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.06),
+          0 3px 12px rgba(0, 0, 0, 0.35);
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .todo-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--todo-pad-y) var(--todo-pad-x) calc(var(--todo-pad-y) * 0.7) calc(var(--todo-pad-x) * 1.1);
+        border-bottom: 1px solid rgba(180, 160, 60, 0.2);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.35) 0%,
+          rgba(255, 255, 255, 0.05) 100%
+        );
+      }
+
+      .todo-title {
+        font-family: 'Segoe UI', sans-serif;
+        font-size: var(--todo-title-size);
+        font-weight: 600;
+        color: #5a4e10;
+        letter-spacing: 0.3px;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+      }
+
+      .todo-add-btn {
+        width: var(--todo-btn-size);
+        height: var(--todo-btn-size);
+        border-radius: 50%;
+        border: 1px solid rgba(120, 110, 40, 0.35);
+        background: linear-gradient(180deg, #fff8b5 0%, #f0e440 100%);
+        color: #6b5e00;
+        font-size: var(--todo-btn-font);
+        font-weight: 700;
+        line-height: var(--todo-btn-size);
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.15s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .todo-add-btn:hover {
+        background: linear-gradient(180deg, #fffacc 0%, #e8da20 100%);
+        border-color: rgba(120, 110, 40, 0.6);
+        box-shadow: 0 0 4px rgba(200, 180, 0, 0.4);
+        transform: scale(1.1);
+      }
+
+      .todo-list {
+        list-style: none;
+        padding: calc(var(--todo-pad-y) * 0.7) var(--todo-pad-x) var(--todo-pad-y) var(--todo-pad-x);
+        margin: 0;
+        max-height: var(--todo-list-max-h);
+        overflow-y: auto;
+      }
+
+      .todo-list::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .todo-list::-webkit-scrollbar-thumb {
+        background: rgba(140, 130, 50, 0.3);
+        border-radius: 2px;
+      }
+
+      .todo-item {
+        display: flex;
+        align-items: flex-start;
+        gap: clamp(5px, 0.4vw, 8px);
+        padding: clamp(3px, 0.25vw, 6px) 2px;
+        border-bottom: 1px dashed rgba(180, 160, 60, 0.15);
+        animation: todoSlideIn 0.25s ease-out;
+      }
+
+      .todo-item:last-child {
+        border-bottom: none;
+      }
+
+      @keyframes todoSlideIn {
+        from { opacity: 0; transform: translateY(-6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .todo-check {
+        width: var(--todo-check-size);
+        height: var(--todo-check-size);
+        min-width: var(--todo-check-size);
+        border-radius: 2px;
+        border: 1.5px solid rgba(120, 100, 30, 0.5);
+        background: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1px;
+        transition: all 0.15s;
+        font-size: calc(var(--todo-check-size) * 0.7);
+        color: transparent;
+      }
+
+      .todo-check:hover {
+        background: rgba(255, 255, 255, 0.9);
+        border-color: rgba(120, 100, 30, 0.7);
+        color: #5a4e10;
+        transform: scale(1.1);
+      }
+
+      .todo-text {
+        font-family: 'Segoe UI', sans-serif;
+        font-size: var(--todo-text-size);
+        color: #3d3500;
+        line-height: 1.4;
+        word-break: break-word;
+        user-select: text;
+      }
+
+      .todo-input-row {
+        display: flex;
+        gap: clamp(3px, 0.3vw, 6px);
+        padding: calc(var(--todo-pad-y) * 0.7) var(--todo-pad-x) var(--todo-pad-y) var(--todo-pad-x);
+      }
+
+      .todo-input {
+        flex: 1;
+        border: 1px solid rgba(140, 120, 30, 0.35);
+        border-radius: 2px;
+        padding: clamp(3px, 0.25vw, 6px) clamp(5px, 0.4vw, 8px);
+        font-family: 'Segoe UI', sans-serif;
+        font-size: var(--todo-input-size);
+        background: rgba(255, 255, 255, 0.65);
+        color: #3d3500;
+        outline: none;
+        user-select: text;
+      }
+
+      .todo-input::placeholder {
+        color: rgba(100, 90, 30, 0.45);
+        font-style: italic;
+      }
+
+      .todo-input:focus {
+        background: rgba(255, 255, 255, 0.85);
+        border-color: rgba(140, 120, 30, 0.6);
+        box-shadow: 0 0 3px rgba(200, 180, 0, 0.25);
+      }
+
+      .todo-submit {
+        border: 1px solid rgba(140, 120, 30, 0.35);
+        border-radius: 2px;
+        padding: clamp(2px, 0.2vw, 5px) clamp(6px, 0.5vw, 10px);
+        font-size: var(--todo-input-size);
+        font-weight: 600;
+        background: linear-gradient(180deg, #fff8b5 0%, #f0e440 100%);
+        color: #5a4e10;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .todo-submit:hover {
+        background: linear-gradient(180deg, #fffacc 0%, #e8da20 100%);
+        border-color: rgba(140, 120, 30, 0.6);
+      }
+
+      .todo-empty {
+        font-size: var(--todo-input-size);
+        color: rgba(100, 90, 30, 0.5);
+        font-style: italic;
+        text-align: center;
+        padding: clamp(10px, 0.8vw, 16px) var(--todo-pad-x);
       }
 
       /* =========================================================
@@ -1318,30 +1880,127 @@
        SPOTIFY AERO GLASS APPLICATION WINDOW
        ========================================================= */
       #spotifyWindow {
-        width: 660px;
-        height: 520px;
+        width: 680px;
+        height: 580px;
         top: 35px;
         left: 780px;
       }
 
-      .spotify-top-bar {
+      .spotify-playlist-shelf {
         background: #121212;
         border-bottom: 1px solid #282828;
-        padding: 6px 10px;
+        padding: 8px 10px 8px 10px;
+        user-select: none;
+      }
+
+      .spotify-shelf-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 10px;
+        font-weight: 700;
+        color: #1ed760;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+      }
+
+      .spotify-playlist-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .spotify-playlist-card {
         display: flex;
         align-items: center;
         gap: 8px;
+        padding: 6px 8px;
+        background: #1a1a1a;
+        border-radius: 5px;
+        border: 1px solid #2d2d2d;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .spotify-playlist-card:hover {
+        background: #252525;
+        border-color: #1ed760;
+        box-shadow: 0 2px 8px rgba(30, 215, 96, 0.3);
+      }
+
+      .spotify-playlist-card.active {
+        background: rgba(30, 215, 96, 0.15);
+        border-color: #1ed760;
+        box-shadow: 0 0 8px rgba(30, 215, 96, 0.35);
+      }
+
+      .spotify-card-thumb {
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        object-fit: cover;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+        flex-shrink: 0;
+      }
+
+      .spotify-card-info {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .spotify-card-title {
+        font-size: 11px;
+        font-weight: 700;
+        color: #ffffff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .spotify-card-desc {
+        font-size: 9.5px;
+        color: #a1a1aa;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-top: 1px;
+      }
+
+      .spotify-card-indicator {
+        font-size: 10px;
+        color: #1ed760;
+        opacity: 0;
+        transition: opacity 0.15s;
+        flex-shrink: 0;
+      }
+
+      .spotify-playlist-card.active .spotify-card-indicator {
+        opacity: 1;
+      }
+
+      .spotify-custom-bar {
+        background: #161616;
+        border-bottom: 1px solid #282828;
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
       }
 
       .spotify-url-input {
         flex: 1;
-        height: 24px;
+        height: 22px;
         background: #242424;
         border: 1px solid #3e3e3e;
-        border-radius: 12px;
-        padding: 0 12px;
+        border-radius: 11px;
+        padding: 0 10px;
         color: #ffffff;
-        font-size: 11px;
+        font-size: 10.5px;
         outline: none;
       }
 
@@ -1349,26 +2008,11 @@
         border-color: #1db954;
       }
 
-      .spotify-chip-btn {
-        padding: 3px 10px;
-        border-radius: 12px;
-        background: #282828;
-        color: #ffffff;
-        font-size: 11px;
-        cursor: pointer;
-        border: 1px solid #3e3e3e;
-      }
-
-      .spotify-chip-btn:hover {
-        background: #1db954;
-        color: #000000;
-        border-color: #1db954;
-      }
-
       .spotify-frame-container {
         flex: 1;
         background: #121212;
         position: relative;
+        min-height: 380px;
       }
 
       .spotify-frame-container iframe {
@@ -1652,23 +2296,30 @@
           <div class="desktop-icon-label">Computer</div>
         </div>
 
-        <!-- Sumit User Profile -->
+        <!-- About Sumit Document -->
         <div
           class="desktop-icon"
           onclick="openWindowSmart('notepadWindow', 'about_sumit.txt')"
         >
           <svg viewBox="0 0 48 48">
-            <path
-              d="M6 10 L18 10 L22 14 L42 14 L42 40 L6 40 Z"
-              fill="#ffb834"
-              stroke="#d48a12"
+            <rect
+              x="10"
+              y="6"
+              width="28"
+              height="36"
+              rx="2"
+              fill="#f8fafc"
+              stroke="#94a3b8"
               stroke-width="1.2"
             />
-            <path d="M6 16 L42 16 L40 40 L6 40 Z" fill="#ffd166" />
-            <circle cx="24" cy="25" r="5" fill="#1b5a93" />
-            <path d="M16 36 C16 31 32 31 32 36" fill="#1b5a93" />
+            <path
+              d="M15 13 L33 13 M15 18 L33 18 M15 23 L33 23 M15 28 L28 28 M15 33 L25 33"
+              stroke="#64748b"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
           </svg>
-          <div class="desktop-icon-label">Sumit</div>
+          <div class="desktop-icon-label">about_sumit.txt</div>
         </div>
 
         <!-- Windows Media Player 12 -->
@@ -1884,13 +2535,67 @@
         </div>
       </div>
 
-      <!-- Desktop Analog Clock Gadget -->
-      <div id="clockGadget" title="Windows 7 Desktop Clock">
-        <div class="gadget-face">
-          <div class="gadget-center"></div>
-          <div class="gadget-hand gadget-hour" id="gadgetHour"></div>
-          <div class="gadget-hand gadget-minute" id="gadgetMinute"></div>
-          <div class="gadget-hand gadget-second" id="gadgetSecond"></div>
+      <!-- Windows 7 Desktop Gadgets -->
+      <div class="win7-gadgets" id="gadgetsContainer">
+        <!-- Desktop Analog Clock Gadget (Realistic) -->
+        <div id="clockGadget" title="Windows 7 Desktop Clock">
+          <div class="gadget-close" onclick="closeGadget('clockGadget')" title="Close">✕</div>
+          <div class="gadget-face">
+            <!-- Hour numbers are positioned by JS -->
+            <div class="gadget-center"></div>
+            <div class="gadget-hand gadget-hour" id="gadgetHour"></div>
+            <div class="gadget-hand gadget-minute" id="gadgetMinute"></div>
+            <div class="gadget-hand gadget-second" id="gadgetSecond"></div>
+          </div>
+        </div>
+
+        <!-- Windows 7 Weather Gadget -->
+        <div id="weatherGadget" title="Windows 7 Weather">
+          <div class="gadget-close" onclick="closeGadget('weatherGadget')" title="Close">✕</div>
+          <div class="weather-gadget-body">
+            <div class="weather-loading" id="weatherLoading">⟳ Loading weather...</div>
+            <div id="weatherContent" style="display:none; width:100%;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;">
+                <div class="weather-icon-large" id="weatherIcon">☀️</div>
+                <div class="weather-temp" id="weatherTemp">--<sup>°C</sup></div>
+                <div class="weather-desc" id="weatherDesc">--</div>
+                <div class="weather-divider"></div>
+                <div class="weather-details">
+                  <div class="weather-detail-item">
+                    <div class="weather-detail-icon">💧</div>
+                    <div class="weather-detail-val" id="weatherHumidity">--%</div>
+                  </div>
+                  <div class="weather-detail-item">
+                    <div class="weather-detail-icon">🌬️</div>
+                    <div class="weather-detail-val" id="weatherWind">-- km/h</div>
+                  </div>
+                  <div class="weather-detail-item">
+                    <div class="weather-detail-icon">🌡️</div>
+                    <div class="weather-detail-val" id="weatherFeelsLike">--°</div>
+                  </div>
+                </div>
+                <div class="weather-location" id="weatherLocation">Locating...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Windows 7 Sticky Notes / Todo Gadget -->
+        <div id="todoGadget" title="Sticky Notes">
+          <div class="gadget-close" onclick="closeGadget('todoGadget')" title="Close">✕</div>
+          <div class="todo-gadget-body">
+            <div class="todo-header">
+              <span class="todo-title">📌 Sticky Notes</span>
+              <div class="todo-add-btn" onclick="toggleTodoInput()" title="Add Note">+</div>
+            </div>
+            <div class="todo-input-row" id="todoInputRow" style="display:none;">
+              <input class="todo-input" id="todoInput" type="text" placeholder="Type a note..." maxlength="120" onkeydown="if(event.key==='Enter')addTodoItem()" />
+              <button class="todo-submit" onclick="addTodoItem()">Add</button>
+            </div>
+            <ul class="todo-list" id="todoList">
+              <li class="todo-empty" id="todoEmpty">No notes yet</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -1917,7 +2622,7 @@
             />
             <path d="M4 4h8M4 7h8M4 10h5" stroke="#94a3b8" />
           </svg>
-          <span id="notepadTitle">tools_i_use.txt - Notepad</span>
+          <span id="notepadTitle">about_sumit.txt - Notepad</span>
         </div>
         <div class="title-bar-controls">
           <button
@@ -2222,36 +2927,84 @@
         </div>
       </div>
 
-      <!-- Quick Presets & URL Loader -->
-      <div class="spotify-top-bar">
-        <div
-          class="spotify-chip-btn"
-          onclick="loadSpotifyUri('playlist/37i9dQZF1DXdLEN7aqioXM')"
-        >
-          Lofi Beats
+      <!-- Featured Playlist Selection Shelf (3 Curated Playlists with Local Thumbnails) -->
+      <div class="spotify-playlist-shelf">
+        <div class="spotify-shelf-header">
+          <span>FEATURED PLAYLISTS</span>
+          <span style="font-size: 9.5px; color: #888;">Click any playlist to listen</span>
         </div>
-        <div
-          class="spotify-chip-btn"
-          onclick="loadSpotifyUri('playlist/37i9dQZF1DWZeKCadgRdKQ')"
-        >
-          Deep Focus
+        <div class="spotify-playlist-grid">
+          <!-- Playlist 1: Chill Out Music -->
+          <div
+            class="spotify-playlist-card active"
+            id="spotCard-1"
+            onclick="loadSpotifyUri('playlist/37i9dQZF1DX32oVqaQE8BM', 'spotCard-1')"
+            title="Chill Out Music • The ultimate chill out playlist"
+          >
+            <img
+              src="/img/spotify-playlist-chillout.jpg"
+              alt="Chill Out Music"
+              class="spotify-card-thumb"
+            />
+            <div class="spotify-card-info">
+              <div class="spotify-card-title">Chill Out Music</div>
+              <div class="spotify-card-desc">Ultimate chill out</div>
+            </div>
+            <div class="spotify-card-indicator">▶</div>
+          </div>
+
+          <!-- Playlist 2: Lounge Covers -->
+          <div
+            class="spotify-playlist-card"
+            id="spotCard-2"
+            onclick="loadSpotifyUri('playlist/37i9dQZF1DXcPUkCx9Vjk0', 'spotCard-2')"
+            title="Lounge Covers • Chilled house covers"
+          >
+            <img
+              src="/img/spotify-playlist-lounge.jpg"
+              alt="Lounge Covers"
+              class="spotify-card-thumb"
+            />
+            <div class="spotify-card-info">
+              <div class="spotify-card-title">Lounge Covers</div>
+              <div class="spotify-card-desc">Chilled house covers</div>
+            </div>
+            <div class="spotify-card-indicator">▶</div>
+          </div>
+
+          <!-- Playlist 3: Best Movie Soundtracks -->
+          <div
+            class="spotify-playlist-card"
+            id="spotCard-3"
+            onclick="loadSpotifyUri('playlist/4RLpDbXkSZdWGsNEeoPRHr', 'spotCard-3')"
+            title="Movie Soundtracks • Best Instrumental Scores"
+          >
+            <img
+              src="/img/spotify-playlist-soundtracks.jpg"
+              alt="Movie Soundtracks"
+              class="spotify-card-thumb"
+            />
+            <div class="spotify-card-info">
+              <div class="spotify-card-title">Movie Soundtracks</div>
+              <div class="spotify-card-desc">Best instrumental</div>
+            </div>
+            <div class="spotify-card-indicator">▶</div>
+          </div>
         </div>
-        <div
-          class="spotify-chip-btn"
-          onclick="loadSpotifyUri('playlist/37i9dQZF1DXd9rSDyQguIk')"
-        >
-          Synthwave
-        </div>
+      </div>
+
+      <!-- Custom URL Bar -->
+      <div class="spotify-custom-bar">
         <input
           type="text"
           class="spotify-url-input"
           id="spotifyCustomInput"
-          placeholder="Paste Spotify Playlist / Track URL..."
+          placeholder="Paste any custom Spotify Playlist or Track URL..."
           onkeydown="if (event.key === 'Enter') loadCustomSpotify();"
         />
         <button
           class="default"
-          style="height: 24px; padding: 0 10px; font-size: 11px"
+          style="height: 22px; padding: 0 10px; font-size: 11px"
           onclick="loadCustomSpotify()"
         >
           Load
@@ -3603,24 +4356,19 @@ and stacks I rely on for building clean, fast, and tactile software:
 1. CORE EDITOR & WORKSPACE
 ----------------------------------------------------------------------
 - Primary Editor  : VS Code (Obsidian/Minimal dark themes, high legibility)
-- Font            : JetBrains Mono / Consolas (Ligatures enabled)
-- Machine & OS    : Portable Unix Workstation (Clean, quiet, and fast)
-- Shell           : zsh with fast fuzzy finders (fzf, zoxide, ripgrep)
+- Machine & OS    : MacOS
 - Git Philosophy  : Surgical commits, clean history, zero clutter
 
 ----------------------------------------------------------------------
-2. LANGUAGES & RUNTIMES
+2. PREFERRED AI TOOLS
 ----------------------------------------------------------------------
-- JavaScript / TypeScript : First-class language for interfaces & APIs
-- Modern Vanilla Web APIs : Web Audio API, Canvas 2D / WebGL, CSS Grid
-- Node.js & Bun           : Fast scripting, tooling, and backend pipelines
-- HTML5 / CSS3            : High-performance layouts with zero framework bloat
+- Claude Code, Google Antigravity, OpenCode
 
 ----------------------------------------------------------------------
 3. CLOUD & INFRASTRUCTURE
 ----------------------------------------------------------------------
 - Cloudflare Ecosystem : Workers, Pages, Edge KV, and Durable Workflows
-- Static Hosting       : Netlify, GitHub Pages, Cloudflare Pages
+- Hosting              : Hetzner (Trusted Source), Cloudflare Pages, Netlify, GitHub Pages
 - Design & Prototyping : Procedural canvas tools, Figma, Vanilla CSS tokens
 
 ----------------------------------------------------------------------
@@ -3628,7 +4376,6 @@ and stacks I rely on for building clean, fast, and tactile software:
 ----------------------------------------------------------------------
 * Sub-10ms feedback loops: Instant reload, lightweight dependencies.
 * Build in the quiet hours: Crafting without algorithmic self-promotion.
-* Audio & Focus: Reference headphones streaming procedural lofi sound.
 
 ----------------------------------------------------------------------
 CONTACT & CONNECT:
@@ -3636,8 +4383,7 @@ CONTACT & CONNECT:
 - LinkedIn  : https://www.linkedin.com/in/sumityadav8181/
 - Twitter/X : https://twitter.com/sumityadav8181/
 - Email     : sumityadav8181@gmail.com
-======================================================================
-[Press F5 to stamp time, edit freely, or use File > Save to export]`,
+======================================================================`,
 
         "about_sumit.txt": `======================================================================
 SUMIT KUMAR YADAV // PERSONAL PROFILE
@@ -3685,11 +4431,83 @@ creators, and curious tinkerers.
 ======================================================================`,
       };
 
-      // =========================================================
-      // AUDIO CLICK SYNTHESIZER
-      // =========================================================
+      // User-created documents (persisted via localStorage)
+      let userDocs = {};
+
+      // Render user-created document icons on the desktop
+      function renderUserDocIcons() {
+        // Remove existing user doc icons
+        document.querySelectorAll('.desktop-icon.user-doc').forEach(el => el.remove());
+        document.querySelectorAll('.explorer-item.user-doc').forEach(el => el.remove());
+
+        const container = document.getElementById('desktopIcons');
+        const explorerGrid = document.getElementById('explorerGrid');
+        if (!container) return;
+
+        const docNames = Object.keys(userDocs);
+        docNames.forEach(name => {
+          // Desktop icon
+          const icon = document.createElement('div');
+          icon.className = 'desktop-icon user-doc';
+          icon.onclick = () => openWindowSmart('notepadWindow', name);
+          icon.innerHTML = `
+            <svg viewBox="0 0 48 48">
+              <rect x="10" y="6" width="28" height="36" rx="2" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2"/>
+              <path d="M15 12 L33 12 M15 18 L33 18 M15 24 L27 24" stroke="#64748b" stroke-width="2" stroke-linecap="round"/>
+              <rect x="26" y="30" width="12" height="12" rx="2" fill="#38bdf8"/>
+              <path d="M30 36 L34 36 M32 34 L32 38" stroke="#fff" stroke-width="1.5"/>
+            </svg>
+            <div class="desktop-icon-label">${name}</div>
+          `;
+          container.appendChild(icon);
+
+          // Explorer item
+          if (explorerGrid) {
+            const item = document.createElement('div');
+            item.className = 'explorer-item user-doc';
+            item.onclick = () => openWindowSmart('notepadWindow', name);
+            item.innerHTML = `
+              <svg viewBox="0 0 32 32">
+                <rect x="6" y="4" width="20" height="24" rx="2" fill="#fff" stroke="#94a3b8"/>
+                <path d="M10 9h12M10 14h12M10 19h7" stroke="#64748b" stroke-width="2"/>
+              </svg>
+              <span>${name}</span>
+            `;
+            explorerGrid.appendChild(item);
+          }
+        });
+      }
+
       let audioFxCtx = null;
+      let lastAudioEffectTime = 0;
+
+      function isSystemMuted() {
+        if (window.ambientPlayer && typeof window.ambientPlayer.volume === "number") {
+          return window.ambientPlayer.volume <= 0.001;
+        }
+        return false;
+      }
+
+      function getSystemVolume() {
+        if (window.ambientPlayer && typeof window.ambientPlayer.volume === "number") {
+          return window.ambientPlayer.volume;
+        }
+        return 0.6;
+      }
+
       function playAudioEffect(type = "click") {
+        // Strict check: if system is muted globally, produce no sound
+        if (isSystemMuted()) return;
+        const sysVol = getSystemVolume();
+        if (sysVol <= 0.001) return;
+
+        // Throttle rapid duplicate clicks within 45ms
+        const realNow = performance.now();
+        if (type === "click" && realNow - lastAudioEffectTime < 45) {
+          return;
+        }
+        lastAudioEffectTime = realNow;
+
         try {
           if (!audioFxCtx) {
             const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -3698,23 +4516,111 @@ creators, and curious tinkerers.
           if (audioFxCtx.state === "suspended") {
             audioFxCtx.resume();
           }
-          const osc = audioFxCtx.createOscillator();
-          const gain = audioFxCtx.createGain();
-          osc.connect(gain);
-          gain.connect(audioFxCtx.destination);
-
           const now = audioFxCtx.currentTime;
+
           if (type === "click") {
-            osc.type = "sine";
-            osc.frequency.setValueAtTime(1400, now);
-            osc.frequency.exponentialRampToValueAtTime(300, now + 0.035);
-            gain.gain.setValueAtTime(0.04, now);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
-            osc.start(now);
-            osc.stop(now + 0.035);
+            // Windows 7 Navigation Click: tactile dual-transient click
+            // 1. High transient snap (triangle wave)
+            const osc1 = audioFxCtx.createOscillator();
+            const gain1 = audioFxCtx.createGain();
+            osc1.type = "triangle";
+            osc1.frequency.setValueAtTime(2000, now);
+            osc1.frequency.exponentialRampToValueAtTime(360, now + 0.020);
+            gain1.gain.setValueAtTime(0.048 * sysVol, now);
+            gain1.gain.exponentialRampToValueAtTime(0.0001, now + 0.022);
+            osc1.connect(gain1);
+            gain1.connect(audioFxCtx.destination);
+            osc1.start(now);
+            osc1.stop(now + 0.024);
+
+            // 2. Warm tactile resonance (sine wave)
+            const osc2 = audioFxCtx.createOscillator();
+            const gain2 = audioFxCtx.createGain();
+            osc2.type = "sine";
+            osc2.frequency.setValueAtTime(600, now);
+            osc2.frequency.exponentialRampToValueAtTime(140, now + 0.016);
+            gain2.gain.setValueAtTime(0.035 * sysVol, now);
+            gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.018);
+            osc2.connect(gain2);
+            gain2.connect(audioFxCtx.destination);
+            osc2.start(now);
+            osc2.stop(now + 0.020);
           }
         } catch (e) {}
       }
+
+      // Global delegated UI click sound for all buttons & interactive controls
+      document.addEventListener(
+        "click",
+        (e) => {
+          // Do not play click when clicking inside text inputs or textareas for typing
+          if (
+            e.target.matches(
+              'textarea, input[type="text"], input[type="search"], input[type="password"], input[type="email"]'
+            )
+          ) {
+            return;
+          }
+
+          const clickable = e.target.closest(
+            [
+              "button",
+              "a",
+              "input[type='button']",
+              "input[type='submit']",
+              "input[type='checkbox']",
+              "input[type='radio']",
+              "select",
+              ".desktop-icon",
+              ".superbar-btn",
+              ".start-orb",
+              ".show-desktop-btn",
+              ".tray-btn",
+              ".tray-clock",
+              ".start-app-item",
+              ".start-link",
+              ".start-all-programs",
+              ".shutdown-btn",
+              ".shutdown-arrow",
+              ".start-sub-item",
+              ".menu-trigger",
+              ".dropdown-item",
+              ".ctx-item",
+              ".context-menu-item",
+              ".explorer-item",
+              ".explorer-nav-item",
+              ".tree-node",
+              ".breadcrumb-item",
+              ".spotify-playlist-card",
+              ".wmp-tab-btn",
+              ".wmp-ctrl-btn",
+              ".wmp-playlist-item",
+              ".title-bar-controls button",
+              ".win7-dialog-btn",
+              ".win7-dialog-close",
+              "#volMixerLink",
+              "#volSpeakerIcon",
+              "#volHeaderSpeakerIcon",
+              "#traySpeakerBtn",
+              "[role='button']",
+              "[onclick]"
+            ].join(", ")
+          );
+
+          if (clickable) {
+            // Exclude desktop background containers
+            if (
+              clickable.id === "desktopIcons" ||
+              clickable.id === "desktopContextMenu" ||
+              clickable.classList.contains("desktop-icons")
+            ) {
+              return;
+            }
+            playAudioEffect("click");
+          }
+        },
+        true
+      );
 
       // =========================================================
       // WINDOW MANAGEMENT
@@ -3726,8 +4632,8 @@ creators, and curious tinkerers.
         const win = document.getElementById(id);
         if (!win) return;
 
-        if (id === "notepadWindow" && docName && docs[docName]) {
-          document.getElementById("notepadTextarea").value = docs[docName];
+        if (id === "notepadWindow" && docName && (docs[docName] || userDocs[docName])) {
+          document.getElementById("notepadTextarea").value = docs[docName] || userDocs[docName];
           document.getElementById("notepadTitle").textContent =
             `${docName} - Notepad`;
           updateNotepadStatus();
@@ -3960,6 +4866,25 @@ creators, and curious tinkerers.
       });
 
       function actionNewFile() {
+        // Auto-save current content to memory if it has content
+        const currentContent = textarea.value.trim();
+        const currentTitle = document.getElementById("notepadTitle").textContent.split(" - ")[0];
+        if (currentContent) {
+          // Save current doc to userDocs (if user-created) or just preserve it
+          if (currentTitle !== 'Untitled' && !docs[currentTitle]) {
+            userDocs[currentTitle] = textarea.value;
+          } else if (currentTitle === 'Untitled' && currentContent) {
+            // Prompt for filename if untitled has content
+            const name = prompt('Save current file as:', 'my_notes.txt');
+            if (name && name.trim()) {
+              const fileName = name.trim().endsWith('.txt') ? name.trim() : name.trim() + '.txt';
+              userDocs[fileName] = textarea.value;
+            }
+          }
+          renderUserDocIcons();
+          savePrefs();
+        }
+
         textarea.value = "";
         document.getElementById("notepadTitle").textContent =
           "Untitled - Notepad";
@@ -3967,14 +4892,32 @@ creators, and curious tinkerers.
       }
 
       function actionSaveFile() {
-        const blob = new Blob([textarea.value], {
+        const content = textarea.value;
+        const titleEl = document.getElementById("notepadTitle");
+        let currentName = titleEl.textContent.split(" - ")[0];
+
+        // If untitled, prompt for a name
+        if (currentName === 'Untitled' || !currentName) {
+          const name = prompt('Save file as:', 'my_notes.txt');
+          if (!name || !name.trim()) return;
+          currentName = name.trim().endsWith('.txt') ? name.trim() : name.trim() + '.txt';
+          titleEl.textContent = `${currentName} - Notepad`;
+        }
+
+        // Don't overwrite built-in docs in userDocs
+        if (!docs[currentName]) {
+          userDocs[currentName] = content;
+          renderUserDocIcons();
+          savePrefs();
+        }
+
+        // Also trigger browser download
+        const blob = new Blob([content], {
           type: "text/plain;charset=utf-8",
         });
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
-        a.download =
-          document.getElementById("notepadTitle").textContent.split(" - ")[0] ||
-          "notes.txt";
+        a.download = currentName;
         a.click();
       }
 
@@ -4019,6 +4962,10 @@ creators, and curious tinkerers.
       // AUTHENTIC WINDOWS 7 MESSAGEBOX (PERSISTENT SYSTEM DIALOG)
       // =========================================================
       function playDingSound() {
+        if (isSystemMuted()) return;
+        const sysVol = getSystemVolume();
+        if (sysVol <= 0.001) return;
+
         try {
           if (!audioFxCtx) {
             const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -4037,7 +4984,7 @@ creators, and curious tinkerers.
           osc2.type = "sine";
           osc2.frequency.setValueAtTime(1567.98, now); // G6
 
-          gain.gain.setValueAtTime(0.09, now);
+          gain.gain.setValueAtTime(0.09 * sysVol, now);
           gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
 
           osc1.connect(gain);
@@ -4192,6 +5139,13 @@ creators, and curious tinkerers.
       function toggleClockGadget() {
         const g = document.getElementById("clockGadget");
         g.style.display = g.style.display === "none" ? "block" : "none";
+        savePrefs();
+      }
+
+      function closeGadget(id) {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+        savePrefs();
       }
 
       // =========================================================
@@ -4305,16 +5259,20 @@ creators, and curious tinkerers.
         if (speakerBtn) speakerBtn.textContent = icon;
         if (flyoutIcon) flyoutIcon.textContent = icon;
         if (headerIcon) headerIcon.textContent = icon;
+
+        // Persist volume preference
+        savePrefs();
       }
 
       function toggleMute() {
-        playAudioEffect("click");
-        const current = window.ambientPlayer.volume;
+        const current = window.ambientPlayer ? window.ambientPlayer.volume : 0.6;
         if (current > 0) {
+          playAudioEffect("click");
           prevVolume = current;
           updateSystemVolume(0);
         } else {
           updateSystemVolume(prevVolume || 0.6);
+          playAudioEffect("click");
         }
       }
 
@@ -4374,6 +5332,8 @@ creators, and curious tinkerers.
           e.target.closest("#taskbar") ||
           e.target.closest("#startMenu") ||
           e.target.closest("#clockGadget") ||
+          e.target.closest("#weatherGadget") ||
+          e.target.closest("#gadgetsContainer") ||
           e.target.closest("#desktopContextMenu") ||
           e.target.closest("#volumeFlyout") ||
           e.target.closest("#clockFlyout")
@@ -4721,11 +5681,21 @@ creators, and curious tinkerers.
       // =========================================================
       // SPOTIFY WEB APP LOGIC
       // =========================================================
-      function loadSpotifyUri(uri) {
+      function loadSpotifyUri(uri, cardId = null) {
         playAudioEffect("click");
-        const cleanUri = uri.replace("https://open.spotify.com/", "");
+        const cleanUri = uri
+          .replace("https://open.spotify.com/", "")
+          .replace(/^\//, "");
         document.getElementById("spotifyIframe").src =
           `https://open.spotify.com/embed/${cleanUri}?utm_source=generator&theme=0`;
+
+        document
+          .querySelectorAll(".spotify-playlist-card")
+          .forEach((c) => c.classList.remove("active"));
+        if (cardId) {
+          const card = document.getElementById(cardId);
+          if (card) card.classList.add("active");
+        }
       }
 
       function loadCustomSpotify() {
@@ -4736,15 +5706,71 @@ creators, and curious tinkerers.
 
         if (val.includes("open.spotify.com/")) {
           const parts = val.split("open.spotify.com/")[1].split("?")[0];
-          loadSpotifyUri(parts);
+          loadSpotifyUri(parts, null);
         } else {
-          loadSpotifyUri(val);
+          loadSpotifyUri(val, null);
         }
       }
 
       // =========================================================
       // SYSTEM TRAY CLOCK & DESKTOP GADGET
       // =========================================================
+
+      // Generate realistic clock face markers and numbers
+      (function initClockFace() {
+        const face = document.querySelector('.gadget-face');
+        if (!face) return;
+        const faceSize = 140; // match #clockGadget width
+        const cx = faceSize / 2 - 3; // subtract border
+        const cy = faceSize / 2 - 3;
+
+        // Add tick marks (60 marks, major every 5)
+        for (let i = 0; i < 60; i++) {
+          const angle = (i * 6) * Math.PI / 180;
+          const isMajor = i % 5 === 0;
+          const outerR = cx - 4;
+          const innerR = isMajor ? cx - 14 : cx - 8;
+          const x1 = cx + outerR * Math.sin(angle);
+          const y1 = cy - outerR * Math.cos(angle);
+          const x2 = cx + innerR * Math.sin(angle);
+          const y2 = cy - innerR * Math.cos(angle);
+
+          const tick = document.createElement('div');
+          tick.style.cssText = `
+            position: absolute;
+            top: ${y1}px;
+            left: ${x1}px;
+            width: ${isMajor ? 2 : 0.8}px;
+            height: ${Math.sqrt((x2-x1)**2 + (y2-y1)**2)}px;
+            background: ${isMajor ? '#1a2a3a' : 'rgba(40,60,80,0.45)'};
+            transform-origin: top center;
+            transform: rotate(${i * 6}deg);
+            border-radius: 1px;
+            z-index: 3;
+          `;
+          face.appendChild(tick);
+        }
+
+        // Add hour numbers
+        const numbers = [12,1,2,3,4,5,6,7,8,9,10,11];
+        const numR = cx - 22;
+        numbers.forEach((num, idx) => {
+          const angle = (idx * 30) * Math.PI / 180;
+          const x = cx + numR * Math.sin(angle);
+          const y = cy - numR * Math.cos(angle);
+          const numEl = document.createElement('div');
+          numEl.className = 'clock-number';
+          numEl.textContent = num;
+          numEl.style.cssText = `
+            position: absolute;
+            top: ${y}px;
+            left: ${x}px;
+            transform: translate(-50%, -50%);
+          `;
+          face.appendChild(numEl);
+        });
+      })();
+
       function updateClock() {
         const now = new Date();
         const timeStr = now.toLocaleTimeString("en-US", {
@@ -4776,21 +5802,393 @@ creators, and curious tinkerers.
         const minDeg = (minutes + seconds / 60) * 6;
         const hourDeg = (hours + minutes / 60) * 30;
 
-        document.getElementById("gadgetSecond").style.transform =
-          `rotate(${secDeg}deg)`;
-        document.getElementById("gadgetMinute").style.transform =
-          `rotate(${minDeg}deg)`;
-        document.getElementById("gadgetHour").style.transform =
-          `rotate(${hourDeg}deg)`;
+        const secEl = document.getElementById("gadgetSecond");
+        const minEl = document.getElementById("gadgetMinute");
+        const hourEl = document.getElementById("gadgetHour");
+        if (secEl) secEl.style.transform = `rotate(${secDeg}deg)`;
+        if (minEl) minEl.style.transform = `rotate(${minDeg}deg)`;
+        if (hourEl) hourEl.style.transform = `rotate(${hourDeg}deg)`;
       }
       setInterval(updateClock, 100);
       updateClock();
 
+      // =========================================================
+      // WINDOWS 7 WEATHER GADGET (Open-Meteo API — no key needed)
+      // =========================================================
+      const weatherCodes = {
+        0: { icon: '☀️', desc: 'Clear Sky' },
+        1: { icon: '🌤️', desc: 'Mainly Clear' },
+        2: { icon: '⛅', desc: 'Partly Cloudy' },
+        3: { icon: '☁️', desc: 'Overcast' },
+        45: { icon: '🌫️', desc: 'Foggy' },
+        48: { icon: '🌫️', desc: 'Rime Fog' },
+        51: { icon: '🌦️', desc: 'Light Drizzle' },
+        53: { icon: '🌦️', desc: 'Moderate Drizzle' },
+        55: { icon: '🌧️', desc: 'Dense Drizzle' },
+        56: { icon: '🌧️', desc: 'Freezing Drizzle' },
+        57: { icon: '🌧️', desc: 'Heavy Freezing Drizzle' },
+        61: { icon: '🌧️', desc: 'Slight Rain' },
+        63: { icon: '🌧️', desc: 'Moderate Rain' },
+        65: { icon: '🌧️', desc: 'Heavy Rain' },
+        66: { icon: '🌨️', desc: 'Freezing Rain' },
+        67: { icon: '🌨️', desc: 'Heavy Freezing Rain' },
+        71: { icon: '❄️', desc: 'Slight Snowfall' },
+        73: { icon: '❄️', desc: 'Moderate Snowfall' },
+        75: { icon: '❄️', desc: 'Heavy Snowfall' },
+        77: { icon: '🌨️', desc: 'Snow Grains' },
+        80: { icon: '🌦️', desc: 'Slight Showers' },
+        81: { icon: '🌧️', desc: 'Moderate Showers' },
+        82: { icon: '⛈️', desc: 'Violent Showers' },
+        85: { icon: '🌨️', desc: 'Slight Snow Showers' },
+        86: { icon: '🌨️', desc: 'Heavy Snow Showers' },
+        95: { icon: '⛈️', desc: 'Thunderstorm' },
+        96: { icon: '⛈️', desc: 'Thunderstorm with Hail' },
+        99: { icon: '⛈️', desc: 'Heavy Thunderstorm' },
+      };
+
+      async function fetchWeather(lat, lon) {
+        try {
+          const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&timezone=auto`;
+          const res = await fetch(url);
+          const data = await res.json();
+          const c = data.current;
+          const wc = weatherCodes[c.weather_code] || { icon: '🌈', desc: 'Unknown' };
+
+          document.getElementById('weatherIcon').textContent = wc.icon;
+          document.getElementById('weatherTemp').innerHTML = `${Math.round(c.temperature_2m)}<sup>°C</sup>`;
+          document.getElementById('weatherDesc').textContent = wc.desc;
+          document.getElementById('weatherHumidity').textContent = `${c.relative_humidity_2m}%`;
+          document.getElementById('weatherWind').textContent = `${Math.round(c.wind_speed_10m)} km/h`;
+          document.getElementById('weatherFeelsLike').textContent = `${Math.round(c.apparent_temperature)}°`;
+
+          document.getElementById('weatherLoading').style.display = 'none';
+          const content = document.getElementById('weatherContent');
+          content.style.display = 'flex';
+          content.classList.add('weather-loaded');
+        } catch (err) {
+          document.getElementById('weatherLoading').textContent = '⚠ Weather unavailable';
+        }
+      }
+
+      async function getLocationName(lat, lon) {
+        try {
+          const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=&count=1&latitude=${lat}&longitude=${lon}`);
+          // Fallback: use reverse geocode from Open-Meteo timezone
+          const tzUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m&timezone=auto`;
+          const tzRes = await fetch(tzUrl);
+          const tzData = await tzRes.json();
+          const tz = tzData.timezone || '';
+          // Extract city from timezone like "Asia/Kolkata"
+          const city = tz.split('/').pop().replace(/_/g, ' ');
+          document.getElementById('weatherLocation').textContent = city || `${lat.toFixed(1)}°, ${lon.toFixed(1)}°`;
+        } catch {
+          document.getElementById('weatherLocation').textContent = `${lat.toFixed(1)}°, ${lon.toFixed(1)}°`;
+        }
+      }
+
+      function initWeather() {
+        // Default: New Delhi coordinates (fallback)
+        let defaultLat = 28.6139;
+        let defaultLon = 77.2090;
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              const lat = pos.coords.latitude;
+              const lon = pos.coords.longitude;
+              fetchWeather(lat, lon);
+              getLocationName(lat, lon);
+            },
+            () => {
+              // Permission denied or error — use default
+              fetchWeather(defaultLat, defaultLon);
+              document.getElementById('weatherLocation').textContent = 'New Delhi';
+            },
+            { timeout: 5000 }
+          );
+        } else {
+          fetchWeather(defaultLat, defaultLon);
+          document.getElementById('weatherLocation').textContent = 'New Delhi';
+        }
+
+        // Refresh weather every 10 minutes
+        setInterval(() => {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              (pos) => fetchWeather(pos.coords.latitude, pos.coords.longitude),
+              () => fetchWeather(defaultLat, defaultLon),
+              { timeout: 5000 }
+            );
+          }
+        }, 600000);
+      }
+
+      initWeather();
+
+      // =========================================================
+      // GADGET CONTAINER DRAG
+      // =========================================================
+      (function initGadgetDrag() {
+        const container = document.getElementById('gadgetsContainer');
+        if (!container) return;
+        let isDragging = false;
+        let dragOffX = 0, dragOffY = 0;
+
+        container.addEventListener('mousedown', (e) => {
+          if (e.target.closest('.gadget-close')) return;
+          isDragging = true;
+          const rect = container.getBoundingClientRect();
+          dragOffX = e.clientX - rect.left;
+          dragOffY = e.clientY - rect.top;
+          e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          const desktop = document.getElementById('desktop');
+          const dr = desktop.getBoundingClientRect();
+          let newLeft = e.clientX - dragOffX - dr.left;
+          let newTop = e.clientY - dragOffY - dr.top;
+          newLeft = Math.max(0, Math.min(dr.width - container.offsetWidth, newLeft));
+          newTop = Math.max(0, Math.min(dr.height - container.offsetHeight, newTop));
+          container.style.left = newLeft + 'px';
+          container.style.top = newTop + 'px';
+          container.style.right = 'auto';
+          savePrefs();
+        });
+
+        window.addEventListener('mouseup', () => {
+          isDragging = false;
+        });
+      })();
+
+      // =========================================================
+      // STICKY NOTES / TODO GADGET
+      // =========================================================
+      let todoItems = [];
+
+      function renderTodoList() {
+        const list = document.getElementById('todoList');
+        const empty = document.getElementById('todoEmpty');
+        if (!list) return;
+
+        // Clear existing items (keep empty placeholder)
+        Array.from(list.children).forEach(child => {
+          if (child.id !== 'todoEmpty') child.remove();
+        });
+
+        if (todoItems.length === 0) {
+          if (empty) empty.style.display = 'block';
+          return;
+        }
+
+        if (empty) empty.style.display = 'none';
+
+        todoItems.forEach((text, idx) => {
+          const li = document.createElement('li');
+          li.className = 'todo-item';
+
+          const check = document.createElement('div');
+          check.className = 'todo-check';
+          check.textContent = '✓';
+          check.title = 'Done — remove';
+          check.onclick = () => removeTodoItem(idx);
+
+          const span = document.createElement('span');
+          span.className = 'todo-text';
+          span.textContent = text;
+
+          li.appendChild(check);
+          li.appendChild(span);
+          list.appendChild(li);
+        });
+      }
+
+      function toggleTodoInput() {
+        const row = document.getElementById('todoInputRow');
+        const input = document.getElementById('todoInput');
+        if (row.style.display === 'none') {
+          row.style.display = 'flex';
+          input.focus();
+        } else {
+          row.style.display = 'none';
+          input.value = '';
+        }
+      }
+
+      function addTodoItem() {
+        const input = document.getElementById('todoInput');
+        const text = input.value.trim();
+        if (!text) return;
+        todoItems.push(text);
+        input.value = '';
+        renderTodoList();
+        savePrefs();
+        playAudioEffect('click');
+      }
+
+      function removeTodoItem(idx) {
+        todoItems.splice(idx, 1);
+        renderTodoList();
+        savePrefs();
+        playAudioEffect('click');
+      }
+
+      // =========================================================
+      // LOCALSTORAGE PERSISTENCE LAYER
+      // =========================================================
+      const PREFS_KEY = 'win7_sumit_prefs';
+
+      function savePrefs() {
+        try {
+          const container = document.getElementById('gadgetsContainer');
+          const prefs = {
+            // Volume
+            volume: window.ambientPlayer ? window.ambientPlayer.volume : 0.6,
+            // Gadget visibility
+            gadgets: {
+              clock: document.getElementById('clockGadget')?.style.display !== 'none',
+              weather: document.getElementById('weatherGadget')?.style.display !== 'none',
+              todo: document.getElementById('todoGadget')?.style.display !== 'none',
+            },
+            // Gadget container position
+            gadgetPos: container ? {
+              left: container.style.left || '',
+              top: container.style.top || '',
+              right: container.style.right || '',
+            } : null,
+            // Todo items
+            todoItems: todoItems,
+            // Notepad content
+            notepad: {
+              content: document.getElementById('notepadTextarea')?.value || '',
+              title: document.getElementById('notepadTitle')?.textContent || 'Untitled - Notepad',
+            },
+            // User-created documents
+            userDocs: userDocs,
+            // Timestamp
+            savedAt: Date.now(),
+          };
+          localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+        } catch (e) {
+          // localStorage might be full or blocked
+        }
+      }
+
+      function loadPrefs() {
+        try {
+          const raw = localStorage.getItem(PREFS_KEY);
+          if (!raw) return null;
+          return JSON.parse(raw);
+        } catch {
+          return null;
+        }
+      }
+
+      function restorePrefs() {
+        const prefs = loadPrefs();
+        if (!prefs) return false;
+
+        // Restore volume
+        if (typeof prefs.volume === 'number') {
+          // Delay slightly so ambientPlayer is ready
+          setTimeout(() => updateSystemVolume(prefs.volume), 200);
+        }
+
+        // Restore gadget visibility
+        if (prefs.gadgets) {
+          if (prefs.gadgets.clock === false) {
+            const el = document.getElementById('clockGadget');
+            if (el) el.style.display = 'none';
+          }
+          if (prefs.gadgets.weather === false) {
+            const el = document.getElementById('weatherGadget');
+            if (el) el.style.display = 'none';
+          }
+          if (prefs.gadgets.todo === false) {
+            const el = document.getElementById('todoGadget');
+            if (el) el.style.display = 'none';
+          }
+        }
+
+        // Restore gadget position
+        if (prefs.gadgetPos) {
+          const container = document.getElementById('gadgetsContainer');
+          if (container && prefs.gadgetPos.left) {
+            container.style.left = prefs.gadgetPos.left;
+            container.style.top = prefs.gadgetPos.top || '';
+            container.style.right = prefs.gadgetPos.right || 'auto';
+          }
+        }
+
+        // Restore todo items
+        if (Array.isArray(prefs.todoItems)) {
+          todoItems = prefs.todoItems;
+          renderTodoList();
+        }
+
+        // Restore notepad content
+        // Built-in docs always reset to default; only user docs persist edits
+        if (prefs.notepad) {
+          const ta = document.getElementById('notepadTextarea');
+          const title = document.getElementById('notepadTitle');
+          let savedDocName = (prefs.notepad.title || '').split(' - ')[0];
+          if (savedDocName === 'tools_i_use.txt' || !savedDocName) {
+            savedDocName = 'about_sumit.txt';
+          }
+
+          if (docs[savedDocName]) {
+            // Built-in doc — reload original content
+            if (ta) ta.value = docs[savedDocName];
+            if (title) title.textContent = `${savedDocName} - Notepad`;
+          } else if (prefs.notepad.content) {
+            // User-created or untitled — restore saved content
+            if (ta) ta.value = prefs.notepad.content;
+            if (title) title.textContent = prefs.notepad.title;
+          }
+          updateNotepadStatus();
+        }
+
+        // Restore user-created documents
+        if (prefs.userDocs && typeof prefs.userDocs === 'object') {
+          userDocs = prefs.userDocs;
+          renderUserDocIcons();
+        }
+
+        return true;
+      }
+
+      // Auto-save notepad on typing (debounced)
+      (function() {
+        let saveTimer = null;
+        const ta = document.getElementById('notepadTextarea');
+        if (ta) {
+          ta.addEventListener('input', () => {
+            clearTimeout(saveTimer);
+            saveTimer = setTimeout(savePrefs, 1000);
+          });
+        }
+      })();
+
       // Launch side-by-side on initial load (Notepad + Spotify)
       window.addEventListener("load", () => {
-        openWindowSmart("notepadWindow", "tools_i_use.txt");
+        const hadPrefs = restorePrefs();
+        if (!hadPrefs) {
+          // First visit defaults
+          openWindowSmart("notepadWindow", "about_sumit.txt");
+          updateSystemVolume(0.6);
+        } else {
+          // Restore from prefs — still open windows
+          const notepadWin = document.getElementById('notepadWindow');
+          if (notepadWin) {
+            notepadWin.style.display = 'flex';
+            notepadWin.classList.remove('minimized');
+            focusWindow('notepadWindow');
+            const btn = document.getElementById('btn-notepadWindow');
+            if (btn) btn.classList.add('running');
+          }
+        }
         openWindowSmart("spotifyWindow");
-        updateSystemVolume(0.6);
         renderPlaylistItems();
       });
     </script>

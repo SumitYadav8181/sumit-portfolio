@@ -1,0 +1,39 @@
+======================================================================
+SUMIT'S CODING TOOLKIT & WORKSPACE (2026)
+======================================================================
+
+Hello! I'm Sumit. Here is the curated set of tools, environments,
+and stacks I rely on for building clean, fast, and tactile software:
+
+----------------------------------------------------------------------
+1. CORE EDITOR & WORKSPACE
+----------------------------------------------------------------------
+- Primary Editor  : VS Code (Obsidian/Minimal dark themes, high legibility)
+- Machine & OS    : MacOS
+- Git Philosophy  : Surgical commits, clean history, zero clutter
+
+----------------------------------------------------------------------
+2. PREFERRED AI TOOLS
+----------------------------------------------------------------------
+- Claude Code, Google Antigravity, OpenCode
+
+----------------------------------------------------------------------
+3. CLOUD & INFRASTRUCTURE
+----------------------------------------------------------------------
+- Cloudflare Ecosystem : Workers, Pages, Edge KV, and Durable Workflows
+- Hosting              : Hetzner (Trusted Source), Cloudflare Pages, Netlify, GitHub Pages
+- Design & Prototyping : Procedural canvas tools, Figma, Vanilla CSS tokens
+
+----------------------------------------------------------------------
+4. PERSONAL WORKFLOW CREED
+----------------------------------------------------------------------
+* Sub-10ms feedback loops: Instant reload, lightweight dependencies.
+* Build in the quiet hours: Crafting without algorithmic self-promotion.
+
+----------------------------------------------------------------------
+CONTACT & CONNECT:
+----------------------------------------------------------------------
+- LinkedIn  : https://www.linkedin.com/in/sumityadav8181/
+- Twitter/X : https://twitter.com/sumityadav8181/
+- Email     : sumityadav8181@gmail.com
+======================================================================
