@@ -3,3 +3,5 @@ Allow: /
 
 # LLM context file
 # See /llms.txt for machine-readable site overview
+
+Sitemap: https://sumityadav.in/sitemap.xml
